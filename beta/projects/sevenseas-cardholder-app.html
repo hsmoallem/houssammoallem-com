@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SevenSeas Cardholder Application | Houssam Moallem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="../index.html#case-studies">Case studies</a>
+      <a href="../about.html">About me</a>
+      <a class="cta" href="mailto:moallem.houssam@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS-02 &middot; SevenSeas &middot; Card-as-a-Service</p>
+    <h1>CAAS Cardholder Application (PWA)</h1>
+    <p class="tagline">Building on the platform modernization, SevenSeas launched a progressive web app for seamless cross-platform use on Android and iOS.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">My role</div><div class="v">Product Manager / Product Owner</div></div>
+      <div class="meta-cell"><div class="k">Client</div><div class="v">SevenSeas (sevenseas.cards)</div></div>
+      <div class="meta-cell"><div class="k">Domain</div><div class="v">Fintech, mobile payments</div></div>
+      <div class="meta-cell"><div class="k">Key features</div><div class="v">Biometric auth, payments, self-service</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Context</h2>
+  <p>
+    With the admin and cardholder portals modernized (see CS-01), the next step was reach:
+    cardholders expected a mobile experience, but maintaining two native codebases would
+    have doubled the cost of every feature. The decision was a progressive web app: one
+    codebase, installable on both Android and iOS, with near-native experience.
+  </p>
+
+  <h2>The challenge</h2>
+  <ul>
+    <li>Deliver a mobile experience users trust with their money, on web technology.</li>
+    <li>Design authentication that is both secure and effortless: passwords alone were unacceptable for a financial product in daily use.</li>
+    <li>Cover the full journey: registration, login, card management, payment confirmation, and session handling, each with airtight edge-case behavior.</li>
+  </ul>
+
+  <h2>My role</h2>
+  <p>
+    I specified and owned the application's core flows, most notably the biometric
+    authentication framework. I authored the FSD covering biometric registration, login,
+    payment confirmation, and session timeout, iterating through multiple rounds of client
+    feedback until every scenario, from device changes to failed biometric reads to
+    fallback paths, had an explicit, testable acceptance criterion.
+  </p>
+  <div class="callout">
+    <div class="k">Why the detail matters</div>
+    <p>
+      In payments, the unhappy paths are the product. A biometric login that works 95% of
+      the time and fails silently the other 5% destroys trust. My specifications treated
+      every fallback, timeout, and error state as a first-class requirement, so the
+      developed product behaved predictably under real-world conditions.
+    </p>
+  </div>
+
+  <h2>Approach</h2>
+  <ul>
+    <li><strong>Biometric framework FSD.</strong> Defined registration and re-registration flows, login, step-up authentication for payment confirmation, and session timeout behavior, with Given/When/Then criteria for each state.</li>
+    <li><strong>Iterative client validation.</strong> Incorporated structured client feedback across review cycles, keeping a clear record of what changed and why, which kept scope disputes off the table.</li>
+    <li><strong>Cross-platform consistency.</strong> Ensured flows behaved identically across Android and iOS PWA contexts, documenting platform-specific constraints where they existed.</li>
+    <li><strong>Test suites.</strong> Produced comprehensive test cases mapped one-to-one to acceptance criteria, giving QA full traceability from requirement to verification.</li>
+  </ul>
+
+  <h2>Outcomes</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>One codebase</b><span>Android and iOS served by a single PWA, halving feature delivery cost</span></div>
+    <div class="outcome"><b>Frictionless security</b><span>Biometric login and payment confirmation replaced password-heavy flows</span></div>
+    <div class="outcome"><b>Predictable behavior</b><span>Edge cases specified upfront, not discovered in production</span></div>
+    <div class="outcome"><b>Traceable QA</b><span>Every requirement mapped to executable test cases</span></div>
+  </div>
+
+  <div class="cs-nav">
+    <a href="sevenseas-caas-platform.html">&larr; Previous: CAAS Platform</a>
+    <a href="admod-mcn.html">Next: Admod Optimization for MCN &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem</span>
+    <span><a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

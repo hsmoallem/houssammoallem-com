@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Limit Management System | Houssam Moallem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="../index.html#case-studies">Case studies</a>
+      <a href="../about.html">About me</a>
+      <a class="cta" href="mailto:moallem.houssam@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS-05 &middot; Fintech &middot; Credit Risk</p>
+    <h1>Credit Limit Management System</h1>
+    <p class="tagline">Empowering financial institutions with automated credit risk solutions.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">My role</div><div class="v">Product Manager / Product Owner</div></div>
+      <div class="meta-cell"><div class="k">Client</div><div class="v">Financial institutions (B2B fintech)</div></div>
+      <div class="meta-cell"><div class="k">Domain</div><div class="v">Credit risk, limits &amp; exposure management</div></div>
+      <div class="meta-cell"><div class="k">Focus</div><div class="v">Rules engine, approvals, auditability</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Context</h2>
+  <p>
+    Financial institutions managing credit exposure across many customers face a scaling
+    problem: manual limit reviews are slow and inconsistent, but blanket policies are
+    either too conservative (leaving revenue on the table) or too loose (accumulating
+    risk). The Credit Limit Management System was built to automate limit decisions
+    within institution-defined risk policy, with humans stepping in exactly where
+    judgment adds value.
+  </p>
+
+  <h2>The challenge</h2>
+  <ul>
+    <li>Translate credit risk policy, an inherently human, judgment-heavy domain, into rules a system can execute consistently.</li>
+    <li>Design approval workflows where automated decisions and human overrides coexist without ambiguity about accountability.</li>
+    <li>Satisfy the audit standard of a regulated industry: every limit change explainable, attributable, and reversible.</li>
+  </ul>
+
+  <h2>My role</h2>
+  <p>
+    I led requirements definition with the institution's risk and operations stakeholders,
+    specifying the rules engine behavior, limit lifecycle (request, evaluation, approval,
+    adjustment, suspension), and the exception paths where cases escalate to human review.
+    I authored the FSDs with exhaustive acceptance criteria covering boundary conditions,
+    which in credit risk are the entire point: what happens exactly at the threshold matters.
+  </p>
+  <div class="callout">
+    <div class="k">Automation with accountability</div>
+    <p>
+      The design principle was simple: the system decides the routine, humans decide the
+      exceptional, and both leave the same audit trail. Risk officers gained capacity for
+      the cases that genuinely needed them, without losing visibility into anything the
+      system decided on its own.
+    </p>
+  </div>
+
+  <h2>Approach</h2>
+  <ul>
+    <li><strong>Policy-to-rules translation.</strong> Worked with risk stakeholders to convert policy documents into explicit, testable decision rules with defined inputs, thresholds, and outcomes.</li>
+    <li><strong>Lifecycle-aware states.</strong> Specified the full limit lifecycle with guarded transitions, so a limit could never reach an inconsistent state regardless of the sequence of events.</li>
+    <li><strong>Escalation design.</strong> Defined clear criteria for automated approval versus human review, with SLAs and routing rules for escalated cases.</li>
+    <li><strong>Audit-first specification.</strong> Required every decision, automated or manual, to record who or what decided, based on which rule version, at what time, with what inputs.</li>
+  </ul>
+
+  <h2>Outcomes</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>Consistent decisions</b><span>Identical cases receive identical outcomes, ending reviewer-to-reviewer variance</span></div>
+    <div class="outcome"><b>Faster turnaround</b><span>Routine limit requests resolved automatically instead of queuing for review</span></div>
+    <div class="outcome"><b>Focused expertise</b><span>Risk officers concentrate on genuinely exceptional cases</span></div>
+    <div class="outcome"><b>Regulator-ready</b><span>Complete, attributable audit trail for every limit decision</span></div>
+  </div>
+
+  <div class="cs-nav">
+    <a href="billing-revenue-automation.html">&larr; Previous: Billing &amp; Revenue Automation</a>
+    <a href="../index.html#case-studies">All case studies &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem</span>
+    <span><a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
