@@ -3,26 +3,27 @@
 > **Server:** Contabo VPS (vmi3349165, Ubuntu 24.04)  
 > **IP:** 13.140.134.57  
 > **Domain:** houssammoallem.com  
-> **Last Updated:** July 6, 2026
+> **Last Updated:** July 7, 2026
 
 ---
 
 ## 1. Architecture
 
 ```
-┌──────────┐     HTTPS      ┌──────────────┐     HTTP :80     ┌───────────────┐
-│ Visitor  │ ──────────────▶ │  Cloudflare  │ ───────────────▶ │  Your Server  │
-│ (Browser)│ ◀────────────── │  (CDN/DNS)   │ ◀─────────────── │  nginx        │
-└──────────┘                 └──────────────┘                  │  /var/www/... │
-                                                               └───────────────┘
+┌──────────┐     HTTPS      ┌──────────────┐     HTTPS :443    ┌───────────────┐
+│ Visitor  │ ──────────────▶ │  Cloudflare  │ ────────────────▶ │  Your Server  │
+│ (Browser)│ ◀────────────── │  (CDN/DNS)   │ ◀──────────────── │  nginx        │
+└──────────┘                 │ Full (strict)│                   │  TLS 1.2/1.3  │
+                             └──────────────┘                   │  /var/www/... │
+                                                                └───────────────┘
 ```
 
 | Layer | What | Detail |
 |-------|------|--------|
 | **DNS** | Cloudflare | `houssammoallem.com` A → `13.140.134.57` (proxied) |
-| **CDN / SSL** | Cloudflare | Flexible SSL (browser↔CF encrypted, CF↔origin plain HTTP) |
-| **Web Server** | nginx 1.24.0 | Serves static files from `/var/www/houssammoallem/` |
-| **Host** | Contabo VPS | Ubuntu 24.04, AMD EPYC 6-core, 11 GB RAM, 193 GB SSD |
+| **CDN / SSL** | Cloudflare | Full (strict) — end-to-end HTTPS |
+| **Web Server** | nginx 1.24.0 | Port 80 → 301 redirect, Port 443 → TLS 1.2/1.3 |
+| **Host** | Contabo VPS | Ubuntu 24.04, AMD EPYC 6-core, 11 GB RAM |
 
 ---
 
@@ -32,246 +33,115 @@
 
 | Type | Name | Content | Proxy | TTL |
 |------|------|---------|-------|-----|
-| A | `@` (houssammoallem.com) | `13.140.134.57` | Proxied (orange) | Auto |
+| A | `@` | `13.140.134.57` | Proxied (orange) | Auto |
 | A | `www` | `13.140.134.57` | Proxied (orange) | Auto |
 
-### SSL/TLS
+### SSL/TLS Settings
 
-- **Mode:** Flexible (Cloudflare ↔ browser: HTTPS encrypted, Cloudflare ↔ origin: HTTP port 80)
-- **Always Use HTTPS:** ON
-- **HTTP Strict Transport Security (HSTS):** OFF (not needed with Flexible mode)
+| Setting | Value |
+|---------|-------|
+| SSL/TLS mode | **Full (strict)** |
+| Always Use HTTPS | ON |
+| Minimum TLS Version | 1.2 |
+| HSTS | Enabled (6 months, include subdomains) |
+| Origin Certificate | Cloudflare Origin CA (RSA 2048, 15 years) |
 
-### Common Issues
+### Page Rules
 
-| Error | Cause | Fix |
-|-------|-------|-----|
-| **530** | Cloudflare can't reach origin | Check A record points to correct IP; check nginx is running |
-| **1016** | Origin DNS error (www subdomain) | Use A record for www instead of CNAME to root |
-| **DNS cache on mobile** | Old record cached | Toggle airplane mode, clear browser cache |
+| URL | Action |
+|-----|--------|
+| `www.houssammoallem.com/*` | 301 → `https://houssammoallem.com/$1` |
 
 ---
 
 ## 3. nginx Configuration
 
-**Config file:** `/etc/nginx/sites-available/houssammoallem.com`  
-**Symlinked from:** `/etc/nginx/sites-enabled/houssammoallem.com`
+**File:** `/etc/nginx/sites-available/houssammoallem.com`
 
 ```nginx
+# HTTP → HTTPS redirect
 server {
     listen 80 default_server;
     server_name houssammoallem.com www.houssammoallem.com;
+    return 301 https://houssammoallem.com$request_uri;
+}
+
+# HTTPS
+server {
+    listen 443 ssl;
+    server_name houssammoallem.com www.houssammoallem.com;
+
+    ssl_certificate /etc/nginx/ssl/houssammoallem.com.pem;
+    ssl_certificate_key /etc/nginx/ssl/houssammoallem.com.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
     root /var/www/houssammoallem;
     index index.html;
 }
 ```
 
-### Useful Commands
-
-```bash
-# Test config
-sudo nginx -t
-
-# Reload (no downtime)
-sudo systemctl reload nginx
-
-# Restart
-sudo systemctl restart nginx
-
-# Check status
-systemctl status nginx
-
-# View logs
-sudo tail -f /var/log/nginx/access.log
-sudo tail -f /var/log/nginx/error.log
-```
-
 ---
 
-## 4. File Structure on Server
+## 4. File Structure
 
 ```
 /var/www/houssammoallem/
-├── index.html          ← Coming Soon page (live root)
+├── index.html          ← Portfolio home
+├── about.html          ← About page
+├── styles.css          ← Shared stylesheet
+├── favicon.ico         ← Browser tab icon
 ├── robots.txt          ← Crawl directives
-├── sitemap.xml         ← All page URLs for search engines
-└── beta/
-    ├── index.html      ← Full portfolio homepage
-    ├── about.html      ← About page
-    ├── styles.css      ← Shared stylesheet
-    └── projects/
-        ├── sevenseas-caas-platform.html
-        ├── sevenseas-cardholder-app.html
-        ├── admod-mcn.html
-        ├── billing-revenue-automation.html
-        └── credit-limit-management.html
+├── sitemap.xml         ← All pages for indexing
+└── projects/           ← 5 case studies
 ```
-
-**Permissions:** All files owned by `root:root`, mode `644` (readable by nginx `www-data`).
 
 ---
 
-## 5. Deployment Workflow
-
-```
-┌─────────────────┐      git push       ┌──────────┐      git pull       ┌───────────────┐
-│  Local editing   │ ─────────────────▶ │  GitHub  │ ◀───────────────── │  Server repo  │
-│  (any machine)   │                    │          │                    │  ~/houss...   │
-└─────────────────┘                    └──────────┘                    └───────┬───────┘
-                                                                              │
-                                                                     sudo cp -r *
-                                                                              │
-                                                                              ▼
-                                                                     /var/www/houssammoallem/
-                                                                         (live site)
-```
-
-### Deploy from server repo to live site
-
-```bash
-cd ~/houssammoallem-com && git pull && sudo cp -r * /var/www/houssammoallem/
-```
-
-### Deploy a single file
-
-```bash
-sudo cp ~/houssammoallem-com/index.html /var/www/houssammoallem/
-```
-
-**Note:** No build step — the site is static HTML/CSS. Changes are instant after copy.
-
----
-
-## 6. Git Setup
+## 5. Git Setup
 
 | Key | Value |
 |-----|-------|
 | **Repository** | `github.com/hsmoallem/houssammoallem-com` |
-| **SSH Key** | `~/.ssh/id_ed25519_vocab` (Ed25519) |
-| **Auth** | SSH to `git@github.com` |
+| **SSH Key** | `~/.ssh/id_ed25519_vocab` |
 | **Branch** | `master` |
 | **Local Repo** | `~/houssammoallem-com/` |
 
-### Git commands (from `~/houssammoallem-com/`)
+---
+
+## 6. Quick Reference
 
 ```bash
-# Push with the correct SSH key
+# Check website
+curl -s -o /dev/null -w "%{http_code}" https://houssammoallem.com/
+
+# Test nginx config
+sudo nginx -t && sudo systemctl reload nginx
+
+# Deploy from repo
+cd ~/houssammoallem-com && git pull && sudo cp -r * /var/www/houssammoallem/
+
+# Push to GitHub
+cd ~/houssammoallem-com
 GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_vocab -o IdentitiesOnly=yes" git push
 
-# Pull latest
-GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_vocab -o IdentitiesOnly=yes" git pull
-
-# Check status
-git status
-git log --oneline -5
+# Check SSL cert
+openssl s_client -connect houssammoallem.com:443 -servername houssammoallem.com </dev/null 2>/dev/null | openssl x509 -noout -dates
 ```
 
 ---
 
-## 7. SEO Technical Details
-
-### Meta Tags (on every page)
-
-```html
-<!-- canonical URL -->
-<link rel="canonical" href="https://houssammoallem.com/...">
-
-<!-- Open Graph (Facebook, LinkedIn, etc.) -->
-<meta property="og:title" content="...">
-<meta property="og:description" content="...">
-<meta property="og:url" content="...">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="...">
-<meta name="twitter:description" content="...">
-```
-
-### Structured Data
-
-**Landing page** (`index.html`):
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Houssam Moallem",
-  "jobTitle": "Product Manager & Product Owner",
-  "url": "https://houssammoallem.com/",
-  "address": {"addressLocality": "Dessau-Roßlau", "addressCountry": "DE"},
-  "sameAs": ["https://linkedin.com/in/moallem", "https://github.com/hsmoallem"]
-}
-```
-
-**Beta portfolio** (`beta/index.html`): Same Person schema.  
-**About page** (`beta/about.html`): `@type: AboutPage`.
-
-### robots.txt
-
-```
-User-agent: *
-Allow: /
-Sitemap: https://houssammoallem.com/sitemap.xml
-```
-
-### sitemap.xml
-
-Lists all 8 pages with `lastmod`, `changefreq`, and `priority`. Generated manually — update when pages are added or removed.
-
----
-
-## 8. Security
+## 7. Security
 
 | Layer | Status |
 |-------|--------|
-| HTTPS | ✅ Cloudflare edge (Flexible SSL) |
-| DDoS protection | ✅ Cloudflare (proxied DNS) |
-| Server firewall | ⚠️ UFW inactive (only nginx port 80 exposed) |
-| SSH | ✅ Key-only authentication |
-| File permissions | ✅ `644` for web files, root-owned |
+| HTTPS edge (CF ↔ visitor) | ✅ Cloudflare |
+| HTTPS origin (CF ↔ server) | ✅ Full (strict) |
+| TLS version | ✅ 1.2/1.3 only |
+| HSTS | ✅ Enabled |
+| HTTP → HTTPS redirect | ✅ 301 |
+| www → root redirect | ✅ 301 |
+| UFW firewall | ✅ Active (ports: 22, 80, 443, 3001, 9000) |
+| SSH | ✅ Key-only auth |
 | fail2ban | ✅ Active |
-
----
-
-## 9. Fonts
-
-Loaded from Google Fonts CDN in `<head>`:
-
-```html
-<link href="https://fonts.googleapis.com/css2?
-  family=Sora:wght@400;600;700&
-  family=IBM+Plex+Sans:wght@400;500;600&
-  family=IBM+Plex+Mono:wght@400;500&
-  display=swap" rel="stylesheet">
-```
-
-| Font | Usage |
-|------|-------|
-| **Sora** (400, 600, 700) | Headings, brand name |
-| **IBM Plex Sans** (400, 500, 600) | Body text, descriptions |
-| **IBM Plex Mono** (400, 500) | Code, tags, metadata |
-
-<style>
-  .key-point { background: #ff6347; padding: 2px 6px; border-radius: 3px; color: white; }
-</style>
-
----
-
-## 10. Quick Reference Commands
-
-```bash
-# Check if website is up
-curl -s -o /dev/null -w "%{http_code}" https://houssammoallem.com/
-
-# Check nginx status
-systemctl status nginx
-
-# View nginx access log (Cloudflare IPs will show)
-sudo tail -f /var/log/nginx/access.log
-
-# Deploy after git changes
-cd ~/houssammoallem-com && git pull && sudo cp -r * /var/www/houssammoallem/
-
-# Check DNS from different resolvers
-dig +short houssammoallem.com @1.1.1.1
-dig +short houssammoallem.com @8.8.8.8
-```
+| unattended-upgrades | ✅ Active |

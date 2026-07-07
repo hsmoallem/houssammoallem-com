@@ -7,8 +7,8 @@ Source code for [houssammoallem.com](https://houssammoallem.com)
 | Document | Purpose |
 |----------|---------|
 | [docs/README.md](docs/README.md) | Project overview, features, page structure |
-| [docs/TECHNICAL.md](docs/TECHNICAL.md) | Architecture, DNS, nginx, SEO, security, commands |
-| [docs/SETUP.md](docs/SETUP.md) | How to edit, deploy, Git workflow, troubleshooting |
+| [docs/TECHNICAL.md](docs/TECHNICAL.md) | Architecture, DNS, nginx, SSL, security, commands |
+| [docs/SETUP.md](docs/SETUP.md) | Editing workflow, deployment, Git, troubleshooting |
 | [docs/PRD.md](docs/PRD.md) | Product vision, pages, design decisions, roadmap |
 
 ## Quick Deploy

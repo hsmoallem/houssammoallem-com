@@ -1,10 +1,9 @@
 # Houssam Moallem — Portfolio Website
 
 > **Domain:** [houssammoallem.com](https://houssammoallem.com)  
-> **Beta:** [houssammoallem.com/beta/](https://houssammoallem.com/beta/)  
 > **GitHub:** [github.com/hsmoallem/houssammoallem-com](https://github.com/hsmoallem/houssammoallem-com)  
 > **Status:** Live  
-> **Last Updated:** July 6, 2026
+> **Last Updated:** July 7, 2026
 
 ---
 
@@ -16,13 +15,13 @@ Personal portfolio website for Houssam Moallem — PMP and MBA certified Product
 
 ## Features
 
-- 🏠 **Coming Soon Landing Page** — Minimal dark-themed page with name, role, badges, and links. Includes a "View Beta" button to the full portfolio.
-- 📋 **Full Portfolio (Beta)** — Multi-page portfolio with case studies, client list, credentials, and contact section.
-- 👤 **About Page** — Career journey, quick facts, certifications, methodologies, and contact.
-- 📂 **5 Case Studies** — Detailed project breakdowns across fintech, enterprise, and EdTech.
-- 🔍 **SEO Optimized** — Schema.org Person structured data, OG/Twitter meta tags, canonical URLs, sitemap.xml, robots.txt on every page.
-- ⚡ **Cloudflare CDN** — Global edge caching, free HTTPS, DDoS protection.
-- 📱 **Responsive** — Mobile-friendly design with Google Fonts (Sora, IBM Plex Sans, IBM Plex Mono).
+- 📋 **Portfolio Home** — Case studies grid, client list, credentials section, contact CTA
+- 👤 **About Page** — Career journey, quick facts sidebar, certifications, methodologies
+- 📂 **5 Case Studies** — Detailed project breakdowns across fintech, enterprise, and EdTech
+- 🔍 **SEO Optimized** — Schema.org Person structured data, OG/Twitter meta tags, canonical URLs, sitemap.xml, robots.txt, favicon
+- ⚡ **Cloudflare CDN** — Global edge caching, HTTPS via Cloudflare Origin Certificate (Full strict), DDoS protection
+- 🔒 **End-to-End HTTPS** — Cloudflare Full (strict) mode, nginx with TLS 1.2/1.3, HSTS enabled
+- 📱 **Responsive** — Mobile-friendly design with Google Fonts (Sora, IBM Plex Sans, IBM Plex Mono)
 
 ---
 
@@ -32,13 +31,13 @@ Personal portfolio website for Houssam Moallem — PMP and MBA certified Product
 |-----|-------|
 | **Domain** | `houssammoallem.com` |
 | **Hosting** | Contabo VPS (Ubuntu 24.04, 13.140.134.57) |
-| **Web Server** | nginx 1.24.0 |
-| **DNS / CDN** | Cloudflare (proxied, Flexible SSL) |
-| **Tech Stack** | Static HTML + CSS (no frameworks, no JavaScript framework) |
+| **Web Server** | nginx 1.24.0 (HTTP 80 → 301 HTTPS, TLS 1.2/1.3 on 443) |
+| **DNS / CDN** | Cloudflare (proxied, Full strict SSL) |
+| **Tech Stack** | Static HTML + CSS |
 | **Fonts** | Google Fonts: Sora, IBM Plex Sans, IBM Plex Mono |
 | **GitHub Repo** | `hsmoallem/houssammoallem-com` |
-| **Files Location** | `/var/www/houssammoallem/` on server |
-| **Local Repo** | `~/houssammoallem-com/` on server |
+| **Server Path** | `/var/www/houssammoallem/` |
+| **Local Repo** | `~/houssammoallem-com/` |
 
 ---
 
@@ -46,39 +45,45 @@ Personal portfolio website for Houssam Moallem — PMP and MBA certified Product
 
 ```
 houssammoallem.com/
-├── index.html              ← Coming Soon landing (live)
-├── robots.txt              ← Search engine crawl rules
-├── sitemap.xml             ← All 8 pages for indexing
-└── beta/
-    ├── index.html          ← Full portfolio (case studies, clients, credentials)
-    ├── about.html          ← Career story, quick facts, certifications
-    ├── styles.css          ← All styling (shared across pages)
-    └── projects/
-        ├── sevenseas-caas-platform.html
-        ├── sevenseas-cardholder-app.html
-        ├── admod-mcn.html
-        ├── billing-revenue-automation.html
-        └── credit-limit-management.html
+├── index.html              ← Portfolio home (case studies, clients, credentials)
+├── about.html              ← Career story, quick facts, certifications
+├── styles.css              ← All styling
+├── favicon.ico             ← Browser tab icon
+├── robots.txt              ← Crawl directives
+├── sitemap.xml             ← All 7 pages for indexing
+└── projects/
+    ├── sevenseas-caas-platform.html
+    ├── sevenseas-cardholder-app.html
+    ├── admod-mcn.html
+    ├── billing-revenue-automation.html
+    └── credit-limit-management.html
 ```
 
 ---
 
 ## SEO Implementation
 
-| Element | Landing | Beta | About | Projects |
-|---------|:-------:|:----:|:-----:|:--------:|
-| Meta title | ✅ | ✅ | ✅ | ✅ |
-| Meta description | ✅ | ✅ | ✅ | ✅ |
-| Canonical URL | ✅ | ✅ | ✅ | ✅ |
-| OG tags | ✅ | ✅ | ✅ | ✅ |
-| Twitter cards | ✅ | ✅ | ✅ | ✅ |
-| Schema.org | ✅ Person | ✅ Person | ✅ AboutPage | — |
+| Element | Home | About | Projects |
+|---------|:----:|:-----:|:--------:|
+| Meta title + description | ✅ | ✅ | ✅ |
+| Canonical URL | ✅ | ✅ | ✅ |
+| OG + Twitter tags | ✅ | ✅ | ✅ |
+| Schema.org | ✅ Person | ✅ AboutPage | — |
 
-SEO checklist to complete:
-- [ ] Submit to Google Search Console
-- [ ] Add `houssammoallem.com` to LinkedIn profile
-- [ ] Add `houssammoallem.com` to GitHub profile
-- [ ] Add link from `houssam.framer.website` to this domain
+---
+
+## Security
+
+| Layer | Status |
+|-------|--------|
+| HTTPS (visitor ↔ Cloudflare) | ✅ Cloudflare edge |
+| HTTPS (Cloudflare ↔ origin) | ✅ Full (strict) — Cloudflare Origin Certificate |
+| TLS version | ✅ 1.2/1.3 only |
+| HSTS | ✅ Enabled |
+| HTTP → HTTPS redirect | ✅ 301 |
+| www → root redirect | ✅ 301 |
+| SPF | 🔴 Pending (if email not needed: `v=spf1 -all`) |
+| DMARC | 🔴 Pending (`v=DMARC1; p=reject`) |
 
 ---
 
@@ -87,7 +92,6 @@ SEO checklist to complete:
 | Platform | URL |
 |----------|-----|
 | Website | [houssammoallem.com](https://houssammoallem.com) |
-| Beta Portfolio | [houssammoallem.com/beta/](https://houssammoallem.com/beta/) |
 | GitHub Repo | [github.com/hsmoallem/houssammoallem-com](https://github.com/hsmoallem/houssammoallem-com) |
 | LinkedIn | [linkedin.com/in/moallem](https://linkedin.com/in/moallem) |
 | Old Portfolio | [houssam.framer.website](https://houssam.framer.website/) |

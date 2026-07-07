@@ -7,45 +7,39 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://houssammoallem.com/beta/</loc>
+    <loc>https://houssammoallem.com/about.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://houssammoallem.com/beta/about.html</loc>
+    <loc>https://houssammoallem.com/projects/sevenseas-caas-platform.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://houssammoallem.com/beta/projects/sevenseas-caas-platform.html</loc>
+    <loc>https://houssammoallem.com/projects/sevenseas-cardholder-app.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://houssammoallem.com/beta/projects/credit-limit-management.html</loc>
+    <loc>https://houssammoallem.com/projects/admod-mcn.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://houssammoallem.com/beta/projects/billing-revenue-automation.html</loc>
+    <loc>https://houssammoallem.com/projects/billing-revenue-automation.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://houssammoallem.com/beta/projects/admod-mcn.html</loc>
+    <loc>https://houssammoallem.com/projects/credit-limit-management.html</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/beta/projects/sevenseas-cardholder-app.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>
