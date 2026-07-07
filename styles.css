@@ -78,6 +78,7 @@ img { max-width: 100%; display: block; }
   font-size: 14px;
 }
 .nav-links a.cta:hover { background: var(--green); }
+.nav-links .active { color: #fff; font-weight: 700; cursor: default; }
 
 /* ---------- Hero ---------- */
 .hero { padding: 88px 0 64px; }
