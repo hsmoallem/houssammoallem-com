@@ -37,8 +37,8 @@
   <div class="nav-inner">
     <a class="brand" href="/index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
     <div class="nav-links">
-      <a href="#case-studies">Case studies</a>
-      <a href="#clients">Clients</a>
+      <a href="#case-studies" data-nav="cases">Case studies</a>
+      <a href="#clients" data-nav="clients">Clients</a>
       <a href="/about.html">About me</a>
       <a class="cta" href="mailto:moallem.houssam@gmail.com">Get in touch</a>
     </div>
@@ -215,9 +215,33 @@
 <footer>
   <div class="footer-inner">
     <span>&copy; 2026 Houssam Moallem</span>
-    <span><a href="/about.html">About</a> &middot; <a href="#case-studies">Case studies</a> &middot; <a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+    <span><a href="/about.html">About</a> &middot; <a href="#case-studies" data-nav="cases">Case studies</a> &middot; <a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
   </div>
 </footer>
+
+<script>
+(function(){
+  var sections = ["clients","case-studies"];
+  var nav = {};
+  nav.clients = document.querySelector('[data-nav="clients"]');
+  nav.cases = document.querySelector('[data-nav="cases"]');
+  window.addEventListener("scroll", function(){
+    var scroll = window.scrollY + 120;
+    for (var i = sections.length-1; i >= 0; i--) {
+      var el = document.getElementById(sections[i]);
+      if (el && scroll >= el.offsetTop) {
+        nav.clients && nav.clients.classList.remove("active");
+        nav.cases && nav.cases.classList.remove("active");
+        var key = sections[i] === "clients" ? "clients" : "cases";
+        nav[key] && nav[key].classList.add("active");
+        return;
+      }
+    }
+    nav.clients && nav.clients.classList.remove("active");
+    nav.cases && nav.cases.classList.remove("active");
+  });
+})();
+</script>
 
 </body>
 </html>
