@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New Contract Template</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { background: #eef1f6; font-family: 'Segoe UI', sans-serif; font-size: 14px; color: #333; margin: 0; padding: 0 0 40px; }
+
+    /* ── Page title ── */
+    .page-title { text-align: center; font-size: 22px; font-weight: 700; color: #2563eb; padding: 28px 0 20px; }
+
+    /* ── Outer card ── */
+    .outer-card { background: #fff; border-radius: 10px; border: 1px solid #e0e4ea; padding: 24px 28px; }
+
+    /* ── Form controls ── */
+    .form-label { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 5px; }
+    .form-control, .form-select {
+      border: 1px solid #d0d5dd; border-radius: 6px; font-size: 13px;
+      padding: 8px 12px; color: #333; transition: border-color .15s, box-shadow .15s;
+      background: #fff;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.12); outline: none;
+    }
+    .form-control::placeholder { color: #adb5bd; font-style: italic; }
+
+    /* ── Description mini-editor ── */
+    .desc-editor { border: 1px solid #d0d5dd; border-radius: 6px; overflow: hidden; }
+    .desc-toolbar { display: flex; align-items: center; gap: 2px; padding: 6px 10px; border-bottom: 1px solid #e5e7eb; background: #fff; }
+    .desc-toolbar button { border: none; background: transparent; padding: 3px 6px; border-radius: 4px; font-size: 13px; color: #374151; cursor: pointer; font-weight: 600; line-height: 1; }
+    .desc-toolbar button:hover { background: #f0f0f0; }
+    .desc-toolbar .tb-sep { width: 1px; height: 16px; background: #d1d5db; margin: 0 3px; }
+    .desc-body { min-height: 80px; padding: 12px 14px; outline: none; font-size: 13px; color: #333; }
+    .desc-body:empty::before { content: "Description"; color: #adb5bd; font-style: italic; pointer-events: none; }
+
+    /* ── AI Button ── */
+    .btn-ai {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 9px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: opacity .15s, transform .1s, box-shadow .15s;
+    }
+    .btn-ai:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,.35); color: #fff; }
+    .btn-ai .spark { font-size: 15px; }
+    .ai-hint { font-size: 12px; color: #6b7280; }
+
+    /* ── Search + Add New Field bar ── */
+    .fields-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .fields-bar input { flex: 1; border: 1px solid #d0d5dd; border-radius: 6px; padding: 8px 12px; font-size: 13px; }
+    .fields-bar input::placeholder { color: #adb5bd; }
+    .fields-bar input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,.1); }
+    .btn-add-field { border: 1px solid #333; background: #fff; border-radius: 20px; padding: 8px 20px; font-size: 13px; font-weight: 500; color: #333; white-space: nowrap; cursor: pointer; transition: background .12s; }
+    .btn-add-field:hover { background: #f3f4f6; }
+
+    /* ── Template Fields section ── */
+    .section-label { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px; }
+    .fields-box { border: 1px solid #e0e4ea; border-radius: 8px; min-height: 90px; background: #fff; padding: 10px 14px; }
+    .field-row { display: flex; align-items: center; gap: 10px; padding: 6px 4px; }
+    .field-row input[type=checkbox] { accent-color: #2563eb; width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+    .field-row .fn { flex: 1; font-size: 13px; color: #333; }
+    .field-row .edit-btn { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #2563eb; background: #fff; color: #2563eb; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; flex-shrink: 0; transition: background .12s; }
+    .field-row .edit-btn:hover { background: #eff6ff; }
+    .field-row .del-icon { background: transparent; border: none; color: #f87171; cursor: pointer; font-size: 13px; padding: 2px 5px; border-radius: 4px; }
+    .field-row .del-icon:hover { background: #fee2e2; color: #ef4444; }
+    .fields-empty { text-align: center; color: #9ca3af; font-size: 13px; padding: 24px 0; }
+    .fields-empty .fe-icon { font-size: 28px; margin-bottom: 6px; }
+
+    /* ── Template Editor ── */
+    .editor-wrap { border: 1px solid #e0e4ea; border-radius: 8px; overflow: hidden; display: grid; grid-template-columns: 1fr 260px; }
+    .editor-toolbar {
+      grid-column: 1 / -1; background: #fff; border-bottom: 1px solid #e5e7eb;
+      padding: 7px 12px; display: flex; flex-wrap: wrap; gap: 2px; align-items: center;
+    }
+    .editor-toolbar button { border: none; background: transparent; padding: 3px 6px; border-radius: 4px; font-size: 13px; color: #374151; cursor: pointer; line-height: 1.2; }
+    .editor-toolbar button:hover { background: #f0f0f0; }
+    .editor-toolbar .tb-sep { width: 1px; height: 18px; background: #d1d5db; margin: 0 3px; }
+    .editor-toolbar select { border: 1px solid #d1d5db; border-radius: 4px; font-size: 12px; padding: 2px 5px; background: #fff; cursor: pointer; color: #374151; }
+    .editor-body { min-height: 160px; padding: 18px 20px; outline: none; font-size: 13px; line-height: 1.75; overflow-y: auto; }
+    .editor-body:empty::before { content: "Insert text here ..."; color: #adb5bd; font-style: italic; pointer-events: none; }
+
+    /* ── Field chip (in editor) ── */
+    .fchip { display: inline-flex; align-items: center; gap: 4px; background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; border-radius: 5px; padding: 1px 8px 1px 6px; font-size: 12px; font-weight: 600; margin: 0 2px; user-select: none; white-space: nowrap; }
+    .fchip .cd { color: #a78bfa; cursor: pointer; font-size: 10px; margin-left: 2px; }
+    .fchip .cd:hover { color: #6d28d9; }
+
+    /* ── Editor right panel ── */
+    .editor-panel { border-left: 1px solid #e5e7eb; background: #fafafa; overflow-y: auto; max-height: 300px; }
+    .ep-header { padding: 10px 12px 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #9ca3af; border-bottom: 1px solid #e5e7eb; }
+    .ep-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f3f4f6; cursor: pointer; }
+    .ep-item:hover { background: #f3f4f6; }
+    .ep-item .epi-label { font-size: 12px; color: #374151; }
+    .ep-item .epi-type { font-size: 10px; color: #9ca3af; }
+    .ep-item .epi-plus { color: #2563eb; font-size: 16px; font-weight: 700; opacity: 0; }
+    .ep-item:hover .epi-plus { opacity: 1; }
+    .ep-empty { padding: 18px 12px; text-align: center; font-size: 12px; color: #9ca3af; }
+
+    /* ── Bottom action bar ── */
+    .action-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 24px; }
+    .btn-close { border: 1px solid #d0d5dd; background: #fff; border-radius: 20px; padding: 8px 24px; font-size: 13px; font-weight: 500; color: #333; cursor: pointer; }
+    .btn-close:hover { background: #f3f4f6; }
+    .btn-save-tpl { background: #2563eb; color: #fff; border: none; border-radius: 20px; padding: 9px 28px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .btn-save-tpl:hover { background: #1d4ed8; }
+
+    /* ═══════════════════════════════════
+       MODALS
+    ═══════════════════════════════════ */
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1050; display: flex; align-items: center; justify-content: center; }
+    .mbox { background: #fff; border-radius: 12px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.18); overflow: hidden; animation: popIn .2s ease; }
+    @keyframes popIn { from{transform:scale(.95);opacity:0} to{transform:scale(1);opacity:1} }
+    .mbox-hdr { padding: 16px 22px 14px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; }
+    .mbox-hdr h5 { font-size: 15px; font-weight: 700; margin: 0; }
+    .mbox-hdr .xbtn { border: none; background: transparent; font-size: 20px; color: #9ca3af; cursor: pointer; line-height: 1; padding: 0; }
+    .mbox-hdr .xbtn:hover { color: #374151; }
+    .mbox-body { padding: 20px 22px; }
+
+    /* Upload */
+    .drop-zone { border: 2px dashed #93c5fd; border-radius: 10px; padding: 40px 20px; text-align: center; cursor: pointer; background: #eff6ff; transition: background .15s, border-color .15s; }
+    .drop-zone:hover, .drop-zone.over { background: #dbeafe; border-color: #2563eb; }
+    .drop-zone .dz-icon { font-size: 36px; color: #60a5fa; margin-bottom: 10px; }
+    .drop-zone .dz-label { font-size: 14px; font-weight: 600; color: #1d4ed8; }
+    .drop-zone .dz-sub { font-size: 12px; color: #6b7280; margin-top: 4px; }
+    .dz-fmts { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+    .dz-fmts span { background: #dbeafe; color: #1d4ed8; border-radius: 4px; padding: 2px 10px; font-size: 11px; font-weight: 600; }
+    .file-pill { display: flex; align-items: center; gap: 10px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px 14px; margin-top: 12px; }
+    .file-pill .fp-icon { font-size: 20px; color: #16a34a; }
+    .file-pill .fp-name { flex: 1; font-size: 13px; font-weight: 600; color: #15803d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-pill .fp-size { font-size: 11px; color: #9ca3af; white-space: nowrap; }
+    .file-pill .fp-rm { border: none; background: transparent; color: #9ca3af; cursor: pointer; font-size: 14px; }
+    .file-pill .fp-rm:hover { color: #ef4444; }
+
+    /* Processing */
+    .proc-body { padding: 36px 22px 28px; text-align: center; }
+    .spinner { width: 54px; height: 54px; border: 4px solid #dbeafe; border-top-color: #2563eb; border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 18px; }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .proc-body h6 { font-size: 15px; font-weight: 700; margin-bottom: 5px; color: #1e293b; }
+    .proc-body p { font-size: 13px; color: #6b7280; margin: 0; }
+    .steps-list { margin-top: 20px; text-align: left; max-width: 260px; margin-left: auto; margin-right: auto; }
+    .step-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; font-size: 12px; color: #9ca3af; }
+    .step-row.done { color: #16a34a; }
+    .step-row.active { color: #2563eb; font-weight: 600; }
+    .step-dot { width: 18px; height: 18px; border-radius: 50%; background: #e5e7eb; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+    .step-row.done .step-dot { background: #bbf7d0; color: #16a34a; }
+    .step-row.active .step-dot { background: #dbeafe; color: #2563eb; animation: pulse 1.1s ease infinite; }
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+    /* Review */
+    .review-sub { padding: 8px 22px 12px; font-size: 12px; color: #6b7280; border-bottom: 1px solid #f3f4f6; }
+    .ai-tag { display: inline-block; font-size: 10px; background: #dbeafe; color: #1d4ed8; border-radius: 4px; padding: 1px 6px; font-weight: 700; }
+    .count-badge { background: #2563eb; color: #fff; border-radius: 12px; padding: 1px 8px; font-size: 11px; font-weight: 700; margin-left: 8px; }
+    .review-list { max-height: 360px; overflow-y: auto; padding: 10px 22px; }
+    .col-labels { display: grid; grid-template-columns: 1fr 160px 36px; gap: 8px; padding: 0 10px 5px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: #9ca3af; }
+    .review-row { display: grid; grid-template-columns: 1fr 160px 36px; gap: 8px; align-items: center; margin-bottom: 7px; padding: 8px 10px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; }
+    .review-row.ai { border-color: #93c5fd; background: #eff6ff; }
+    .review-row input[type=text] { width: 100%; border: 1px solid #d0d5dd; border-radius: 6px; padding: 5px 9px; font-size: 12px; }
+    .review-row input[type=text]:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,.1); }
+    .review-row input.err { border-color: #f87171; }
+    .review-row select { width: 100%; border: 1px solid #d0d5dd; border-radius: 6px; padding: 5px 6px; font-size: 12px; background: #fff; }
+    .review-row select:focus { outline: none; border-color: #2563eb; }
+    .rdel { border: none; background: transparent; color: #fca5a5; cursor: pointer; font-size: 15px; border-radius: 4px; padding: 2px 4px; }
+    .rdel:hover { background: #fee2e2; color: #ef4444; }
+    .review-footer { padding: 14px 22px; border-top: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .btn-add-row { border: 1px dashed #93c5fd; background: transparent; color: #2563eb; border-radius: 7px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+    .btn-add-row:hover { background: #eff6ff; }
+    .btn-apply { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 9px 22px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .btn-apply:hover { background: #1d4ed8; }
+    .btn-ghost { background: #fff; border: 1px solid #d0d5dd; color: #374151; border-radius: 8px; padding: 8px 16px; font-size: 13px; cursor: pointer; }
+    .btn-ghost:hover { background: #f3f4f6; }
+
+    /* Add Field modal */
+    .af-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+
+    /* Validation */
+    .vmsg { font-size: 12px; color: #ef4444; margin-top: 5px; display: none; }
+    .vmsg.show { display: block; }
+
+    /* Toast */
+    .toasts { position: fixed; top: 16px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 8px; }
+    .toast-item { background: #fff; border-left: 4px solid #2563eb; border-radius: 8px; padding: 11px 16px; box-shadow: 0 4px 16px rgba(0,0,0,.12); font-size: 13px; display: flex; align-items: center; gap: 10px; min-width: 260px; animation: slideIn .2s ease; }
+    .toast-item.ok  { border-left-color: #16a34a; }
+    .toast-item.err { border-left-color: #ef4444; }
+    @keyframes slideIn{from{transform:translateX(30px);opacity:0}}
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="container" style="max-width:1010px; padding-top:4px;">
+
+  <!-- Page title -->
+  <div class="page-title">Add New Contract Template</div>
+
+  <div class="outer-card">
+
+    <!-- ── Row 1: Title / Country / Office ── -->
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <label class="form-label">Template Title <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="templateTitle" placeholder="Template Title" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Country <span class="text-danger">*</span></label>
+        <select class="form-select" id="countrySelect">
+          <option value="">Country</option>
+          <option>UAE</option><option>KSA</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Office <span class="text-danger">*</span></label>
+        <select class="form-select" id="officeSelect">
+          <option value="">Office</option>
+          <option>Dubai</option><option>Abu Dhabi</option><option>Riyadh</option><option>Doha</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ── Template Description ── -->
+    <div class="mb-3">
+      <label class="form-label">Template Description <span class="text-danger">*</span></label>
+      <div class="desc-editor">
+        <div class="desc-toolbar">
+          <button title="Bold"><b>B</b></button>
+          <button title="Italic"><i>I</i></button>
+          <button title="Strikethrough"><s>S</s></button>
+          <div class="tb-sep"></div>
+          <button title="Ordered list"><i class="bi bi-list-ol"></i></button>
+          <button title="Bullet list"><i class="bi bi-list-ul"></i></button>
+          <div class="tb-sep"></div>
+          <button title="Insert link"><i class="bi bi-link-45deg"></i></button>
+          <button title="Insert image"><i class="bi bi-image"></i></button>
+        </div>
+        <div class="desc-body" id="descBody" contenteditable="true"></div>
+      </div>
+    </div>
+
+    <!-- ✦ NEW: Generate Template Using AI button -->
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <button class="btn-ai" onclick="openUploadModal()">
+        <span class="spark">✦</span> Generate Template Using AI
+      </button>
+      <span class="ai-hint">Upload a contract document — AI will extract all fields and populate the template automatically.</span>
+    </div>
+
+    <!-- ── Search + Add New Field ── -->
+    <div class="fields-bar">
+      <input type="text" id="fieldSearch" placeholder="Search fields" oninput="filterFields()" />
+      <button class="btn-add-field" onclick="openAddFieldModal()">Add New Field</button>
+    </div>
+
+    <!-- ── Template Fields ── -->
+    <div class="section-label">Template Fields</div>
+    <div class="fields-box mb-4">
+      <div id="fieldsList"></div>
+      <div id="emptyFields" class="fields-empty">
+        <div class="fe-icon"><i class="bi bi-layout-text-sidebar-reverse"></i></div>
+        <div>No fields added yet.<br><span style="color:#6b7280;font-size:12px;">Add fields manually or use <strong>Generate Template Using AI</strong>.</span></div>
+      </div>
+      <div id="noResults" class="fields-empty hidden">
+        <i class="bi bi-search me-1"></i> No fields match "<span id="searchTerm"></span>"
+      </div>
+    </div>
+
+    <!-- ── Template Editor ── -->
+    <div class="section-label">Template Editor</div>
+    <div class="editor-wrap">
+      <!-- Toolbar -->
+      <div class="editor-toolbar">
+        <button title="Bold"><b>B</b></button>
+        <button title="Italic"><i>I</i></button>
+        <button title="Underline"><u>U</u></button>
+        <button title="Strikethrough"><s>S</s></button>
+        <button title="Quote" style="font-size:16px;">"</button>
+        <button title="Code"><i class="bi bi-code-slash" style="font-size:12px;"></i></button>
+        <div class="tb-sep"></div>
+        <button title="H1" style="font-size:12px;font-weight:700;">H<sub>1</sub></button>
+        <button title="H2" style="font-size:12px;font-weight:700;">H<sub>2</sub></button>
+        <div class="tb-sep"></div>
+        <button title="Ordered list"><i class="bi bi-list-ol"></i></button>
+        <button title="Bullet list"><i class="bi bi-list-ul"></i></button>
+        <div class="tb-sep"></div>
+        <button title="Subscript">X<sub style="font-size:9px;">2</sub></button>
+        <button title="Superscript">X<sup style="font-size:9px;">2</sup></button>
+        <div class="tb-sep"></div>
+        <button title="Indent right"><i class="bi bi-text-indent-right"></i></button>
+        <button title="Indent left"><i class="bi bi-text-indent-left"></i></button>
+        <div class="tb-sep"></div>
+        <button title="Text direction"><i class="bi bi-paragraph" style="font-size:12px;"></i></button>
+        <div class="tb-sep"></div>
+        <select title="Heading"><option>Normal</option><option>Heading 1</option><option>Heading 2</option></select>
+        <select title="Font"><option>Normal</option><option>Small</option><option>Large</option></select>
+        <div class="tb-sep"></div>
+        <button title="Text colour" style="font-weight:700;text-decoration:underline;text-decoration-color:#e53e3e;">A</button>
+        <button title="Highlight"><i class="bi bi-highlighter" style="font-size:11px;"></i></button>
+        <div class="tb-sep"></div>
+        <button title="Align left"><i class="bi bi-justify"></i></button>
+        <button title="Clear formatting"><i class="bi bi-eraser" style="font-size:11px;"></i></button>
+        <div class="tb-sep"></div>
+        <button title="Link"><i class="bi bi-link-45deg"></i></button>
+        <button title="Image"><i class="bi bi-image"></i></button>
+        <button title="Table" style="font-size:12px;font-weight:600;">&#9776; TABLE</button>
+        <div class="tb-sep"></div>
+        <select title="Font family"><option>Sans Serif</option><option>Serif</option><option>Monospace</option></select>
+      </div>
+
+      <!-- Editor body -->
+      <div class="editor-body" id="editorBody" contenteditable="true"></div>
+
+      <!-- Right: available fields -->
+      <div class="editor-panel" id="editorPanel">
+        <div class="ep-header">Available Fields</div>
+        <div id="epList"><div class="ep-empty">No fields yet</div></div>
+      </div>
+    </div>
+
+    <!-- ── Bottom buttons ── -->
+    <div class="action-bar">
+      <button class="btn-close">Close</button>
+      <button class="btn-save-tpl" onclick="saveTemplate()">Save Template</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     MODALS
+═══════════════════════════════════ -->
+<div class="overlay hidden" id="overlay" onclick="onOverlayClick(event)">
+
+  <!-- 1. Upload -->
+  <div class="mbox hidden" id="mUpload" style="max-width:540px;">
+    <div class="mbox-hdr">
+      <h5><span style="color:#2563eb;">✦</span> Generate Template Using AI</h5>
+      <button class="xbtn" onclick="closeModal()">×</button>
+    </div>
+    <div class="mbox-body">
+      <p style="font-size:13px;color:#6b7280;margin-bottom:18px;">
+        Upload your existing contract document. AI will read it, identify every dynamic field, assign the correct field type, and populate both the Template Fields section and the Template Editor automatically.
+      </p>
+      <div class="drop-zone" id="dropZone"
+           onclick="document.getElementById('fileIn').click()"
+           ondragover="doDragOver(event)" ondragleave="doDragLeave()" ondrop="doDrop(event)">
+        <div class="dz-icon"><i class="bi bi-cloud-arrow-up"></i></div>
+        <div class="dz-label">Drop your contract here or click to browse</div>
+        <div class="dz-sub">Maximum file size: 20 MB</div>
+        <div class="dz-fmts"><span>PDF</span><span>DOCX</span><span>DOC</span></div>
+        <input type="file" id="fileIn" accept=".pdf,.doc,.docx" class="hidden" onchange="onFilePick(event)" />
+      </div>
+      <div class="file-pill hidden" id="filePill">
+        <i class="bi bi-file-earmark-text fp-icon"></i>
+        <span class="fp-name" id="fpName">–</span>
+        <span class="fp-size" id="fpSize">–</span>
+        <button class="fp-rm" onclick="clearFile()"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="vmsg" id="uploadErr"><i class="bi bi-exclamation-circle me-1"></i>Please select a PDF or DOCX file.</div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:20px;">
+        <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn-ai" onclick="startAnalysis()"><span class="spark">✦</span> Analyse Document</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Processing -->
+  <div class="mbox hidden" id="mProcessing" style="max-width:460px;">
+    <div class="mbox-hdr">
+      <h5><span style="color:#2563eb;">✦</span> Analysing Document…</h5>
+    </div>
+    <div class="proc-body">
+      <div class="spinner"></div>
+      <h6 id="procTitle">Reading document structure</h6>
+      <p id="procSub">This usually takes a few seconds</p>
+      <div class="steps-list">
+        <div class="step-row done" id="s1"><div class="step-dot">✓</div> Uploading document</div>
+        <div class="step-row active" id="s2"><div class="step-dot">●</div> Parsing document content</div>
+        <div class="step-row" id="s3"><div class="step-dot"></div> Identifying dynamic fields</div>
+        <div class="step-row" id="s4"><div class="step-dot"></div> Assigning field types</div>
+        <div class="step-row" id="s5"><div class="step-dot"></div> Generating template layout</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Review extracted fields -->
+  <div class="mbox hidden" id="mReview" style="max-width:680px;">
+    <div class="mbox-hdr">
+      <div style="display:flex;align-items:center;">
+        <h5>Review Extracted Fields</h5>
+        <span class="count-badge" id="rCount">0</span>
+      </div>
+      <button class="xbtn" onclick="closeModal()">×</button>
+    </div>
+    <div class="review-sub">
+      AI detected <strong id="rCountTxt">0</strong> dynamic fields from your document.
+      Review, rename, or change types before applying.
+      Fields marked <span class="ai-tag">AI</span> were auto-detected.
+    </div>
+    <div class="review-list">
+      <div class="col-labels"><div>Field Label</div><div>Field Type</div><div></div></div>
+      <div id="reviewRows"></div>
+    </div>
+    <div class="review-footer">
+      <button class="btn-add-row" onclick="addReviewRow()"><i class="bi bi-plus"></i> Add Field</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn-apply" onclick="applyFields()"><i class="bi bi-check2-circle me-1"></i>Save &amp; Apply to Template</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Add / Edit Field -->
+  <div class="mbox hidden" id="mAddField" style="max-width:560px;">
+    <div class="mbox-hdr">
+      <h5 id="afTitle">Add New Field</h5>
+      <button class="xbtn" onclick="closeAddField()">×</button>
+    </div>
+    <div class="mbox-body">
+      <div class="mb-2">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="afRequired" />
+          <label class="form-check-label" for="afRequired" style="font-size:13px;">Required</label>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Label <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="afLabel" placeholder="Enter label" />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Field Type <span class="text-danger">*</span></label>
+          <select class="form-select" id="afType">
+            <option value="">Field Type</option>
+            <option>Checkbox</option>
+            <option>ContractPdfFileUploader</option>
+            <option>DatePicker</option>
+            <option>DateTimePicker</option>
+            <option>Dropdown</option>
+            <option>FileUploader</option>
+            <option>Radio</option>
+            <option>Textarea</option>
+            <option>Textbox</option>
+          </select>
+        </div>
+      </div>
+      <div class="vmsg" id="afErr"><i class="bi bi-exclamation-circle me-1"></i>Label and Field Type are required.</div>
+      <div class="af-footer">
+        <button class="btn-ghost" onclick="closeAddField()">Cancel</button>
+        <button class="btn-apply" onclick="saveField()"><span id="afBtnTxt">Add Field</span></button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Toasts -->
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ═══ DATA ═══ */
+const TYPES = ['Textbox','Textarea','DatePicker','DateTimePicker','Dropdown','Radio','Checkbox','FileUploader','ContractPdfFileUploader'];
+let fields      = [];
+let reviewData  = [];
+let editingId   = null;
+let selFile     = null;
+
+/* Simulated AI extraction */
+const AI_FIELDS = [
+  {label:'Agreement DATE',                              fieldType:'DatePicker', isRequired:true },
+  {label:'Employer name',                               fieldType:'Textbox',    isRequired:true },
+  {label:'Candidate name',                              fieldType:'Textbox',    isRequired:true },
+  {label:'Candidate name in full',                      fieldType:'Textbox',    isRequired:true },
+  {label:'Candidate signature',                         fieldType:'Textbox',    isRequired:false},
+  {label:'Candidate signature date',                    fieldType:'DatePicker', isRequired:false},
+  {label:'First Agency Representative position',        fieldType:'Textbox',    isRequired:false},
+  {label:'First Agency Representative name',            fieldType:'Textbox',    isRequired:false},
+  {label:'First Agency Representative signature',       fieldType:'Textbox',    isRequired:false},
+  {label:'Second Agency Representative Position',       fieldType:'Textbox',    isRequired:false},
+  {label:'Second Agency Representative Name',           fieldType:'Textbox',    isRequired:false},
+  {label:'Second Agency Representative signature',      fieldType:'Textbox',    isRequired:false},
+  {label:'Candidate Phone number',                      fieldType:'Textbox',    isRequired:false},
+  {label:'Candidate Email Address',                     fieldType:'Textbox',    isRequired:false},
+  {label:'Scope of Work',                               fieldType:'Textarea',   isRequired:false},
+  {label:'Work Location',                               fieldType:'Textbox',    isRequired:false},
+  {label:'Contract Start Date',                         fieldType:'DatePicker', isRequired:true },
+  {label:'Contract End Date',                           fieldType:'DatePicker', isRequired:true },
+  {label:'Base Salary Amount',                          fieldType:'Textbox',    isRequired:true },
+  {label:'Notice Period (days)',                        fieldType:'Textbox',    isRequired:false},
+  {label:'CITY IN HOME COUNTRY',                        fieldType:'Textbox',    isRequired:false},
+  {label:'Relocation Flight',                           fieldType:'Textbox',    isRequired:false},
+  {label:'Temporary Accommodation',                     fieldType:'Textbox',    isRequired:false},
+  {label:'Shipping of Personal Effects maximum amount', fieldType:'Textbox',    isRequired:false},
+];
+
+function buildEditorHTML() {
+  return `
+<p style="text-align:center;font-weight:700;font-size:15px;">Limited Term Contract of Employment</p>
+<p style="text-align:center;font-weight:700;">STRICTLY PRIVATE AND CONFIDENTIAL</p><br>
+<p>The agreement was made on ${ch('Agreement DATE','📅')} between:</p>
+<p>(1) ${ch('Employer name')} &nbsp;(Referred to in this contract as the Employer, or the Agency).</p>
+<p>(2) ${ch('Candidate name')} &nbsp;(Referred to in this contract as the Employee).</p>
+<p>It is agreed as follows:</p>
+<p><strong>1 &nbsp;Scope of Work</strong></p>
+<p>1.1 The scope of work for this engagement is: ${ch('Scope of Work')}</p>
+<p>1.2 The work location shall be ${ch('Work Location')}.</p>
+<p><strong>2 &nbsp;Employment Period</strong></p>
+<p>2.1 This contract commences on ${ch('Contract Start Date','📅')} and ends on ${ch('Contract End Date','📅')}.</p>
+<p><strong>3 &nbsp;Compensation</strong></p>
+<p>3.1 The Employee shall receive a base salary of ${ch('Base Salary Amount')} per month.</p>
+<p>3.2 The notice period required by either party is ${ch('Notice Period (days)')} days.</p>
+<p><strong>4 &nbsp;Relocation Benefits</strong></p>
+<p>4.1 City of origin: ${ch('CITY IN HOME COUNTRY')}. &nbsp;Relocation flight: ${ch('Relocation Flight')}.</p>
+<p>4.2 Temporary accommodation: ${ch('Temporary Accommodation')}.</p>
+<p>4.3 Shipping of personal effects — maximum: ${ch('Shipping of Personal Effects maximum amount')}.</p>
+<p><strong>5 &nbsp;Signatures</strong></p>
+<p>Candidate full name: ${ch('Candidate name in full')} &nbsp;&nbsp; Date: ${ch('Candidate signature date','📅')}</p>
+<p>Candidate signature: ${ch('Candidate signature')}</p>
+<p>Agency representative: ${ch('First Agency Representative name')} &nbsp;&nbsp; Position: ${ch('First Agency Representative position')}</p>
+<p>Signature: ${ch('First Agency Representative signature')}</p>
+`;
+}
+
+function ch(label, icon) {
+  const ic = icon ? icon + ' ' : '';
+  return `<span class="fchip" contenteditable="false" data-field="${label}">${ic}${label}<span class="cd" onclick="removeChip(this)"> ✕</span></span>`;
+}
+function removeChip(el) { el.closest('.fchip').remove(); }
+
+/* ═══ UTILS ═══ */
+function uid() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
+}
+function fmtSize(b) {
+  if (b<1024) return b+' B';
+  if (b<1048576) return (b/1024).toFixed(1)+' KB';
+  return (b/1048576).toFixed(1)+' MB';
+}
+function toast(msg, type='info') {
+  const tc = document.getElementById('toasts');
+  const d = document.createElement('div');
+  d.className = `toast-item${type==='success'?' ok':type==='error'?' err':''}`;
+  d.innerHTML = `<span>${type==='success'?'✓':type==='error'?'✕':'✦'}</span> ${msg}`;
+  tc.appendChild(d);
+  setTimeout(()=>d.remove(), 4000);
+}
+
+/* ═══ FIELD LIST ═══ */
+function renderFields() {
+  const q = (document.getElementById('fieldSearch').value||'').toLowerCase();
+  const list   = document.getElementById('fieldsList');
+  const empty  = document.getElementById('emptyFields');
+  const noRes  = document.getElementById('noResults');
+  const vis    = fields.filter(f=>f.label.toLowerCase().includes(q));
+
+  empty.classList.toggle('hidden', fields.length>0);
+  noRes.classList.toggle('hidden', !(fields.length>0 && vis.length===0));
+
+  if (fields.length>0 && vis.length===0) {
+    document.getElementById('searchTerm').textContent = q;
+    list.innerHTML = '';
+  } else {
+    list.innerHTML = vis.map((f,i) => `
+      <div class="field-row">
+        <input type="checkbox" ${f.selected?'checked':''} onchange="toggleSel('${f.id}',this.checked)" />
+        <span class="fn">${i+1} - ${f.label} (${f.fieldType})</span>
+        <button class="edit-btn" onclick="editField('${f.id}')" title="Edit"><i class="bi bi-pencil"></i></button>
+        <button class="del-icon" onclick="deleteField('${f.id}')" title="Delete"><i class="bi bi-trash"></i></button>
+      </div>
+    `).join('');
+  }
+  renderEditorPanel();
+}
+
+function filterFields() { renderFields(); }
+function toggleSel(id,v) { const f=fields.find(x=>x.id===id); if(f) f.selected=v; }
+function deleteField(id) {
+  if(!confirm('Delete this field?')) return;
+  fields=fields.filter(f=>f.id!==id);
+  renderFields();
+  toast('Field deleted.','error');
+}
+
+function renderEditorPanel() {
+  const el = document.getElementById('epList');
+  if (!fields.length) { el.innerHTML='<div class="ep-empty">No fields yet</div>'; return; }
+  el.innerHTML = fields.map(f=>`
+    <div class="ep-item" onclick="insertChip('${f.label}','${f.fieldType}')" title="Insert into editor">
+      <div><div class="epi-label">${f.label}</div><div class="epi-type">${f.fieldType}</div></div>
+      <span class="epi-plus">+</span>
+    </div>
+  `).join('');
+}
+
+function insertChip(label, type) {
+  const ed = document.getElementById('editorBody');
+  ed.focus();
+  const icon = (type==='DatePicker'||type==='DateTimePicker') ? '📅 ' : '';
+  document.execCommand('insertHTML',false,
+    `<span class="fchip" contenteditable="false" data-field="${label}">${icon}${label}<span class="cd" onclick="removeChip(this)"> ✕</span></span>&nbsp;`
+  );
+  toast(`"${label}" inserted into editor.`);
+}
+
+/* ═══ MODAL SYSTEM ═══ */
+function showOnly(id) {
+  ['mUpload','mProcessing','mReview','mAddField'].forEach(m=>{
+    document.getElementById(m).classList.toggle('hidden', m!==id);
+  });
+  document.getElementById('overlay').classList.remove('hidden');
+}
+function closeModal()  { document.getElementById('overlay').classList.add('hidden'); clearFile(); }
+function onOverlayClick(e) { if(e.target===document.getElementById('overlay')) closeModal(); }
+
+/* ═══ UPLOAD ═══ */
+function openUploadModal() { clearFile(); showOnly('mUpload'); }
+function doDragOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('over'); }
+function doDragLeave()  { document.getElementById('dropZone').classList.remove('over'); }
+function doDrop(e)      { e.preventDefault(); document.getElementById('dropZone').classList.remove('over'); applyFile(e.dataTransfer.files[0]); }
+function onFilePick(e)  { applyFile(e.target.files[0]); }
+function applyFile(f) {
+  if(!f) return;
+  const ext=f.name.split('.').pop().toLowerCase();
+  const ok=['pdf','doc','docx'].includes(ext);
+  document.getElementById('uploadErr').classList.toggle('show',!ok);
+  if(!ok) return;
+  selFile=f;
+  document.getElementById('fpName').textContent=f.name;
+  document.getElementById('fpSize').textContent=fmtSize(f.size);
+  document.getElementById('filePill').classList.remove('hidden');
+  document.getElementById('dropZone').classList.add('hidden');
+  document.getElementById('uploadErr').classList.remove('show');
+}
+function clearFile() {
+  selFile=null;
+  const fi=document.getElementById('fileIn'); if(fi) fi.value='';
+  document.getElementById('filePill').classList.add('hidden');
+  document.getElementById('dropZone').classList.remove('hidden','over');
+  document.getElementById('uploadErr').classList.remove('show');
+}
+
+/* ═══ PROCESSING ═══ */
+function startAnalysis() {
+  if(!selFile) { document.getElementById('uploadErr').classList.add('show'); return; }
+  showOnly('mProcessing');
+  const steps = [
+    {id:'s1',title:'Uploading document',         sub:'Sending file securely…',                delay:0   },
+    {id:'s2',title:'Parsing document content',   sub:'Extracting text and document layout…',  delay:900 },
+    {id:'s3',title:'Identifying dynamic fields', sub:'Scanning for variable placeholders…',   delay:2000},
+    {id:'s4',title:'Assigning field types',      sub:'Mapping field types intelligently…',    delay:3100},
+    {id:'s5',title:'Generating template layout', sub:'Building editor content from contract…',delay:4200},
+  ];
+  steps.forEach((s,i)=>{
+    setTimeout(()=>{
+      if(i>0){ const p=document.getElementById(steps[i-1].id); p.className='step-row done'; p.querySelector('.step-dot').textContent='✓'; }
+      const c=document.getElementById(s.id); c.className='step-row active'; c.querySelector('.step-dot').textContent='●';
+      document.getElementById('procTitle').textContent=s.title;
+      document.getElementById('procSub').textContent=s.sub;
+    },s.delay);
+  });
+  setTimeout(()=>{
+    const last=document.getElementById('s5'); last.className='step-row done'; last.querySelector('.step-dot').textContent='✓';
+    reviewData=AI_FIELDS.map(f=>({...f,id:uid(),_ai:true}));
+    renderReview();
+    showOnly('mReview');
+  },5200);
+}
+
+/* ═══ REVIEW ═══ */
+function renderReview() {
+  document.getElementById('rCount').textContent=reviewData.length;
+  document.getElementById('rCountTxt').textContent=reviewData.length;
+  document.getElementById('reviewRows').innerHTML=reviewData.map((f,i)=>`
+    <div class="review-row ${f._ai?'ai':''}">
+      <input type="text" value="${f.label}" placeholder="Field label"
+             oninput="setReview(${i},'label',this.value)"
+             class="${f.label.trim()?'':'err'}" />
+      <select onchange="setReview(${i},'fieldType',this.value)">
+        ${TYPES.map(t=>`<option value="${t}" ${t===f.fieldType?'selected':''}>${t}</option>`).join('')}
+      </select>
+      <button class="rdel" onclick="removeReview(${i})" title="Remove"><i class="bi bi-trash"></i></button>
+    </div>
+  `).join('');
+}
+function setReview(i,key,val) {
+  reviewData[i][key]=val;
+  if(key==='label') document.querySelectorAll('.review-row')[i].querySelector('input[type=text]').classList.toggle('err',!val.trim());
+}
+function removeReview(i) { reviewData.splice(i,1); renderReview(); }
+function addReviewRow() {
+  reviewData.push({id:uid(),label:'',fieldType:'Textbox',isRequired:false,_ai:false});
+  renderReview();
+  const l=document.querySelector('.review-list'); l.scrollTop=l.scrollHeight;
+  const ins=document.querySelectorAll('.review-row input[type=text]');
+  if(ins.length) ins[ins.length-1].focus();
+}
+function applyFields() {
+  const blank=reviewData.filter(f=>!f.label.trim());
+  if(blank.length){ toast('Fill in all field labels before saving.','error'); renderReview(); return; }
+  const ex=new Set(fields.map(f=>f.label.toLowerCase()));
+  let added=0,updated=0;
+  reviewData.forEach(rf=>{
+    const k=rf.label.toLowerCase();
+    if(ex.has(k)){ const ef=fields.find(f=>f.label.toLowerCase()===k); if(ef){ef.fieldType=rf.fieldType;updated++;} }
+    else { fields.push({id:rf.id||uid(),label:rf.label,fieldType:rf.fieldType,isRequired:rf.isRequired,selected:false}); added++; }
+  });
+  document.getElementById('editorBody').innerHTML=buildEditorHTML();
+  closeModal();
+  renderFields();
+  toast(`✦ ${added} fields added, ${updated} updated. Template editor populated!`,'success');
+}
+
+/* ═══ ADD/EDIT FIELD ═══ */
+function openAddFieldModal() {
+  editingId=null;
+  document.getElementById('afTitle').textContent='Add New Field';
+  document.getElementById('afBtnTxt').textContent='Add Field';
+  document.getElementById('afLabel').value='';
+  document.getElementById('afType').value='';
+  document.getElementById('afRequired').checked=false;
+  document.getElementById('afErr').classList.remove('show');
+  showOnly('mAddField');
+}
+function editField(id) {
+  const f=fields.find(x=>x.id===id); if(!f) return;
+  editingId=id;
+  document.getElementById('afTitle').textContent='Edit Field';
+  document.getElementById('afBtnTxt').textContent='Update Field';
+  document.getElementById('afLabel').value=f.label;
+  document.getElementById('afType').value=f.fieldType;
+  document.getElementById('afRequired').checked=f.isRequired;
+  document.getElementById('afErr').classList.remove('show');
+  showOnly('mAddField');
+}
+function closeAddField() { document.getElementById('overlay').classList.add('hidden'); editingId=null; }
+function saveField() {
+  const label=document.getElementById('afLabel').value.trim();
+  const type=document.getElementById('afType').value;
+  if(!label||!type){ document.getElementById('afErr').classList.add('show'); return; }
+  if(editingId){
+    const f=fields.find(x=>x.id===editingId);
+    if(f){f.label=label;f.fieldType=type;f.isRequired=document.getElementById('afRequired').checked;}
+    toast('Field updated.');
+  } else {
+    fields.push({id:uid(),label,fieldType:type,isRequired:document.getElementById('afRequired').checked,selected:false});
+    toast('Field added.');
+  }
+  closeAddField();
+  renderFields();
+}
+
+/* ═══ SAVE ═══ */
+function saveTemplate() {
+  const title=document.getElementById('templateTitle').value.trim();
+  const desc=document.getElementById('descBody').innerText.trim();
+  if(!title){ toast('Template title is required.','error'); return; }
+  if(!desc) { toast('Template description is required.','error'); return; }
+  const payload={
+    id:uid(), name:title, description:desc,
+    country:document.getElementById('countrySelect').value,
+    office:document.getElementById('officeSelect').value,
+    dynamicFormFields:fields.map((f,i)=>({id:f.id,label:f.label,fieldType:f.fieldType,isRequired:f.isRequired,sortOrder:i+1})),
+    templateContent:document.getElementById('editorBody').innerHTML||'',
+  };
+  console.log('Saving template:',payload);
+  toast('Template saved successfully!','success');
+}
+
+document.addEventListener('DOMContentLoaded', renderFields);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="canonical" href="https://houssammoallem.com/projects/ai-template-generation.html">
+<meta property="og:title" content="AI Contract Template Generator | Houssam Moallem">
+<meta property="og:description" content="AI-powered contract template creation: upload a document, AI extracts dynamic fields, populates the editor — reducing template setup from hours to seconds.">
+<meta property="og:url" content="https://houssammoallem.com/projects/ai-template-generation.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI Contract Template Generator | Houssam Moallem">
+<meta name="twitter:description" content="Upload a contract → AI extracts every field → ready-to-use template in seconds.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Template Generator | Houssam Moallem</title>
+<meta name="description" content="AI-powered contract template generator: upload PDF/DOCX contracts and AI extracts all dynamic fields, assigns types, and populates the template editor automatically.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=2">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="../index.html#case-studies">Case studies</a>
+      <a href="../index.html#clients">Clients</a>
+      <a href="../about.html">About me</a>
+      <a href="../resume.html">Resume</a>
+      <a class="cta" href="mailto:moallem.houssam@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS &middot; STeP &middot; AI &amp; Legal Tech</p>
+    <h1>AI Contract Template Generator</h1>
+    <p class="tagline">Upload a contract document &mdash; AI extracts every dynamic field, assigns field types, and populates the template editor in seconds instead of hours.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">My role</div><div class="v">Product Manager</div></div>
+      <div class="meta-cell"><div class="k">Client</div><div class="v">STeP Systems That Perform</div></div>
+      <div class="meta-cell"><div class="k">Domain</div><div class="v">Legal tech, HR, contract management</div></div>
+      <div class="meta-cell"><div class="k">Technology</div><div class="v">AI field extraction, rich-text editor, dynamic forms</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Context</h2>
+  <p>
+    STeP's platform includes a contract template module used by HR and legal teams to generate
+    employment contracts, service agreements, and compliance documents. Creating a new template
+    meant manually identifying every dynamic field in a contract, assigning each a field type
+    (text, date, dropdown, etc.), and then composing the template in a rich-text editor with
+    field placeholders &mdash; a process that took 2-4 hours per template and was prone to
+    missed fields and type errors.
+  </p>
+
+  <h2>The challenge</h2>
+  <ul>
+    <li>Each contract document contains 20-40 dynamic fields that had to be manually identified, named, typed, and placed.</li>
+    <li>HR teams managing multi-country operations needed templates for UAE, KSA, Qatar, Kuwait &mdash; each with different legal requirements and field sets.</li>
+    <li>The manual process was error-prone: missing a field meant a contract went live with a hardcoded value instead of a dynamic placeholder.</li>
+    <li>Template creation was a bottleneck &mdash; only senior staff could do it, blocking sales and onboarding.</li>
+  </ul>
+
+  <h2>My role</h2>
+  <p>
+    I led the product discovery, requirements, and delivery of the AI-powered template generator.
+    This included mapping the as-is manual workflow, specifying the AI extraction pipeline
+    (document parsing &rarr; field identification &rarr; type assignment &rarr; editor population),
+    designing the review/approval UX so users could verify AI suggestions before applying them,
+    and coordinating with the development team through sprint cycles.
+  </p>
+  <div class="callout">
+    <div class="k">Trust, not automation for its own sake</div>
+    <p>
+      The key design decision was making AI <em>assistive</em>, not autonomous. Every extracted
+      field goes through a review screen where users can rename, retype, add, or remove fields
+      before applying. AI does the heavy lifting; the human stays in control. This eliminated
+      the trust barrier that would have killed adoption if we'd gone fully automatic.
+    </p>
+  </div>
+
+  <h2>Approach</h2>
+  <ul>
+    <li><strong>Document upload &amp; parsing.</strong> Users upload PDF or DOCX contracts. The system extracts text and structure, then uses AI to identify candidate fields based on context patterns (dates, names, amounts, places, signatures).</li>
+    <li><strong>Intelligent field typing.</strong> Fields are auto-classified as DatePicker, Textbox, Textarea, Dropdown, etc. based on their content and surrounding context &mdash; not just pattern matching.</li>
+    <li><strong>Review &amp; refine screen.</strong> All AI-detected fields appear in a review modal with inline editing. Users can rename labels, change types, delete false positives, or add missed fields. Fields marked with an AI badge show provenance.</li>
+    <li><strong>One-click template population.</strong> On approval, the system injects all fields as interactive chips into the rich-text editor, composing the full contract template from a structured layout. Users can then fine-tune formatting and language.</li>
+    <li><strong>Multi-country support.</strong> Template metadata (country, office) drives field suggestions. UAE employment contracts auto-suggest UAE-specific legal fields; KSA templates get KSA-appropriate defaults.</li>
+  </ul>
+
+  <h2>Outcomes</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>2-4 hours &rarr; under 30 seconds</b><span>Template creation time reduced by over 99%</span></div>
+    <div class="outcome"><b>Zero missed fields</b><span>AI extraction catches fields humans routinely overlook &mdash; no contract goes live with hardcoded placeholders</span></div>
+    <div class="outcome"><b>Non-technical adoption</b><span>HR and legal staff can create templates without technical knowledge of field types or rich-text markup</span></div>
+    <div class="outcome"><b>Multi-country scale</b><span>One workflow serves UAE, KSA, Qatar, Kuwait, Bahrain, Oman templates with country-aware field suggestions</span></div>
+  </div>
+
+  <h2>Key decisions &amp; learnings</h2>
+  <ul>
+    <li><strong>Review screen was the MVP.</strong> We originally planned to skip review and auto-apply. User testing showed immediate rejection &mdash; people won't trust AI they can't verify. Adding the review modal with inline editing turned skeptics into advocates.</li>
+    <li><strong>Field chips in the editor.</strong> Making extracted fields visible as interactive chips (colored, removable, clickable) inside the editor gave users a mental model they immediately understood: "these are the blanks I fill later." This replaced a confusing placeholder syntax.</li>
+    <li><strong>Country metadata matters.</strong> A "Contract Start Date" is universal; "Iqama Number" is KSA-specific. Linking template metadata to field suggestion logic made the AI contextually smarter without requiring per-country training data.</li>
+  </ul>
+
+  <div class="cs-nav">
+    <a href="billing-revenue-automation.html">&larr; Previous: Billing &amp; Revenue Automation</a>
+    <a href="credit-limit-management.html">Next: Credit Limit Management &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem</span>
+    <span><a href="../index.html#case-studies">Case studies</a> &middot; <a href="../resume.html">Resume</a> &middot; <a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
