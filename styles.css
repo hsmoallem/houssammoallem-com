@@ -78,6 +78,16 @@ img { max-width: 100%; display: block; }
   font-size: 14px;
 }
 .nav-links a.cta:hover { background: var(--green); }
+/* Nav social icons */
+.nav-icons { display: flex; gap: 4px; align-items: center; margin-left: 4px; }
+.nav-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  color: var(--slate); font-size: 14px;
+  transition: color .15s, background .15s;
+}
+.nav-icon:hover { color: var(--green); background: var(--green-soft); text-decoration: none; }
+
 
 /* ---------- Hero ---------- */
 .hero { padding: 88px 0 64px; }
