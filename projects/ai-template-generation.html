@@ -48,7 +48,7 @@
       <a class="btn btn-primary" href="ai-template-demo.html" target="_blank" style="font-size:14px;">✦ Try the live demo</a>
     </div>
     <div class="meta-grid">
-      <div class="meta-cell"><div class="k">My role</div><div class="v">Product Manager</div></div>
+      <div class="meta-cell"><div class="k">My role</div><div class="v">Product Manager &middot; UI/UX Design &middot; Front-End Development</div></div>
       <div class="meta-cell"><div class="k">Client</div><div class="v">STeP Systems That Perform</div></div>
       <div class="meta-cell"><div class="k">Domain</div><div class="v">Legal tech, HR, contract management</div></div>
       <div class="meta-cell"><div class="k">Technology</div><div class="v">AI field extraction, rich-text editor, dynamic forms</div></div>
@@ -77,7 +77,7 @@
 
   <h2>My role</h2>
   <p>
-    I led the product discovery, requirements, and delivery of the AI-powered template generator.
+    I led the product discovery, UI/UX design, and front-end development of the AI-powered template generator. I used Claude to build and commit the entire front-end and AI integration, working hands-on from concept to working prototype.
     This included mapping the as-is manual workflow, specifying the AI extraction pipeline
     (document parsing &rarr; field identification &rarr; type assignment &rarr; editor population),
     designing the review/approval UX so users could verify AI suggestions before applying them,
@@ -95,7 +95,8 @@
 
   <h2>Approach</h2>
   <ul>
-    <li><strong>Document upload &amp; parsing.</strong> Users upload PDF or DOCX contracts. The system extracts text and structure, then uses AI to identify candidate fields based on context patterns (dates, names, amounts, places, signatures).</li>
+    <li><strong>Built with Claude.</strong> The entire front-end UI, AI integration logic, rich-text editor, and multi-step modal flow were built and committed to the codebase using Claude as an AI coding assistant — from initial prototype to production-ready code.</li>
+        <li><strong>Document upload &amp; parsing.</strong> Users upload PDF or DOCX contracts. The system extracts text and structure, then uses AI to identify candidate fields based on context patterns (dates, names, amounts, places, signatures).</li>
     <li><strong>Intelligent field typing.</strong> Fields are auto-classified as DatePicker, Textbox, Textarea, Dropdown, etc. based on their content and surrounding context &mdash; not just pattern matching.</li>
     <li><strong>Review &amp; refine screen.</strong> All AI-detected fields appear in a review modal with inline editing. Users can rename labels, change types, delete false positives, or add missed fields. Fields marked with an AI badge show provenance.</li>
     <li><strong>One-click template population.</strong> On approval, the system injects all fields as interactive chips into the rich-text editor, composing the full contract template from a structured layout. Users can then fine-tune formatting and language.</li>
