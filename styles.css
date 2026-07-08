@@ -365,6 +365,45 @@ footer { padding: 30px 0 44px; }
 }
 
 /* ============================================================
+   Resume page
+   ============================================================ */
+.hero-sub { margin-top: 12px; }
+.hero-sub a { color: var(--green); text-decoration: underline; }
+
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; margin-top: 8px; }
+.skills-grid ul { list-style: none; padding: 0; }
+.skills-grid li { padding: 6px 0 6px 16px; position: relative; font-size: 15px; color: var(--ink-soft); }
+.skills-grid li::before { content: '▸'; position: absolute; left: 0; color: var(--green); font-size: 11px; top: 9px; }
+
+.exp-block { border-left: 3px solid var(--line); padding-left: 24px; margin-bottom: 36px; }
+.exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+.exp-header h3 { font-family: var(--font-display); font-size: 20px; color: var(--ink); margin: 0; }
+.exp-dates { font-family: var(--font-mono); font-size: 13px; color: var(--slate); white-space: nowrap; }
+.exp-company-desc { font-size: 14px; color: var(--slate); margin-bottom: 14px; font-style: italic; }
+.exp-role { margin-bottom: 20px; }
+.exp-role h4 { font-family: var(--font-display); font-size: 16px; color: var(--green); margin: 0 0 6px; font-weight: 600; }
+.exp-role-dates { font-weight: 400; font-size: 13px; color: var(--slate); font-family: var(--font-mono); }
+.exp-role ul { list-style: none; padding: 0; }
+.exp-role li { padding: 4px 0 4px 18px; position: relative; font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+.exp-role li::before { content: '—'; position: absolute; left: 0; color: var(--line); }
+
+.edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.edu-item { margin-bottom: 14px; }
+.edu-item strong { display: block; font-size: 15px; color: var(--ink); }
+.edu-item p { font-size: 14px; color: var(--slate); margin-top: 2px; }
+.cert-list { list-style: none; padding: 0; }
+.cert-list li { padding: 5px 0 5px 16px; position: relative; font-size: 15px; color: var(--ink-soft); }
+.cert-list li::before { content: '▸'; position: absolute; left: 0; color: var(--green); font-size: 10px; top: 8px; }
+.lang-grid { display: flex; gap: 32px; flex-wrap: wrap; font-size: 15px; color: var(--ink-soft); }
+
+@media (max-width: 768px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .edu-cert-grid { grid-template-columns: 1fr; gap: 24px; }
+  .exp-header { flex-direction: column; }
+  .lang-grid { flex-direction: column; gap: 8px; }
+}
+
+/* ============================================================
    Responsive: mobile (<= 620px)
    ============================================================ */
 @media (max-width: 620px) {
