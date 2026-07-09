@@ -212,8 +212,8 @@ section { padding: 64px 0; }
 
 /* Case study thumbnail image */
 .case-img {
-  display: block; width: calc(100% + 56px); height: auto;
-  margin: -28px -28px 4px -28px;
+  display: block; width: calc(100% + 58px); height: auto;
+  margin: -29px -29px 14px -29px;
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
