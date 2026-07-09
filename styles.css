@@ -181,7 +181,7 @@ section { padding: 64px 0; }
 .case-card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 28px; display: flex; flex-direction: column; gap: 14px;
-  color: var(--ink); position: relative;
+  color: var(--ink); position: relative; overflow: hidden;
   transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 .case-card:hover {
@@ -209,6 +209,13 @@ section { padding: 64px 0; }
 }
 .case-link { font-family: var(--font-display); font-weight: 600; font-size: 14.5px; color: var(--green); }
 .case-card:hover .case-link { text-decoration: underline; }
+
+/* Case study thumbnail image */
+.case-img {
+  display: block; width: calc(100% + 56px); height: 150px;
+  object-fit: cover; margin: -28px -28px 4px -28px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
 
 /* ---------- Credentials ---------- */
 .cred-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
