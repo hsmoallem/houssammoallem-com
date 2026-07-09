@@ -27,6 +27,7 @@
       <a href="../about.html">About me</a>
       <a class="cta" href="mailto:moallem.houssam@gmail.com">Get in touch</a>
     </div>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -109,5 +110,17 @@
   </div>
 </footer>
 
+
+<script>
+(function(){
+  var burger = document.querySelector('.nav-burger');
+  var nav = document.querySelector('.nav');
+  if (burger && nav) {
+    burger.addEventListener('click', function(){
+      nav.classList.toggle('open');
+    });
+  }
+})();
+</script>
 </body>
 </html>
