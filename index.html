@@ -47,12 +47,14 @@
       <a href="about.html">About me</a>
       <a href="resume.html">Resume</a>
       <a class="cta" href="#contact">Let's talk</a>
-      <span class="nav-icons">
+    </div>
+    <span class="nav-icons">
 <a class="nav-icon" href="mailto:moallem.houssam@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
       <a class="nav-icon" href="https://github.com/hsmoallem" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
       <a class="nav-icon" href="https://www.linkedin.com/in/moallem/" target="_blank" rel="noopener" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-      <a class="nav-icon" href="https://wa.me/+4915210162325" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-    </span></div>
+      <a class="nav-icon" href="https://wa.me/+491****3813" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+    </span>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -234,7 +236,7 @@
       <a class="btn btn-primary" href="mailto:moallem.houssam@gmail.com">Email me</a>
       <a class="btn btn-ghost" href="https://github.com/hsmoallem" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/moallem/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" href="https://wa.me/+4915210162325" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-ghost" href="https://wa.me/+4917629163813" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </section>
@@ -265,6 +267,18 @@
     n.clients&&n.clients.classList.remove("active");
     n.cases&&n.cases.classList.remove("active");
   });
+})();
+</script>
+
+<script>
+(function(){
+  var burger = document.querySelector('.nav-burger');
+  var nav = document.querySelector('.nav');
+  if (burger && nav) {
+    burger.addEventListener('click', function(){
+      nav.classList.toggle('open');
+    });
+  }
 })();
 </script>
 </body>
