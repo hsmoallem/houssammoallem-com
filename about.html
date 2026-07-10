@@ -173,5 +173,9 @@
   }
 })();
 </script>
+<script>
+/* Section time tracking via IntersectionObserver */
+(function(){if(typeof umami==="undefined")return;var sections={},timers={};document.querySelectorAll("section[id],header[class~='hero'],#case-studies,#clients,#contact,.cred-grid").forEach(function(el){var id=el.id||("s-"+Math.random().toString(36).substr(2,6));sections[id]=el});var o=new IntersectionObserver(function(e){e.forEach(function(e){var n=e.target.id;if(!n)return;if(e.isIntersecting){if(!timers[n])timers[n]=Date.now()}else{if(timers[n]){var d=Math.round((Date.now()-timers[n])/1000);delete timers[n];if(d>1&&typeof umami!=="undefined")umami.track("section-time-"+n,{duration:d})}}})},{threshold:.2});Object.values(sections).forEach(function(el){o.observe(el)});window.addEventListener("beforeunload",function(){var n=Date.now();for(var k in timers){var d=Math.round((n-timers[k])/1000);if(d>1&&typeof umami!=="undefined")umami.track("section-time-"+k,{duration:d})}timers={}})})();
+</script>
 </body>
 </html>
