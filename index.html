@@ -250,20 +250,58 @@
 <script>
 (function(){
   var s=["clients","case-studies"];
-  var n={clients:document.querySelector('[data-nav="clients" data-umami-event="nav-click-clients"]'),cases:document.querySelector('[data-nav="cases" data-umami-event="nav-click-case-studies"]')};
+  var n={clients:document.querySelector('[data-nav="clients"]'),cases:document.querySelector('[data-nav="cases"]')};
+  var currentSection = null;
+  var sectionEnterTime = null;
+
+  function setActive(section){
+    if (section === currentSection) return;
+    // Record time spent on previous section
+    if (currentSection && sectionEnterTime && typeof umami !== 'undefined') {
+      var duration = Math.round((Date.now() - sectionEnterTime) / 1000);
+      umami.track('section-time-' + currentSection, { duration: duration });
+    }
+    // Update UI
+    n.clients&&n.clients.classList.remove("active");
+    n.cases&&n.cases.classList.remove("active");
+    if (section === "clients") n.clients&&n.clients.classList.add("active");
+    if (section === "case-studies") n.cases&&n.cases.classList.add("active");
+    // Track entry
+    currentSection = section;
+    sectionEnterTime = Date.now();
+    if (section && typeof umami !== 'undefined') {
+      umami.track(function(props) {
+        return { website: props.website, hostname: props.hostname, url: '/' + section, title: section.replace(/-/g, ' ') };
+      });
+    }
+  }
+
+  // Scroll-based detection
   window.addEventListener("scroll",function(){
     var y=window.scrollY+120;
     for(var i=s.length-1;i>=0;i--){
       var e=document.getElementById(s[i]);
-      if(e&&y>=e.offsetTop){
-        n.clients&&n.clients.classList.remove("active");
-        n.cases&&n.cases.classList.remove("active");
-        n[s[i]==="clients"?"clients":"cases"]&&n[s[i]==="clients"?"clients":"cases"].classList.add("active");
-        return;
-      }
+      if(e&&y>=e.offsetTop){ setActive(s[i]); return; }
     }
-    n.clients&&n.clients.classList.remove("active");
-    n.cases&&n.cases.classList.remove("active");
+    setActive(null);
+  });
+
+  // Hash changes (nav clicks)
+  window.addEventListener("hashchange", function(){
+    var hash=window.location.hash.replace('#','');
+    if(hash==="case-studies"||hash==="clients") setActive(hash);
+  });
+  if (window.location.hash) {
+    var h=window.location.hash.replace('#','');
+    if(h==="case-studies"||h==="clients") setActive(h);
+  }
+
+  // Record final time on page leave
+  window.addEventListener("beforeunload", function(){
+    if (currentSection && sectionEnterTime && typeof umami !== 'undefined') {
+      var duration = Math.round((Date.now() - sectionEnterTime) / 1000);
+      umami.track('section-time-' + currentSection, { duration: duration });
+    }
   });
 })();
 </script>
@@ -277,25 +315,6 @@
       nav.classList.toggle('open');
     });
   }
-})();
-
-/* Track hash-based navigation as pageviews in Umami */
-(function(){
-  function trackHash() {
-    var hash = window.location.hash;
-    if (hash && hash.length > 1) {
-      var label = hash.replace('#', '');
-      if (typeof umami !== 'undefined') {
-        umami.track(function(props) {
-          return { website: props.website, hostname: props.hostname, url: '/' + label, title: label.replace(/-/g, ' ') };
-        });
-      }
-    }
-  }
-  // Listen for hash changes (clicks, scroll-triggered nav)
-  window.addEventListener('hashchange', trackHash);
-  // Also fire on initial load if there's a hash
-  if (window.location.hash) trackHash();
 })();
 </script>
 </body>
