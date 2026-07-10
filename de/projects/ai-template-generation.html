@@ -42,11 +42,16 @@
     </div>
     <span class="nav-icons">
 <a class="nav-icon" href="mailto:moallem.houssam@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
-      <a class="nav-icon" href="https://github.com/hsmoallem" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
-      <a class="nav-icon" href="https://www.linkedin.com/in/moallem/" target="_blank" rel="noopener" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+
+
+      
+      
+
+      
       <a class="nav-icon" href="https://wa.me/+4915210162325" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-    
-    <span class="lang-switcher"><a href="../" class="">EN</a><span class="sep">|</span><a href="./" class="active">DE</a></span>
+      <a class="nav-icon" href="https://github.com/hsmoallem" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
+      <a class="nav-icon" href="https://www.linkedin.com/in/moallem/" target="_blank" rel="noopener" title="LinkedIn"><i class="bi bi-linkedin"></i></a>    
+    <span class="lang-switcher"><a href="../" class="">EN</a><span class="sep"> | </span><a href="./" class="active">DE</a></span>
     </span>
     <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -56,7 +61,7 @@
   <div class="wrap">
     <p class="eyebrow">CS &middot; STeP &middot; KI &amp; Legal Tech</p>
     <h1>KI-Vertragsvorlagen-Generator</h1>
-    <p class="tagline">Dokument hochladen &mdash; KI extrahiert jedes dynamische Feld, weist Feldtypen zu und befüllt den Vorlagen-Editor in Sekunden statt Stunden.</p>
+    <p class="tagline">Dokument hochladen &mdash; die KI extrahiert jedes dynamische Feld, weist Feldtypen zu und befüllt den Vorlagen-Editor in Sekunden statt Stunden.</p>
     
     <div style="margin-top:24px;">
       <a class="btn btn-primary" href="ai-template-demo.html" target="_blank" style="font-size:14px;">✦ Zur Live-Demo</a>
@@ -84,21 +89,21 @@
   <h2>Die Herausforderung</h2>
   <ul>
     <li>Jedes Vertragsdokument enthält 20–40 dynamische Felder, die manuell identifiziert, benannt, typisiert und platziert werden mussten.</li>
-    <li>HR-Teams mit länderübergreifenden Operationen benötigten Vorlagen für VAE, KSA, Katar, Kuwait &mdash; jedes mit unterschiedlichen gesetzlichen Anforderungen und Feldsätzen.</li>
-    <li>Der manuelle Prozess war fehleranfällig: Ein übersehenes Feld bedeutete, dass ein Vertrag mit einem fest codierten Wert statt eines dynamischen Platzhalters live ging.</li>
-    <li>Die Vorlagenerstellung war ein Engpass &mdash; nur erfahrene Mitarbeiter konnten sie durchführen, was Vertrieb und Onboarding blockierte.</li>
+    <li>HR-Teams mit länderübergreifenden Standorten benötigten Vorlagen für VAE, KSA, Katar, Kuwait &mdash; jedes Land mit eigenen rechtlichen Anforderungen und Feldsätzen.</li>
+    <li>Der manuelle Prozess war fehleranfällig: Ein übersehenes Feld führte dazu, dass ein Vertrag mit einem hart codierten Wert statt eines dynamischen Platzhalters live ging.</li>
+    <li>Die Vorlagenerstellung wurde zum Engpass &mdash; nur erfahrene Mitarbeiter konnten sie durchführen — das blockierte Vertrieb und Onboarding.</li>
   </ul>
 
   <h2>Meine Rolle</h2>
   <p>
-    Ich leitete die Product Discovery, das UI/UX-Design und die Frontend-Entwicklung des KI-gestützten Vorlagen-Generators. Ich nutzte Claude, um das gesamte Frontend und die KI-Integration zu bauen und zu committen — von der Konzeption bis zum funktionierenden Prototyp.
+    Ich leitete die Product Discovery, das UI/UX-Design und die Frontend-Entwicklung des KI-gestützten Vorlagen-Generators. Das gesamte Frontend und die KI-Integration habe ich mit Claude gebaut — von der Konzeption bis zum funktionierenden Prototyp.
     This included mapping the as-is manual workflow, specifying the KI extraction pipeline
     (document parsing &rarr; Feldidentifikation &rarr; Typzuweisung &rarr; editor population),
     designing the review/approval UX so users could verify KI suggestions before applying them,
     and coordinating with the development team through sprint cycles.
   </p>
   <div class="callout">
-    <div class="k">Vertrauen, nicht Automatisierung um ihrer selbst willen</div>
+    <div class="k">Vertrauen statt blinder Automatisierung</div>
     <p>
       The key design decision was making KI <em>assistive</em>, not autonomous. Every extracted
       field goes through a review screen where users can rename, retype, add, or remove fields
@@ -107,10 +112,10 @@
     </p>
   </div>
 
-  <h2>Ansatz</h2>
+  <h2>Vorgehen</h2>
   <ul>
-    <li><strong>Mit Claude gebaut.</strong> Das gesamte Frontend-UI, die KI-Integrationslogik, der Rich-Text-Editor und der mehrstufige Modal-Flow wurden mit Claude als KI-Coding-Assistent gebaut und in die Codebasis committed — vom ersten Prototyp bis zum produktionsreifen Code.</li>
-        <li><strong>Dokumenten-Upload &amp; Analyse.</strong> Nutzer laden PDF- oder DOCX-Verträge hoch. Das System extrahiert Text und Struktur und nutzt dann KI, um Kandidatenfelder anhand von Kontextmustern zu identifizieren (Daten, Namen, Beträge, Orte, Unterschriften).</li>
+    <li><strong>Mit Claude gebaut.</strong> Das gesamte Frontend, die KI-Integrationslogik, der Rich-Text-Editor und der mehrstufige Workflow wurden mit Claude entwickelt und direkt in die Codebasis committed — vom ersten Prototyp bis zum produktionsreifen Code.</li>
+        <li><strong>Dokumenten-Upload &amp; &amp; Analyse.</strong> Nutzer laden PDF- oder DOCX-Verträge hoch. Das System extrahiert Text und Struktur und identifiziert per KI dynamische Felder anhand von Kontextmustern — Daten, Namen, Beträge, Orte, Unterschriften.</li>
     <li><strong>Intelligente Feldtypisierung.</strong> Felder werden automatisch als DatePicker, Textbox, Textarea, Dropdown usw. klassifiziert — basierend auf Inhalt und umgebendem Kontext &mdash; nicht nur Pattern-Matching.</li>
     <li><strong>Prüfung &amp; Verfeinerung.</strong> Alle KI-erkannten Felder erscheinen in einem Prüfmodal mit Inline-Bearbeitung. Nutzer können Labels umbenennen, Typen ändern, Fehlalarme löschen oder übersehene Felder hinzufügen. Mit einem KI-Badge markierte Felder zeigen die Herkunft an.</li>
     <li><strong>Ein-Klick-Vorlagenbefüllung.</strong> Nach Freigabe fügt das System alle Felder als interaktive Chips in den Rich-Text-Editor ein und erstellt die vollständige Vertragsvorlage aus einem strukturierten Layout. Nutzer können dann Formatierung und Sprache verfeinern.</li>
@@ -125,7 +130,7 @@
     <div class="outcome"><b>Länderübergreifende Skalierung</b><span>Ein Workflow bedient Vorlagen für VAE, KSA, Katar, Kuwait, Bahrain, Oman mit länderspezifischen Feldvorschlägen</span></div>
   </div>
 
-  <h2>Wichtige Entscheidungen &amp; Erkenntnisse</h2>
+  <h2>Entscheidungen &amp; Erkenntnisse</h2>
   <ul>
     <li><strong>Prüfung screen was the MVP.</strong> We originally planned to skip review and auto-apply. User testing showed immediate rejection &mdash; Menschen vertrauen keiner KI, die sie nicht verifizieren können. Das Hinzufügen des Prüfmodals mit Inline-Bearbeitung machte Skeptiker zu Befürwortern.</li>
     <li><strong>Field chips in the editor.</strong> Making extracted fields visible as interactive chips (colored, removable, clickable) inside the editor gave users a mental model they immediately understood: "these are the blanks I fill later." This replaced a confusing placeholder syntax.</li>
