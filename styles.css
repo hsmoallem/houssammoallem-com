@@ -135,6 +135,7 @@ img { max-width: 100%; display: block; }
 section { padding: 64px 0; }
 
 /* Resume section alternation for visual rhythm */
+.resume-page header.hero { background: #fff; }
 .resume-page section:nth-of-type(odd)  { background: #fff; }
 .resume-page section:nth-of-type(even) { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .eyebrow {
