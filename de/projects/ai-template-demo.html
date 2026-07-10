@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add New Contract Template</title>
+  <title>Neue Vertragsvorlage</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
   <style>
@@ -34,14 +34,14 @@
     }
     .form-control::placeholder { color: #adb5bd; font-style: italic; }
 
-    /* ── Description mini-editor ── */
+    /* ── Beschreibung mini-editor ── */
     .desc-editor { border: 1px solid #d0d5dd; border-radius: 6px; overflow: hidden; }
     .desc-toolbar { display: flex; align-items: center; gap: 2px; padding: 6px 10px; border-bottom: 1px solid #e5e7eb; background: #fff; }
     .desc-toolbar button { border: none; background: transparent; padding: 3px 6px; border-radius: 4px; font-size: 13px; color: #374151; cursor: pointer; font-weight: 600; line-height: 1; }
     .desc-toolbar button:hover { background: #f0f0f0; }
     .desc-toolbar .tb-sep { width: 1px; height: 16px; background: #d1d5db; margin: 0 3px; }
     .desc-body { min-height: 80px; padding: 12px 14px; outline: none; font-size: 13px; color: #333; }
-    .desc-body:empty::before { content: "Description"; color: #adb5bd; font-style: italic; pointer-events: none; }
+    .desc-body:empty::before { content: "Beschreibung"; color: #adb5bd; font-style: italic; pointer-events: none; }
 
     /* ── AI Button ── */
     .btn-ai {
@@ -55,7 +55,7 @@
     .btn-ai .spark { font-size: 15px; }
     .ai-hint { font-size: 12px; color: #6b7280; }
 
-    /* ── Search + Add New Field bar ── */
+    /* ── Search + Neues Feld bar ── */
     .fields-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
     .fields-bar input { flex: 1; border: 1px solid #d0d5dd; border-radius: 6px; padding: 8px 12px; font-size: 13px; }
     .fields-bar input::placeholder { color: #adb5bd; }
@@ -63,7 +63,7 @@
     .btn-add-field { border: 1px solid #333; background: #fff; border-radius: 20px; padding: 8px 20px; font-size: 13px; font-weight: 500; color: #333; white-space: nowrap; cursor: pointer; transition: background .12s; }
     .btn-add-field:hover { background: #f3f4f6; }
 
-    /* ── Template Fields section ── */
+    /* ── Vorlagenfelder section ── */
     .section-label { font-size: 13px; font-weight: 600; color: #333; margin-bottom: 8px; }
     .fields-box { border: 1px solid #e0e4ea; border-radius: 8px; min-height: 90px; background: #fff; padding: 10px 14px; }
     .field-row { display: flex; align-items: center; gap: 10px; padding: 6px 4px; }
@@ -76,7 +76,7 @@
     .fields-empty { text-align: center; color: #9ca3af; font-size: 13px; padding: 24px 0; }
     .fields-empty .fe-icon { font-size: 28px; margin-bottom: 6px; }
 
-    /* ── Template Editor ── */
+    /* ── Vorlagen-Editor ── */
     .editor-wrap { border: 1px solid #e0e4ea; border-radius: 8px; overflow: hidden; display: grid; grid-template-columns: 1fr 260px; }
     .editor-toolbar {
       grid-column: 1 / -1; background: #fff; border-bottom: 1px solid #e5e7eb;
@@ -87,7 +87,7 @@
     .editor-toolbar .tb-sep { width: 1px; height: 18px; background: #d1d5db; margin: 0 3px; }
     .editor-toolbar select { border: 1px solid #d1d5db; border-radius: 4px; font-size: 12px; padding: 2px 5px; background: #fff; cursor: pointer; color: #374151; }
     .editor-body { min-height: 160px; padding: 18px 20px; outline: none; font-size: 13px; line-height: 1.75; overflow-y: auto; }
-    .editor-body:empty::before { content: "Insert text here ..."; color: #adb5bd; font-style: italic; pointer-events: none; }
+    .editor-body:empty::before { content: "Text hier einfügen ..."; color: #adb5bd; font-style: italic; pointer-events: none; }
 
     /* ── Field chip (in editor) ── */
     .fchip { display: inline-flex; align-items: center; gap: 4px; background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; border-radius: 5px; padding: 1px 8px 1px 6px; font-size: 12px; font-weight: 600; margin: 0 2px; user-select: none; white-space: nowrap; }
@@ -177,7 +177,7 @@
     .btn-ghost { background: #fff; border: 1px solid #d0d5dd; color: #374151; border-radius: 8px; padding: 8px 16px; font-size: 13px; cursor: pointer; }
     .btn-ghost:hover { background: #f3f4f6; }
 
-    /* Add Field modal */
+    /* Feld hinzufügen modal */
     .af-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
 
     /* Validation */
@@ -193,7 +193,7 @@
 
     .hidden { display: none !important; }
 
-    /* ── PSA popups (Save / Close) – site-native style ── */
+    /* ── PSA popups (Save / Schließen) – site-native style ── */
     .psa-overlay { position: fixed; inset: 0; background: rgba(15,29,46,.55); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn .25s ease; }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     .psa-card { background: #fff; border-radius: 14px; border: 1px solid #dde4ea; box-shadow: 0 12px 48px rgba(15,29,46,.18); width: 100%; max-width: 460px; animation: popIn .2s ease; overflow: hidden; }
@@ -221,35 +221,35 @@
 <div class="container" style="max-width:1010px; padding-top:4px;">
 
   <!-- Page title -->
-  <div class="page-title">Add New Contract Template</div>
+  <div class="page-title">Neue Vertragsvorlage</div>
 
   <div class="outer-card">
 
-    <!-- ── Row 1: Title / Country / Office ── -->
+    <!-- ── Row 1: Title / Land / Büro ── -->
     <div class="row g-3 mb-3">
       <div class="col-md-4">
-        <label class="form-label">Template Title <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="templateTitle" placeholder="Template Title" />
+        <label class="form-label">Vorlagentitel <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="templateTitle" placeholder="Vorlagentitel" />
       </div>
       <div class="col-md-4">
-        <label class="form-label">Country <span class="text-danger">*</span></label>
+        <label class="form-label">Land <span class="text-danger">*</span></label>
         <select class="form-select" id="countrySelect">
-          <option value="">Country</option>
+          <option value="">Land</option>
           <option>UAE</option><option>KSA</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option>
         </select>
       </div>
       <div class="col-md-4">
-        <label class="form-label">Office <span class="text-danger">*</span></label>
+        <label class="form-label">Büro <span class="text-danger">*</span></label>
         <select class="form-select" id="officeSelect">
-          <option value="">Office</option>
+          <option value="">Büro</option>
           <option>Dubai</option><option>Abu Dhabi</option><option>Riyadh</option><option>Doha</option>
         </select>
       </div>
     </div>
 
-    <!-- ── Template Description ── -->
+    <!-- ── Vorlagenbeschreibung ── -->
     <div class="mb-3">
-      <label class="form-label">Template Description <span class="text-danger">*</span></label>
+      <label class="form-label">Vorlagenbeschreibung <span class="text-danger">*</span></label>
       <div class="desc-editor">
         <div class="desc-toolbar">
           <button title="Bold"><b>B</b></button>
@@ -266,35 +266,35 @@
       </div>
     </div>
 
-    <!-- ✦ NEW: Generate Template Using AI button -->
+    <!-- ✦ NEW: Vorlage mit KI generieren button -->
     <div class="d-flex align-items-center gap-3 mb-4">
       <button class="btn-ai" onclick="openUploadModal()">
-        <span class="spark">✦</span> Generate Template Using AI
+        <span class="spark">✦</span> Vorlage mit KI generieren
       </button>
-      <span class="ai-hint">Upload a contract document — AI will extract all fields and populate the template automatically.</span>
+      <span class="ai-hint">Vertragsdokument hochladen — KI extrahiert alle Felder und befüllt die Vorlage automatisch.</span>
     </div>
 
-    <!-- ── Search + Add New Field ── -->
+    <!-- ── Search + Neues Feld ── -->
     <div class="fields-bar">
-      <input type="text" id="fieldSearch" placeholder="Search fields" oninput="filterFields()" />
-      <button class="btn-add-field" onclick="openAddFieldModal()">Add New Field</button>
+      <input type="text" id="fieldSearch" placeholder="Felder suchen" oninput="filterFields()" />
+      <button class="btn-add-field" onclick="openAddFieldModal()">Neues Feld</button>
     </div>
 
-    <!-- ── Template Fields ── -->
-    <div class="section-label">Template Fields</div>
+    <!-- ── Vorlagenfelder ── -->
+    <div class="section-label">Vorlagenfelder</div>
     <div class="fields-box mb-4">
       <div id="fieldsList"></div>
       <div id="emptyFields" class="fields-empty">
         <div class="fe-icon"><i class="bi bi-layout-text-sidebar-reverse"></i></div>
-        <div>No fields added yet.<br><span style="color:#6b7280;font-size:12px;">Add fields manually or use <strong>Generate Template Using AI</strong>.</span></div>
+        <div>Noch keine Felder hinzugefügt.<br><span style="color:#6b7280;font-size:12px;">Felder manuell hinzufügen oder <strong>Vorlage mit KI generieren</strong>.</span></div>
       </div>
       <div id="noResults" class="fields-empty hidden">
         <i class="bi bi-search me-1"></i> No fields match "<span id="searchTerm"></span>"
       </div>
     </div>
 
-    <!-- ── Template Editor ── -->
-    <div class="section-label">Template Editor</div>
+    <!-- ── Vorlagen-Editor ── -->
+    <div class="section-label">Vorlagen-Editor</div>
     <div class="editor-wrap">
       <!-- Toolbar -->
       <div class="editor-toolbar">
@@ -318,8 +318,8 @@
         <button title="Indent left" onclick="document.getElementById('editorBody').focus();document.execCommand('outdent')"><i class="bi bi-text-indent-left"></i></button>
         <div class="tb-sep"></div>
         <div class="tb-sep"></div>
-        <select title="Heading" onchange="var v=this.value;document.getElementById('editorBody').focus();document.execCommand(v==='Normal'?'formatBlock':'formatBlock',false,v==='Normal'?'p':v==='Heading 1'?'h1':'h2')"><option>Normal</option><option>Heading 1</option><option>Heading 2</option></select>
-        <select title="Font" onchange="var v=this.value;var s={'Normal':'3','Small':'1','Large':'5'};document.getElementById('editorBody').focus();document.execCommand('fontSize',false,s[v])"><option>Normal</option><option>Small</option><option>Large</option></select>
+        <select title="Überschrift" onchange="var v=this.value;document.getElementById('editorBody').focus();document.execCommand(v==='Normal'?'formatBlock':'formatBlock',false,v==='Normal'?'p':v==='Überschrift 1'?'h1':'h2')"><option>Normal</option><option>Überschrift 1</option><option>Überschrift 2</option></select>
+        <select title="Schriftgröße" onchange="var v=this.value;var s={'Normal':'3','Klein':'1','Groß':'5'};document.getElementById('editorBody').focus();document.execCommand('fontSize',false,s[v])"><option>Normal</option><option>Klein</option><option>Groß</option></select>
         <div class="tb-sep"></div>
         <button title="Text colour" style="font-weight:700;text-decoration:underline;text-decoration-color:#e53e3e;" onclick="var c=prompt('Enter colour (hex or name):','#e53e3e');if(c){document.getElementById('editorBody').focus();document.execCommand('foreColor',false,c)}">A</button>
         <button title="Highlight" onclick="var c=prompt('Enter highlight colour:','#fef08a');if(c){document.getElementById('editorBody').focus();document.execCommand('hiliteColor',false,c)}"><i class="bi bi-highlighter" style="font-size:11px;"></i></button>
@@ -330,7 +330,7 @@
         <button title="Link" onclick="var u=prompt('URL:');if(u){document.getElementById('editorBody').focus();document.execCommand('createLink',false,u)}"><i class="bi bi-link-45deg"></i></button>
         <button title="Image" onclick="var u=prompt('Image URL:');if(u){document.getElementById('editorBody').focus();document.execCommand('insertImage',false,u)}"><i class="bi bi-image"></i></button>
         <div class="tb-sep"></div>
-        <select title="Font family" onchange="var v=this.value;document.getElementById('editorBody').focus();document.execCommand('fontName',false,v==='Sans Serif'?'sans-serif':v==='Serif'?'serif':'monospace')"><option>Sans Serif</option><option>Serif</option><option>Monospace</option></select>
+        <select title="Schriftgröße family" onchange="var v=this.value;document.getElementById('editorBody').focus();document.execCommand('fontName',false,v==='Sans Serif'?'sans-serif':v==='Serif'?'serif':'monospace')"><option>Sans Serif</option><option>Serif</option><option>Monospace</option></select>
       </div>
 
       <!-- Editor body -->
@@ -338,15 +338,15 @@
 
       <!-- Right: available fields -->
       <div class="editor-panel" id="editorPanel">
-        <div class="ep-header">Available Fields</div>
-        <div id="epList"><div class="ep-empty">No fields yet</div></div>
+        <div class="ep-header">Verfügbare Felder</div>
+        <div id="epList"><div class="ep-empty">Noch keine Felder</div></div>
       </div>
     </div>
 
     <!-- ── Bottom buttons ── -->
     <div class="action-bar">
-      <button class="btn-close" onclick="closeDemo()">Close</button>
-      <button class="btn-save-tpl" onclick="saveTemplate()">Save Template</button>
+      <button class="btn-close" onclick="closeDemo()">Schließen</button>
+      <button class="btn-save-tpl" onclick="saveTemplate()">Vorlage speichern</button>
     </div>
 
   </div>
@@ -360,19 +360,19 @@
   <!-- 1. Upload -->
   <div class="mbox hidden" id="mUpload" style="max-width:540px;">
     <div class="mbox-hdr">
-      <h5><span style="color:#2563eb;">✦</span> Generate Template Using AI</h5>
+      <h5><span style="color:#2563eb;">✦</span> Vorlage mit KI generieren</h5>
       <button class="xbtn" onclick="closeModal()">×</button>
     </div>
     <div class="mbox-body">
       <p style="font-size:13px;color:#6b7280;margin-bottom:18px;">
-        Upload your existing contract document. AI will read it, identify every dynamic field, assign the correct field type, and populate both the Template Fields section and the Template Editor automatically.
+        Upload your existing contract document. AI will read it, identify every dynamic field, assign the correct field type, and populate both the Vorlagenfelder section and the Vorlagen-Editor automatically.
       </p>
       <div class="drop-zone" id="dropZone"
            onclick="document.getElementById('fileIn').click()"
            ondragover="doDragOver(event)" ondragleave="doDragLeave()" ondrop="doDrop(event)">
         <div class="dz-icon"><i class="bi bi-cloud-arrow-up"></i></div>
-        <div class="dz-label">Drop your contract here or click to browse</div>
-        <div class="dz-sub">Maximum file size: 20 MB</div>
+        <div class="dz-label">Vertrag hier ablegen oder zum Durchsuchen klicken</div>
+        <div class="dz-sub">Maximale Dateigröße: 20 MB</div>
         <div class="dz-fmts"><span>PDF</span><span>DOCX</span><span>DOC</span></div>
         <input type="file" id="fileIn" accept=".pdf,.doc,.docx" class="hidden" onchange="onFilePick(event)" />
       </div>
@@ -384,8 +384,8 @@
       </div>
       <div class="vmsg" id="uploadErr"><i class="bi bi-exclamation-circle me-1"></i>Please select a PDF or DOCX file.</div>
       <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:20px;">
-        <button class="btn-ghost" onclick="closeModal()">Cancel</button>
-        <button class="btn-ai" onclick="startAnalysis()"><span class="spark">✦</span> Analyse Document</button>
+        <button class="btn-ghost" onclick="closeModal()">Abbrechen</button>
+        <button class="btn-ai" onclick="startAnalysis()"><span class="spark">✦</span> Dokument analysieren</button>
       </div>
     </div>
   </div>
@@ -398,13 +398,13 @@
     <div class="proc-body">
       <div class="spinner"></div>
       <h6 id="procTitle">Reading document structure</h6>
-      <p id="procSub">This usually takes a few seconds</p>
+      <p id="procSub">Dies dauert normalerweise einige Sekunden</p>
       <div class="steps-list">
-        <div class="step-row done" id="s1"><div class="step-dot">✓</div> Uploading document</div>
-        <div class="step-row active" id="s2"><div class="step-dot">●</div> Parsing document content</div>
-        <div class="step-row" id="s3"><div class="step-dot"></div> Identifying dynamic fields</div>
-        <div class="step-row" id="s4"><div class="step-dot"></div> Assigning field types</div>
-        <div class="step-row" id="s5"><div class="step-dot"></div> Generating template layout</div>
+        <div class="step-row done" id="s1"><div class="step-dot">✓</div> Dokument wird hochgeladen</div>
+        <div class="step-row active" id="s2"><div class="step-dot">●</div> Dokumentinhalt wird analysiert</div>
+        <div class="step-row" id="s3"><div class="step-dot"></div> Dynamische Felder werden identifiziert</div>
+        <div class="step-row" id="s4"><div class="step-dot"></div> Feldtypen werden zugewiesen</div>
+        <div class="step-row" id="s5"><div class="step-dot"></div> Vorlagenlayout wird generiert</div>
       </div>
     </div>
   </div>
@@ -413,51 +413,51 @@
   <div class="mbox hidden" id="mReview" style="max-width:680px;">
     <div class="mbox-hdr">
       <div style="display:flex;align-items:center;">
-        <h5>Review Extracted Fields</h5>
+        <h5>Extrahierte Felder prüfen</h5>
         <span class="count-badge" id="rCount">0</span>
       </div>
       <button class="xbtn" onclick="closeModal()">×</button>
     </div>
     <div class="review-sub">
-      AI detected <strong id="rCountTxt">0</strong> dynamic fields from your document.
-      Review, rename, or change types before applying.
-      Fields marked <span class="ai-tag">AI</span> were auto-detected.
+      KI hat erkannt <strong id="rCountTxt">0</strong> dynamische Felder aus Ihrem Dokument.
+      Prüfen, umbenennen oder Typen vor der Anwendung ändern.
+      Fields marked <span class="ai-tag">AI</span> wurden automatisch erkannt.
     </div>
     <div class="review-list">
-      <div class="col-labels"><div>Field Label</div><div>Field Type</div><div></div></div>
+      <div class="col-labels"><div>Feldbezeichnung</div><div>Feldtyp</div><div></div></div>
       <div id="reviewRows"></div>
     </div>
     <div class="review-footer">
-      <button class="btn-add-row" onclick="addReviewRow()"><i class="bi bi-plus"></i> Add Field</button>
+      <button class="btn-add-row" onclick="addReviewRow()"><i class="bi bi-plus"></i> Feld hinzufügen</button>
       <div style="display:flex;gap:8px;">
-        <button class="btn-ghost" onclick="closeModal()">Cancel</button>
-        <button class="btn-apply" onclick="applyFields()"><i class="bi bi-check2-circle me-1"></i>Save &amp; Apply to Template</button>
+        <button class="btn-ghost" onclick="closeModal()">Abbrechen</button>
+        <button class="btn-apply" onclick="applyFields()"><i class="bi bi-check2-circle me-1"></i>Speichern &amp; auf Vorlage anwenden</button>
       </div>
     </div>
   </div>
 
-  <!-- 4. Add / Edit Field -->
+  <!-- 4. Add / Feld bearbeiten -->
   <div class="mbox hidden" id="mAddField" style="max-width:560px;">
     <div class="mbox-hdr">
-      <h5 id="afTitle">Add New Field</h5>
+      <h5 id="afTitle">Neues Feld</h5>
       <button class="xbtn" onclick="closeAddField()">×</button>
     </div>
     <div class="mbox-body">
       <div class="mb-2">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="afRequired" />
-          <label class="form-check-label" for="afRequired" style="font-size:13px;">Required</label>
+          <input type="checkbox" class="form-check-input" id="afErforderlich" />
+          <label class="form-check-label" for="afErforderlich" style="font-size:13px;">Erforderlich</label>
         </div>
       </div>
       <div class="row g-3">
         <div class="col-md-6">
-          <label class="form-label">Label <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" id="afLabel" placeholder="Enter label" />
+          <label class="form-label">Bezeichnung <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="afBezeichnung" placeholder="Bezeichnung eingeben" />
         </div>
         <div class="col-md-6">
-          <label class="form-label">Field Type <span class="text-danger">*</span></label>
+          <label class="form-label">Feldtyp <span class="text-danger">*</span></label>
           <select class="form-select" id="afType">
-            <option value="">Field Type</option>
+            <option value="">Feldtyp</option>
             <option>Checkbox</option>
             <option>ContractPdfFileUploader</option>
             <option>DatePicker</option>
@@ -470,10 +470,10 @@
           </select>
         </div>
       </div>
-      <div class="vmsg" id="afErr"><i class="bi bi-exclamation-circle me-1"></i>Label and Field Type are required.</div>
+      <div class="vmsg" id="afErr"><i class="bi bi-exclamation-circle me-1"></i>Bezeichnung and Feldtyp are required.</div>
       <div class="af-footer">
-        <button class="btn-ghost" onclick="closeAddField()">Cancel</button>
-        <button class="btn-apply" onclick="saveField()"><span id="afBtnTxt">Add Field</span></button>
+        <button class="btn-ghost" onclick="closeAddField()">Abbrechen</button>
+        <button class="btn-apply" onclick="saveField()"><span id="afBtnTxt">Feld hinzufügen</span></button>
       </div>
     </div>
   </div>
@@ -488,31 +488,31 @@
 <div class="psa-overlay hidden" id="psaSave" onclick="if(event.target===this)closePsa('psaSave')">
   <div class="psa-card">
     <div class="psa-hdr">
-      <h4><span class="psa-accent">✦</span> Template saved</h4>
+      <h4><span class="psa-accent">✦</span> Vorlage gespeichert</h4>
       <button class="xbtn" onclick="closePsa('psaSave')">×</button>
     </div>
     <div class="psa-body">
-      <p>I design and build products like this end-to-end. If you want something similar for your team, let's talk.</p>
+      <p>Ich designe und baue Produkte wie dieses von Anfang bis Ende. Wenn Sie etwas Ähnliches für Ihr Team wünschen, lassen Sie uns sprechen.</p>
       <div class="psa-btn-row">
-        <button class="psa-btn-ghost" onclick="closePsa('psaSave')">Close</button>
+        <button class="psa-btn-ghost" onclick="closePsa('psaSave')">Schließen</button>
         <a class="psa-btn-cta" href="https://houssammoallem.com/de/index.html#contact">Kontakt <span class="psa-link-arrow">→</span></a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Close popup -->
-<div class="psa-overlay hidden" id="psaClose" onclick="if(event.target===this)closePsa('psaClose')">
+<!-- Schließen popup -->
+<div class="psa-overlay hidden" id="psaSchließen" onclick="if(event.target===this)closePsa('psaSchließen')">
   <div class="psa-card">
     <div class="psa-hdr">
-      <h4>Before you go</h4>
-      <button class="xbtn" onclick="closePsa('psaClose')">×</button>
+      <h4>Bevor Sie gehen</h4>
+      <button class="xbtn" onclick="closePsa('psaSchließen')">×</button>
     </div>
     <div class="psa-body">
-      <p>I help teams turn ideas into working products. If you ever need a partner for yours, I'm one message away.</p>
+      <p>Ich helfe Teams, Ideen in funktionierende Produkte zu verwandeln. Wenn Sie jemals einen Partner für Ihres brauchen, bin ich nur eine Nachricht entfernt.</p>
       <div class="psa-btn-row">
-        <button class="psa-btn-ghost" onclick="closePsa('psaClose')">Close</button>
-        <a class="psa-btn-cta" href="https://houssammoallem.com/de/index.html#contact">Contact <span class="psa-link-arrow">→</span></a>
+        <button class="psa-btn-ghost" onclick="closePsa('psaSchließen')">Schließen</button>
+        <a class="psa-btn-cta" href="https://houssammoallem.com/de/index.html#contact">Kontakt <span class="psa-link-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -537,16 +537,16 @@ function openPsa(id) {
   if (el) el.classList.remove('hidden');
 }
 function closeDemo() {
-  openPsa('psaClose');
+  openPsa('psaSchließen');
 }
 </script>
 
 <script>
 /* ═══ DATA ═══ */
 const TYPES = ['Textbox','Textarea','DatePicker','DateTimePicker','Dropdown','Radio','Checkbox','FileUploader','ContractPdfFileUploader'];
-let fields=[],reviewData=[],editingId=null,selFile=null;const AI_FIELDS=[{label:"Agreement DATE",fieldType:"DatePicker",isRequired:!0},{label:"Employer name",fieldType:"Textbox",isRequired:!0},{label:"Candidate name",fieldType:"Textbox",isRequired:!0},{label:"Candidate name in full",fieldType:"Textbox",isRequired:!0},{label:"Candidate signature",fieldType:"Textbox",isRequired:!1},{label:"Candidate signature date",fieldType:"DatePicker",isRequired:!1},{label:"First Agency Representative position",fieldType:"Textbox",isRequired:!1},{label:"First Agency Representative name",fieldType:"Textbox",isRequired:!1},{label:"First Agency Representative signature",fieldType:"Textbox",isRequired:!1},{label:"Second Agency Representative Position",fieldType:"Textbox",isRequired:!1},{label:"Second Agency Representative Name",fieldType:"Textbox",isRequired:!1},{label:"Second Agency Representative signature",fieldType:"Textbox",isRequired:!1},{label:"Candidate Phone number",fieldType:"Textbox",isRequired:!1},{label:"Candidate Email Address",fieldType:"Textbox",isRequired:!1},{label:"Scope of Work",fieldType:"Textarea",isRequired:!1},{label:"Work Standort",fieldType:"Textbox",isRequired:!1},{label:"Contract Start Date",fieldType:"DatePicker",isRequired:!0},{label:"Contract End Date",fieldType:"DatePicker",isRequired:!0},{label:"Base Salary Amount",fieldType:"Textbox",isRequired:!0},{label:"Notice Period (days)",fieldType:"Textbox",isRequired:!1},{label:"CITY IN HOME COUNTRY",fieldType:"Textbox",isRequired:!1},{label:"Relocation Flight",fieldType:"Textbox",isRequired:!1},{label:"Temporary Accommodation",fieldType:"Textbox",isRequired:!1},{label:"Shipping of Personal Effects maximum amount",fieldType:"Textbox",isRequired:!1}];function buildEditorHTML(){return`\n<p style="text-align:center;font-weight:700;font-size:15px;">Limited Term Contract of Employment</p>\n<p style="text-align:center;font-weight:700;">STRICTLY PRIVATE AND CONFIDENTIAL</p><br>\n<p>The agreement was made on ${ch("Agreement DATE","📅")} between:</p>\n<p>(1) ${ch("Employer name")} &nbsp;(Referred to in this contract as the Employer, or the Agency).</p>\n<p>(2) ${ch("Candidate name")} &nbsp;(Referred to in this contract as the Employee).</p>\n<p>It is agreed as follows:</p>\n<p><strong>1 &nbsp;Scope of Work</strong></p>\n<p>1.1 The scope of work for this engagement is: ${ch("Scope of Work")}</p>\n<p>1.2 The work location shall be ${ch("Work Standort")}.</p>\n<p><strong>2 &nbsp;Employment Period</strong></p>\n<p>2.1 This contract commences on ${ch("Contract Start Date","📅")} and ends on ${ch("Contract End Date","📅")}.</p>\n<p><strong>3 &nbsp;Compensation</strong></p>\n<p>3.1 The Employee shall receive a base salary of ${ch("Base Salary Amount")} per month.</p>\n<p>3.2 The notice period required by either party is ${ch("Notice Period (days)")} days.</p>\n<p><strong>4 &nbsp;Relocation Benefits</strong></p>\n<p>4.1 City of origin: ${ch("CITY IN HOME COUNTRY")}. &nbsp;Relocation flight: ${ch("Relocation Flight")}.</p>\n<p>4.2 Temporary accommodation: ${ch("Temporary Accommodation")}.</p>\n<p>4.3 Shipping of personal effects — maximum: ${ch("Shipping of Personal Effects maximum amount")}.</p>\n<p><strong>5 &nbsp;Signatures</strong></p>\n<p>Candidate full name: ${ch("Candidate name in full")} &nbsp;&nbsp; Date: ${ch("Candidate signature date","📅")}</p>\n<p>Candidate signature: ${ch("Candidate signature")}</p>\n<p>Agency representative: ${ch("First Agency Representative name")} &nbsp;&nbsp; Position: ${ch("First Agency Representative position")}</p>\n<p>Signature: ${ch("First Agency Representative signature")}</p>\n`}function ch(e,t){return`<span class="fchip" contenteditable="false" data-field="${e}">${t?t+" ":""}${e}<span class="cd" onclick="removeChip(this)"> ✕</span></span>`}function removeChip(e){e.closest(".fchip").remove()}function uid(){return([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,e=>(e^crypto.getRandomValues(new Uint8Array(1))[0]&15>>e/4).toString(16))}function fmtSize(e){return e<1024?e+" B":e<1048576?(e/1024).toFixed(1)+" KB":(e/1048576).toFixed(1)+" MB"}function toast(e,t="info"){const n=document.getElementById("toasts"),i=document.createElement("div");i.className="toast-item"+("success"===t?" ok":"error"===t?" err":""),i.innerHTML=`<span>${"success"===t?"✓":"error"===t?"✕":"✦"}</span> ${e}`,n.appendChild(i),setTimeout(()=>i.remove(),4e3)}function renderFields(){const e=(document.getElementById("fieldSearch").value||"").toLowerCase(),t=document.getElementById("fieldsList"),n=document.getElementById("emptyFields"),i=document.getElementById("noResults"),l=fields.filter(t=>t.label.toLowerCase().includes(e));n.classList.toggle("hidden",fields.length>0),i.classList.toggle("hidden",!(fields.length>0&&0===l.length)),fields.length>0&&0===l.length?(document.getElementById("searchTerm").textContent=e,t.innerHTML=""):t.innerHTML=l.map((e,t)=>`\n      <div class="field-row">\n        <input type="checkbox" ${e.selected?"checked":""} onchange="toggleSel('${e.id}',this.checked)" />\n        <span class="fn">${t+1} - ${e.label} (${e.fieldType})</span>\n        <button class="edit-btn" onclick="editField('${e.id}')" title="Edit"><i class="bi bi-pencil"></i></button>\n        <button class="del-icon" onclick="deleteField('${e.id}')" title="Delete"><i class="bi bi-trash"></i></button>\n      </div>\n    `).join(""),renderEditorPanel()}function filterFields(){renderFields()}function toggleSel(e,t){const n=fields.find(t=>t.id===e);n&&(n.selected=t)}function deleteField(e){confirm("Delete this field?")&&(fields=fields.filter(t=>t.id!==e),renderFields(),toast("Field deleted.","error"))}function renderEditorPanel(){const e=document.getElementById("epList");fields.length?e.innerHTML=fields.map(e=>`\n    <div class="ep-item" onclick="insertChip('${e.label}','${e.fieldType}')" title="Insert into editor">\n      <div><div class="epi-label">${e.label}</div><div class="epi-type">${e.fieldType}</div></div>\n      <span class="epi-plus">+</span>\n    </div>\n  `).join(""):e.innerHTML='<div class="ep-empty">No fields yet</div>'}function insertChip(e,t){document.getElementById("editorBody").focus();const n="DatePicker"===t||"DateTimePicker"===t?"📅 ":"";document.execCommand("insertHTML",!1,`<span class="fchip" contenteditable="false" data-field="${e}">${n}${e}<span class="cd" onclick="removeChip(this)"> ✕</span></span>&nbsp;`),toast(`"${e}" inserted into editor.`)}function showOnly(e){["mUpload","mProcessing","mReview","mAddField"].forEach(t=>{document.getElementById(t).classList.toggle("hidden",t!==e)}),document.getElementById("overlay").classList.remove("hidden")}function closeModal(){document.getElementById("overlay").classList.add("hidden"),clearFile()}function onOverlayClick(e){e.target===document.getElementById("overlay")&&closeModal()}function openUploadModal(){clearFile(),showOnly("mUpload")}function doDragOver(e){e.preventDefault(),document.getElementById("dropZone").classList.add("over")}function doDragLeave(){document.getElementById("dropZone").classList.remove("over")}function doDrop(e){e.preventDefault(),document.getElementById("dropZone").classList.remove("over"),applyFile(e.dataTransfer.files[0])}function onFilePick(e){applyFile(e.target.files[0])}function applyFile(e){if(!e)return;const t=e.name.split(".").pop().toLowerCase(),n=["pdf","doc","docx"].includes(t);document.getElementById("uploadErr").classList.toggle("show",!n),n&&(selFile=e,document.getElementById("fpName").textContent=e.name,document.getElementById("fpSize").textContent=fmtSize(e.size),document.getElementById("filePill").classList.remove("hidden"),document.getElementById("dropZone").classList.add("hidden"),document.getElementById("uploadErr").classList.remove("show"))}function clearFile(){selFile=null;const e=document.getElementById("fileIn");e&&(e.value=""),document.getElementById("filePill").classList.add("hidden"),document.getElementById("dropZone").classList.remove("hidden","over"),document.getElementById("uploadErr").classList.remove("show")}function startAnalysis(){if(!selFile)return void document.getElementById("uploadErr").classList.add("show");showOnly("mProcessing");const e=[{id:"s1",title:"Uploading document",sub:"Sending file securely…",delay:0},{id:"s2",title:"Parsing document content",sub:"Extracting text and document layout…",delay:900},{id:"s3",title:"Identifying dynamic fields",sub:"Scanning for variable placeholders…",delay:2e3},{id:"s4",title:"Assigning field types",sub:"Mapping field types intelligently…",delay:3100},{id:"s5",title:"Generating template layout",sub:"Building editor content from contract…",delay:4200}];e.forEach((t,n)=>{setTimeout(()=>{if(n>0){const t=document.getElementById(e[n-1].id);t.className="step-row done",t.querySelector(".step-dot").textContent="✓"}const i=document.getElementById(t.id);i.className="step-row active",i.querySelector(".step-dot").textContent="●",document.getElementById("procTitle").textContent=t.title,document.getElementById("procSub").textContent=t.sub},t.delay)}),setTimeout(()=>{const e=document.getElementById("s5");e.className="step-row done",e.querySelector(".step-dot").textContent="✓",reviewData=AI_FIELDS.map(e=>({...e,id:uid(),_ai:!0})),renderReview(),showOnly("mReview")},5200)}function renderReview(){document.getElementById("rCount").textContent=reviewData.length,document.getElementById("rCountTxt").textContent=reviewData.length,document.getElementById("reviewRows").innerHTML=reviewData.map((e,t)=>`\n    <div class="review-row ${e._ai?"ai":""}">\n      <input type="text" value="${e.label}" placeholder="Field label"\n             oninput="setReview(${t},'label',this.value)"\n             class="${e.label.trim()?"":"err"}" />\n      <select onchange="setReview(${t},'fieldType',this.value)">\n        ${TYPES.map(t=>`<option value="${t}" ${t===e.fieldType?"selected":""}>${t}</option>`).join("")}\n      </select>\n      <button class="rdel" onclick="removeReview(${t})" title="Remove"><i class="bi bi-trash"></i></button>\n    </div>\n  `).join("")}function setReview(e,t,n){reviewData[e][t]=n,"label"===t&&document.querySelectorAll(".review-row")[e].querySelector("input[type=text]").classList.toggle("err",!n.trim())}function removeReview(e){reviewData.splice(e,1),renderReview()}function addReviewRow(){reviewData.push({id:uid(),label:"",fieldType:"Textbox",isRequired:!1,_ai:!1}),renderReview();const e=document.querySelector(".review-list");e.scrollTop=e.scrollHeight;const t=document.querySelectorAll(".review-row input[type=text]");t.length&&t[t.length-1].focus()}function applyFields(){if(reviewData.filter(e=>!e.label.trim()).length)return toast("Fill in all field labels before saving.","error"),void renderReview();const e=new Set(fields.map(e=>e.label.toLowerCase()));let t=0,n=0;reviewData.forEach(i=>{const l=i.label.toLowerCase();if(e.has(l)){const e=fields.find(e=>e.label.toLowerCase()===l);e&&(e.fieldType=i.fieldType,n++)}else fields.push({id:i.id||uid(),label:i.label,fieldType:i.fieldType,isRequired:i.isRequired,selected:!1}),t++}),document.getElementById("editorBody").innerHTML=buildEditorHTML(),closeModal(),renderFields(),toast(`✦ ${t} fields added, ${n} updated. Template editor populated!`,"success")}function openAddFieldModal(){editingId=null,document.getElementById("afTitle").textContent="Add New Field",document.getElementById("afBtnTxt").textContent="Add Field",document.getElementById("afLabel").value="",document.getElementById("afType").value="",document.getElementById("afRequired").checked=!1,document.getElementById("afErr").classList.remove("show"),showOnly("mAddField")}function editField(e){const t=fields.find(t=>t.id===e);t&&(editingId=e,document.getElementById("afTitle").textContent="Edit Field",document.getElementById("afBtnTxt").textContent="Update Field",document.getElementById("afLabel").value=t.label,document.getElementById("afType").value=t.fieldType,document.getElementById("afRequired").checked=t.isRequired,document.getElementById("afErr").classList.remove("show"),showOnly("mAddField"))}function closeAddField(){document.getElementById("overlay").classList.add("hidden"),editingId=null}function saveField(){const e=document.getElementById("afLabel").value.trim(),t=document.getElementById("afType").value;if(e&&t){if(editingId){const n=fields.find(e=>e.id===editingId);n&&(n.label=e,n.fieldType=t,n.isRequired=document.getElementById("afRequired").checked),toast("Field updated.")}else fields.push({id:uid(),label:e,fieldType:t,isRequired:document.getElementById("afRequired").checked,selected:!1}),toast("Field added.");closeAddField(),renderFields()}else document.getElementById("afErr").classList.add("show")}function saveTemplate(){const e=document.getElementById("templateTitle").value.trim(),t=document.getElementById("descBody").innerText.trim();if(!e)return void toast("Template title is required.","error");if(!t)return void toast("Template description is required.","error");const n={id:uid(),name:e,description:t,country:document.getElementById("countrySelect").value,office:document.getElementById("officeSelect").value,dynamicFormFields:fields.map((e,t)=>({id:e.id,label:e.label,fieldType:e.fieldType,isRequired:e.isRequired,sortOrder:t+1})),templateContent:document.getElementById("editorBody").innerHTML||""};console.log("Saving template:",n),toast("Template saved successfully!","success"),openPsa('psaSave')}document.addEventListener("DOMContentLoaded",renderFields);
+let fields=[],reviewData=[],editingId=null,selFile=null;const AI_FIELDS=[{label:"Agreement DATE",fieldType:"DatePicker",isErforderlich:!0},{label:"Employer name",fieldType:"Textbox",isErforderlich:!0},{label:"Candidate name",fieldType:"Textbox",isErforderlich:!0},{label:"Candidate name in full",fieldType:"Textbox",isErforderlich:!0},{label:"Candidate signature",fieldType:"Textbox",isErforderlich:!1},{label:"Candidate signature date",fieldType:"DatePicker",isErforderlich:!1},{label:"First Agency Representative position",fieldType:"Textbox",isErforderlich:!1},{label:"First Agency Representative name",fieldType:"Textbox",isErforderlich:!1},{label:"First Agency Representative signature",fieldType:"Textbox",isErforderlich:!1},{label:"Second Agency Representative Position",fieldType:"Textbox",isErforderlich:!1},{label:"Second Agency Representative Name",fieldType:"Textbox",isErforderlich:!1},{label:"Second Agency Representative signature",fieldType:"Textbox",isErforderlich:!1},{label:"Candidate Phone number",fieldType:"Textbox",isErforderlich:!1},{label:"Candidate Email Address",fieldType:"Textbox",isErforderlich:!1},{label:"Scope of Work",fieldType:"Textarea",isErforderlich:!1},{label:"Work Standort",fieldType:"Textbox",isErforderlich:!1},{label:"Contract Start Date",fieldType:"DatePicker",isErforderlich:!0},{label:"Contract End Date",fieldType:"DatePicker",isErforderlich:!0},{label:"Base Salary Amount",fieldType:"Textbox",isErforderlich:!0},{label:"Notice Period (days)",fieldType:"Textbox",isErforderlich:!1},{label:"CITY IN HOME COUNTRY",fieldType:"Textbox",isErforderlich:!1},{label:"Relocation Flight",fieldType:"Textbox",isErforderlich:!1},{label:"Temporary Accommodation",fieldType:"Textbox",isErforderlich:!1},{label:"Shipping of Personal Effects maximum amount",fieldType:"Textbox",isErforderlich:!1}];function buildEditorHTML(){return`\n<p style="text-align:center;font-weight:700;font-size:15px;">Limited Term Contract of Employment</p>\n<p style="text-align:center;font-weight:700;">STRICTLY PRIVATE AND CONFIDENTIAL</p><br>\n<p>The agreement was made on ${ch("Agreement DATE","📅")} between:</p>\n<p>(1) ${ch("Employer name")} &nbsp;(Referred to in this contract as the Employer, or the Agency).</p>\n<p>(2) ${ch("Candidate name")} &nbsp;(Referred to in this contract as the Employee).</p>\n<p>It is agreed as follows:</p>\n<p><strong>1 &nbsp;Scope of Work</strong></p>\n<p>1.1 The scope of work for this engagement is: ${ch("Scope of Work")}</p>\n<p>1.2 The work location shall be ${ch("Work Standort")}.</p>\n<p><strong>2 &nbsp;Employment Period</strong></p>\n<p>2.1 This contract commences on ${ch("Contract Start Date","📅")} and ends on ${ch("Contract End Date","📅")}.</p>\n<p><strong>3 &nbsp;Compensation</strong></p>\n<p>3.1 The Employee shall receive a base salary of ${ch("Base Salary Amount")} per month.</p>\n<p>3.2 The notice period required by either party is ${ch("Notice Period (days)")} days.</p>\n<p><strong>4 &nbsp;Relocation Benefits</strong></p>\n<p>4.1 City of origin: ${ch("CITY IN HOME COUNTRY")}. &nbsp;Relocation flight: ${ch("Relocation Flight")}.</p>\n<p>4.2 Temporary accommodation: ${ch("Temporary Accommodation")}.</p>\n<p>4.3 Shipping of personal effects — maximum: ${ch("Shipping of Personal Effects maximum amount")}.</p>\n<p><strong>5 &nbsp;Signatures</strong></p>\n<p>Candidate full name: ${ch("Candidate name in full")} &nbsp;&nbsp; Date: ${ch("Candidate signature date","📅")}</p>\n<p>Candidate signature: ${ch("Candidate signature")}</p>\n<p>Agency representative: ${ch("First Agency Representative name")} &nbsp;&nbsp; Position: ${ch("First Agency Representative position")}</p>\n<p>Signature: ${ch("First Agency Representative signature")}</p>\n`}function ch(e,t){return`<span class="fchip" contenteditable="false" data-field="${e}">${t?t+" ":""}${e}<span class="cd" onclick="removeChip(this)"> ✕</span></span>`}function removeChip(e){e.closest(".fchip").remove()}function uid(){return([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,e=>(e^crypto.getRandomValues(new Uint8Array(1))[0]&15>>e/4).toString(16))}function fmtSize(e){return e<1024?e+" B":e<1048576?(e/1024).toFixed(1)+" KB":(e/1048576).toFixed(1)+" MB"}function toast(e,t="info"){const n=document.getElementById("toasts"),i=document.createElement("div");i.className="toast-item"+("success"===t?" ok":"error"===t?" err":""),i.innerHTML=`<span>${"success"===t?"✓":"error"===t?"✕":"✦"}</span> ${e}`,n.appendChild(i),setTimeout(()=>i.remove(),4e3)}function renderFields(){const e=(document.getElementById("fieldSearch").value||"").toLowerCase(),t=document.getElementById("fieldsList"),n=document.getElementById("emptyFields"),i=document.getElementById("noResults"),l=fields.filter(t=>t.label.toLowerCase().includes(e));n.classList.toggle("hidden",fields.length>0),i.classList.toggle("hidden",!(fields.length>0&&0===l.length)),fields.length>0&&0===l.length?(document.getElementById("searchTerm").textContent=e,t.innerHTML=""):t.innerHTML=l.map((e,t)=>`\n      <div class="field-row">\n        <input type="checkbox" ${e.selected?"checked":""} onchange="toggleSel('${e.id}',this.checked)" />\n        <span class="fn">${t+1} - ${e.label} (${e.fieldType})</span>\n        <button class="edit-btn" onclick="editField('${e.id}')" title="Edit"><i class="bi bi-pencil"></i></button>\n        <button class="del-icon" onclick="deleteField('${e.id}')" title="Delete"><i class="bi bi-trash"></i></button>\n      </div>\n    `).join(""),renderEditorPanel()}function filterFields(){renderFields()}function toggleSel(e,t){const n=fields.find(t=>t.id===e);n&&(n.selected=t)}function deleteField(e){confirm("Dieses Feld löschen?")&&(fields=fields.filter(t=>t.id!==e),renderFields(),toast("Feld gelöscht.","error"))}function renderEditorPanel(){const e=document.getElementById("epList");fields.length?e.innerHTML=fields.map(e=>`\n    <div class="ep-item" onclick="insertChip('${e.label}','${e.fieldType}')" title="Insert into editor">\n      <div><div class="epi-label">${e.label}</div><div class="epi-type">${e.fieldType}</div></div>\n      <span class="epi-plus">+</span>\n    </div>\n  `).join(""):e.innerHTML='<div class="ep-empty">Noch keine Felder</div>'}function insertChip(e,t){document.getElementById("editorBody").focus();const n="DatePicker"===t||"DateTimePicker"===t?"📅 ":"";document.execCommand("insertHTML",!1,`<span class="fchip" contenteditable="false" data-field="${e}">${n}${e}<span class="cd" onclick="removeChip(this)"> ✕</span></span>&nbsp;`),toast(`"${e}" in Editor eingefügt.`)}function showOnly(e){["mUpload","mProcessing","mReview","mAddField"].forEach(t=>{document.getElementById(t).classList.toggle("hidden",t!==e)}),document.getElementById("overlay").classList.remove("hidden")}function closeModal(){document.getElementById("overlay").classList.add("hidden"),clearFile()}function onOverlayClick(e){e.target===document.getElementById("overlay")&&closeModal()}function openUploadModal(){clearFile(),showOnly("mUpload")}function doDragOver(e){e.preventDefault(),document.getElementById("dropZone").classList.add("over")}function doDragLeave(){document.getElementById("dropZone").classList.remove("over")}function doDrop(e){e.preventDefault(),document.getElementById("dropZone").classList.remove("over"),applyFile(e.dataTransfer.files[0])}function onFilePick(e){applyFile(e.target.files[0])}function applyFile(e){if(!e)return;const t=e.name.split(".").pop().toLowerCase(),n=["pdf","doc","docx"].includes(t);document.getElementById("uploadErr").classList.toggle("show",!n),n&&(selFile=e,document.getElementById("fpName").textContent=e.name,document.getElementById("fpSize").textContent=fmtSize(e.size),document.getElementById("filePill").classList.remove("hidden"),document.getElementById("dropZone").classList.add("hidden"),document.getElementById("uploadErr").classList.remove("show"))}function clearFile(){selFile=null;const e=document.getElementById("fileIn");e&&(e.value=""),document.getElementById("filePill").classList.add("hidden"),document.getElementById("dropZone").classList.remove("hidden","over"),document.getElementById("uploadErr").classList.remove("show")}function startAnalysis(){if(!selFile)return void document.getElementById("uploadErr").classList.add("show");showOnly("mProcessing");const e=[{id:"s1",title:"Dokument wird hochgeladen",sub:"Datei wird sicher übertragen…",delay:0},{id:"s2",title:"Dokumentinhalt wird analysiert",sub:"Text und Dokumentlayout werden extrahiert…",delay:900},{id:"s3",title:"Dynamische Felder werden identifiziert",sub:"Nach variablen Platzhaltern wird gesucht…",delay:2e3},{id:"s4",title:"Feldtypen werden zugewiesen",sub:"Feldtypen werden intelligent zugeordnet…",delay:3100},{id:"s5",title:"Vorlagenlayout wird generiert",sub:"Editor-Inhalt aus Vertrag wird erstellt…",delay:4200}];e.forEach((t,n)=>{setTimeout(()=>{if(n>0){const t=document.getElementById(e[n-1].id);t.className="step-row done",t.querySelector(".step-dot").textContent="✓"}const i=document.getElementById(t.id);i.className="step-row active",i.querySelector(".step-dot").textContent="●",document.getElementById("procTitle").textContent=t.title,document.getElementById("procSub").textContent=t.sub},t.delay)}),setTimeout(()=>{const e=document.getElementById("s5");e.className="step-row done",e.querySelector(".step-dot").textContent="✓",reviewData=AI_FIELDS.map(e=>({...e,id:uid(),_ai:!0})),renderReview(),showOnly("mReview")},5200)}function renderReview(){document.getElementById("rCount").textContent=reviewData.length,document.getElementById("rCountTxt").textContent=reviewData.length,document.getElementById("reviewRows").innerHTML=reviewData.map((e,t)=>`\n    <div class="review-row ${e._ai?"ai":""}">\n      <input type="text" value="${e.label}" placeholder="Field label"\n             oninput="setReview(${t},'label',this.value)"\n             class="${e.label.trim()?"":"err"}" />\n      <select onchange="setReview(${t},'fieldType',this.value)">\n        ${TYPES.map(t=>`<option value="${t}" ${t===e.fieldType?"selected":""}>${t}</option>`).join("")}\n      </select>\n      <button class="rdel" onclick="removeReview(${t})" title="Remove"><i class="bi bi-trash"></i></button>\n    </div>\n  `).join("")}function setReview(e,t,n){reviewData[e][t]=n,"label"===t&&document.querySelectorAll(".review-row")[e].querySelector("input[type=text]").classList.toggle("err",!n.trim())}function removeReview(e){reviewData.splice(e,1),renderReview()}function addReviewRow(){reviewData.push({id:uid(),label:"",fieldType:"Textbox",isErforderlich:!1,_ai:!1}),renderReview();const e=document.querySelector(".review-list");e.scrollTop=e.scrollHeight;const t=document.querySelectorAll(".review-row input[type=text]");t.length&&t[t.length-1].focus()}function applyFields(){if(reviewData.filter(e=>!e.label.trim()).length)return toast("Alle Feldbezeichnungen vor dem Speichern ausfüllen.","error"),void renderReview();const e=new Set(fields.map(e=>e.label.toLowerCase()));let t=0,n=0;reviewData.forEach(i=>{const l=i.label.toLowerCase();if(e.has(l)){const e=fields.find(e=>e.label.toLowerCase()===l);e&&(e.fieldType=i.fieldType,n++)}else fields.push({id:i.id||uid(),label:i.label,fieldType:i.fieldType,isErforderlich:i.isErforderlich,selected:!1}),t++}),document.getElementById("editorBody").innerHTML=buildEditorHTML(),closeModal(),renderFields(),toast(`✦ ${t} Felder hinzugefügt, ${n} aktualisiert. Vorlagen-Editor befüllt!`,"success")}function openAddFieldModal(){editingId=null,document.getElementById("afTitle").textContent="Neues Feld",document.getElementById("afBtnTxt").textContent="Feld hinzufügen",document.getElementById("afBezeichnung").value="",document.getElementById("afType").value="",document.getElementById("afErforderlich").checked=!1,document.getElementById("afErr").classList.remove("show"),showOnly("mAddField")}function editField(e){const t=fields.find(t=>t.id===e);t&&(editingId=e,document.getElementById("afTitle").textContent="Feld bearbeiten",document.getElementById("afBtnTxt").textContent="Feld aktualisieren",document.getElementById("afBezeichnung").value=t.label,document.getElementById("afType").value=t.fieldType,document.getElementById("afErforderlich").checked=t.isErforderlich,document.getElementById("afErr").classList.remove("show"),showOnly("mAddField"))}function closeAddField(){document.getElementById("overlay").classList.add("hidden"),editingId=null}function saveField(){const e=document.getElementById("afBezeichnung").value.trim(),t=document.getElementById("afType").value;if(e&&t){if(editingId){const n=fields.find(e=>e.id===editingId);n&&(n.label=e,n.fieldType=t,n.isErforderlich=document.getElementById("afErforderlich").checked),toast("Feld aktualisiert.")}else fields.push({id:uid(),label:e,fieldType:t,isErforderlich:document.getElementById("afErforderlich").checked,selected:!1}),toast("Feld hinzugefügt.");closeAddField(),renderFields()}else document.getElementById("afErr").classList.add("show")}function saveTemplate(){const e=document.getElementById("templateTitle").value.trim(),t=document.getElementById("descBody").innerText.trim();if(!e)return void toast("Vorlagentitel ist erforderlich.","error");if(!t)return void toast("Vorlagenbeschreibung ist erforderlich.","error");const n={id:uid(),name:e,description:t,country:document.getElementById("countrySelect").value,office:document.getElementById("officeSelect").value,dynamicFormFields:fields.map((e,t)=>({id:e.id,label:e.label,fieldType:e.fieldType,isErforderlich:e.isErforderlich,sortOrder:t+1})),templateContent:document.getElementById("editorBody").innerHTML||""};console.log("Vorlage wird gespeichert:",n),toast("Vorlage erfolgreich gespeichert!","success"),openPsa('psaSave')}document.addEventListener("DOMContentLoaded",renderFields);
 </script>
-<div style="text-align:center;padding:24px 0 8px;font-size:11px;color:#9ca3af;">© 2026 Houssam Moallem — Proprietary demo. Not for redistribution.</div>
+<div style="text-align:center;padding:24px 0 8px;font-size:11px;color:#9ca3af;">© 2026 Houssam Moallem — Proprietäre Demo. Nicht zur Weitergabe.</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
