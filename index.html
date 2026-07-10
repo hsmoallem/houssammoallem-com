@@ -278,6 +278,25 @@
     });
   }
 })();
+
+/* Track hash-based navigation as pageviews in Umami */
+(function(){
+  function trackHash() {
+    var hash = window.location.hash;
+    if (hash && hash.length > 1) {
+      var label = hash.replace('#', '');
+      if (typeof umami !== 'undefined') {
+        umami.track(function(props) {
+          return { website: props.website, hostname: props.hostname, url: '/' + label, title: label.replace(/-/g, ' ') };
+        });
+      }
+    }
+  }
+  // Listen for hash changes (clicks, scroll-triggered nav)
+  window.addEventListener('hashchange', trackHash);
+  // Also fire on initial load if there's a hash
+  if (window.location.hash) trackHash();
+})();
 </script>
 </body>
 </html>
