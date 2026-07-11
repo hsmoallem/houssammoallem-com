@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/sevenseas-cardholder-app.html">
 <link rel="alternate" hreflang="x-default" href="https://houssammoallem.com/projects/sevenseas-cardholder-app.html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SevenSeas Cardholder Application | Houssam Moallem</title>
+<title>Swiban Karteninhaber-App | Houssam Moallem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
   <div class="nav-inner">
     <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
     <div class="nav-links">
-      <a href="../../../index.html#case-studies">Case Studies</a>
+      <a href="../index.html#case-studies">Case Studies</a>
       <a href="../about.html">Über mich</a>
       <a class="cta" href="mailto:moallem.houssam@gmail.com">Kontakt</a>
     </div>
@@ -39,7 +39,7 @@
       
 
       
-      <a class="nav-icon" href="https://wa.me/+491****2325" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>      <a class="nav-icon" href="https://github.com/hsmoallem" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
+      <a class="nav-icon" href="https://wa.me/+4915210162325" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>      <a class="nav-icon" href="https://github.com/hsmoallem" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
       <a class="nav-icon" href="https://www.linkedin.com/in/moallem/" target="_blank" rel="noopener" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
     
     <span class="lang-switcher"><a href="../" class="">EN</a><span class="sep"> | </span><a href="./" class="active">DE</a></span>
@@ -50,76 +50,78 @@
 
 <header class="cs-hero">
   <div class="wrap">
-    <p class="eyebrow">CS-02 &middot; SevenSeas &middot; Card-as-a-Service</p>
+    <p class="eyebrow">CS-02 &middot; Swiban &middot; Card-as-a-Service</p>
     <h1>CAAS Karteninhaber-App (PWA)</h1>
-    <p class="tagline">Building on the platform modernization, SevenSeas launched a progressive web app for seamless cross-platform use on Android and iOS.</p>
+    <p class="tagline">Aufbauend auf der Plattform-Modernisierung brachte Swiban eine Progressive Web App für die nahtlose plattformübergreifende Nutzung auf Android und iOS.</p>
     <div class="meta-grid">
       <div class="meta-cell"><div class="k">Meine Rolle</div><div class="v">Product Manager / Product Owner</div></div>
-      <div class="meta-cell"><div class="k">Client</div><div class="v">SevenSeas (sevenseas.cards)</div></div>
-      <div class="meta-cell"><div class="k">Domain</div><div class="v">Fintech, mobile payments</div></div>
-      <div class="meta-cell"><div class="k">Key features</div><div class="v">Biometrische Auth, payments, self-service</div></div>
+      <div class="meta-cell"><div class="k">Kunde</div><div class="v">Swiban (Seven Seas Cards)</div></div>
+      <div class="meta-cell"><div class="k">Bereich</div><div class="v">Fintech, Mobile Payments</div></div>
+      <div class="meta-cell"><div class="k">Kernfunktionen</div><div class="v">Biometrische Auth, Zahlungen, Self-Service</div></div>
     </div>
   </div>
 </header>
 
 <figure class="cs-cover">
-  <img src="../../images/cs-cardholder-app.png" alt="Seven Seas Cards cardholder app login screen with biometric and authenticator options">
-  <figcaption>The cardholder PWA login, with authenticator and biometric sign-in</figcaption>
+  <img src="../../images/cs-cardholder-app.png" alt="Login-Screen der Seven Seas Cards Karteninhaber-App mit biometrischen und Authenticator-Optionen">
+  <figcaption>Der PWA-Login für Karteninhaber, mit Authenticator- und biometrischer Anmeldung</figcaption>
 </figure>
 
 <main class="cs-body">
   <h2>Kontext</h2>
   <p>
-    Nach der Modernisierung der Admin- und Karteninhaber-Portale (see CS-01), the next step was reach:
-    cardholders expected a mobile experience, but maintaining two native codebases would
-    have doubled the cost of every feature. Die Entscheidung fiel auf eine Progressive Web App: one
-    codebase, installable on both Android and iOS, with near-native experience.
+    Nach der Modernisierung der Admin- und Karteninhaber-Portale (siehe CS-01) ging es im
+    nächsten Schritt um Reichweite: Karteninhaber erwarteten ein mobiles Erlebnis, doch die
+    Pflege zweier nativer Codebasen hätte die Kosten jedes Features verdoppelt. Die Entscheidung
+    fiel auf eine Progressive Web App: eine Codebasis, installierbar auf Android und iOS, mit
+    nahezu nativer Nutzererfahrung.
   </p>
 
   <h2>Die Herausforderung</h2>
   <ul>
-    <li>Eine mobile Erfahrung liefern, der Nutzer ihr Geld anvertrauen, on web technology.</li>
-    <li>Authentifizierung gestalten, die sowohl sicher als auch mühelos ist: passwords alone were unacceptable for a financial product in daily use.</li>
-    <li>Cover the full journey: registration, login, card management, payment confirmation, and session handling, each with airtight edge-case behavior.</li>
+    <li>Ein mobiles Erlebnis liefern, dem Nutzer ihr Geld anvertrauen — auf Basis von Web-Technologie.</li>
+    <li>Eine Authentifizierung gestalten, die sicher und zugleich mühelos ist: Passwörter allein waren für ein Finanzprodukt im täglichen Einsatz nicht akzeptabel.</li>
+    <li>Die gesamte Journey abdecken: Registrierung, Login, Kartenverwaltung, Zahlungsbestätigung und Session-Handling — jeweils mit lückenlosem Verhalten in Edge Cases.</li>
   </ul>
 
   <h2>Meine Rolle</h2>
   <p>
-    I specified and owned the application's core flows, most notably the biometric
-    authentication framework. I authored the FSD covering biometric registration, login,
-    payment confirmation, and session timeout, iterating through multiple rounds of client
-    feedback until every scenario, from device changes to failed biometric reads to
-    fallback paths, had an explicit, testable acceptance criterion.
+    Ich spezifizierte und verantwortete die zentralen Abläufe der App, allen voran das
+    Framework für biometrische Authentifizierung. Ich verfasste die FSD für biometrische
+    Registrierung, Login, Zahlungsbestätigung und Session-Timeout und iterierte über mehrere
+    Runden Kundenfeedback, bis jedes Szenario — von Gerätewechseln über fehlgeschlagene
+    biometrische Erkennung bis zu Fallback-Pfaden — ein explizites, testbares Akzeptanzkriterium hatte.
   </p>
   <div class="callout">
     <div class="k">Warum Details entscheidend sind</div>
     <p>
-      In payments, the unhappy paths are the product. A biometric login that works 95% of
-      the time and fails silently the other 5% destroys trust. My specifications treated
-      every fallback, timeout, and error state as a first-class requirement, so the
-      developed product behaved predictably under real-world conditions.
+      Bei Zahlungen sind die Fehlerpfade das eigentliche Produkt. Ein biometrischer Login, der
+      in 95 % der Fälle funktioniert und in den übrigen 5 % stillschweigend fehlschlägt,
+      zerstört Vertrauen. Meine Spezifikationen behandelten jeden Fallback, jedes Timeout und
+      jeden Fehlerzustand als vollwertige Anforderung, sodass sich das Produkt unter realen
+      Bedingungen vorhersehbar verhielt.
     </p>
   </div>
 
   <h2>Vorgehen</h2>
   <ul>
-    <li><strong>Biometric framework FSD.</strong> Defined registration and re-registration flows, login, step-up authentication for payment confirmation, and session timeout behavior, with Given/When/Then criteria for each state.</li>
-    <li><strong>Iterative client validation.</strong> Incorporated structured client feedback across review cycles, keeping a clear record of what changed and why, which kept scope disputes off the table.</li>
-    <li><strong>Cross-platform consistency.</strong> Ensured flows behaved identically across Android and iOS PWA contexts, documenting platform-specific constraints where they existed.</li>
-    <li><strong>Test suites.</strong> Produced comprehensive test cases mapped one-to-one to acceptance criteria, giving QA full traceability from requirement to verification.</li>
+    <li><strong>FSD für das Biometrie-Framework.</strong> Registrierungs- und Re-Registrierungsabläufe, Login, Step-up-Authentifizierung zur Zahlungsbestätigung und Session-Timeout-Verhalten definiert — mit Given/When/Then-Kriterien für jeden Zustand.</li>
+    <li><strong>Iterative Kundenvalidierung.</strong> Strukturiertes Kundenfeedback über Review-Zyklen hinweg eingearbeitet und klar dokumentiert, was sich warum änderte — das hielt Scope-Konflikte fern.</li>
+    <li><strong>Plattformübergreifende Konsistenz.</strong> Sichergestellt, dass sich Abläufe im Android- und iOS-PWA-Kontext identisch verhalten, und plattformspezifische Einschränkungen dokumentiert, wo sie bestanden.</li>
+    <li><strong>Testsuites.</strong> Umfassende Testfälle erstellt, die 1:1 auf Akzeptanzkriterien abgebildet sind — volle Nachvollziehbarkeit für die QA von der Anforderung bis zur Verifikation.</li>
   </ul>
 
   <h2>Ergebnisse</h2>
   <div class="outcome-grid">
-    <div class="outcome"><b>One codebase</b><span>Android and iOS served by a single PWA, halving feature delivery cost</span></div>
-    <div class="outcome"><b>Frictionless security</b><span>Biometric login and payment confirmation replaced password-heavy flows</span></div>
-    <div class="outcome"><b>Predictable behavior</b><span>Edge cases specified upfront, not discovered in production</span></div>
-    <div class="outcome"><b>Traceable QA</b><span>Every requirement mapped to executable test cases</span></div>
+    <div class="outcome"><b>Eine Codebasis</b><span>Android und iOS aus einer einzigen PWA bedient — halbierte Kosten pro Feature</span></div>
+    <div class="outcome"><b>Reibungslose Sicherheit</b><span>Biometrischer Login und Zahlungsbestätigung ersetzten passwortlastige Abläufe</span></div>
+    <div class="outcome"><b>Vorhersehbares Verhalten</b><span>Edge Cases im Vorfeld spezifiziert statt in der Produktion entdeckt</span></div>
+    <div class="outcome"><b>Nachvollziehbare QA</b><span>Jede Anforderung auf ausführbare Testfälle abgebildet</span></div>
   </div>
 
   <div class="cs-nav">
-    <a href="sevenseas-caas-platform.html">&larr; Previous: CAAS Platform</a>
-    <a href="billing-revenue-automation.html">Weiter: Billing & Revenue Automation &rarr;</a>
+    <a href="sevenseas-caas-platform.html">&larr; Zurück: CAAS-Plattform</a>
+    <a href="billing-revenue-automation.html">Weiter: Abrechnungs- &amp; Umsatzautomatisierung &rarr;</a>
   </div>
 </main>
 
