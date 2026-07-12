@@ -415,7 +415,11 @@ footer { padding: 30px 0 44px; }
 .skills-grid li { padding: 6px 0 6px 16px; position: relative; font-size: 15px; color: var(--ink-soft); }
 .skills-grid li::before { content: '▸'; position: absolute; left: 0; color: var(--green); font-size: 11px; top: 9px; }
 
-.exp-block { border-left: 3px solid var(--line); padding-left: 24px; margin-bottom: 36px; }
+.exp-block { border-left: 3px solid var(--line); padding-left: 24px; margin-bottom: 36px; position: relative; }
+.exp-block::before,
+.exp-block::after { content: ''; position: absolute; left: -7px; width: 11px; height: 11px; border-radius: 50%; background: var(--green); }
+.exp-block::before { top: 0; }
+.exp-block::after  { bottom: 0; }
 .exp-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
 .exp-header h3 { font-family: var(--font-display); font-size: 20px; color: var(--ink); margin: 0; }
 .exp-dates { font-family: var(--font-mono); font-size: 13px; color: var(--slate); white-space: nowrap; }
