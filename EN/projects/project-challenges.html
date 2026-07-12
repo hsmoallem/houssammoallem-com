@@ -500,13 +500,20 @@ async function unlock() {
   const input = document.getElementById('pwInput').value;
   const error = document.getElementById('errorMsg');
   if (!input) { error.textContent = 'Enter a password.'; return; }
-  if (await sha256(input) === HASH) {
-    document.getElementById('lockOverlay').classList.add('hidden');
-    document.getElementById('app').style.display = 'flex';
-  } else {
-    error.textContent = 'Incorrect password.';
-    document.getElementById('pwInput').value = '';
-    document.getElementById('pwInput').focus();
+  try {
+    const hash = await sha256(input);
+    if (hash === HASH) {
+      document.getElementById('lockOverlay').classList.add('hidden');
+      document.getElementById('app').style.display = 'flex';
+    } else {
+      error.textContent = 'Incorrect password.';
+      error.style.display = 'block';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  } catch(e) {
+    error.textContent = 'Error: ' + e.message;
+    error.style.display = 'block';
   }
 }
 
