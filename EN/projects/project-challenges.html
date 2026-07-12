@@ -4,121 +4,213 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Project Challenges — Seven Seas Cards</title>
+<title>Project Challenges — Houssam Moallem</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #0f1d2e;
     color: #e2e8f0;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .container { max-width: 720px; width: 100%; padding: 24px; }
-  
-  /* Lock screen */
-  .lock-screen {
+
+  /* Lock Screen */
+  .lock-overlay {
+    position: fixed; inset: 0; z-index: 999;
+    display: flex; align-items: center; justify-content: center;
+    background: #0f1d2e;
+  }
+  .lock-overlay.hidden { display: none; }
+  .lock-box {
     background: #1a2d42;
     border: 1px solid #2d4a6b;
     border-radius: 14px;
     padding: 48px 40px;
     text-align: center;
+    max-width: 400px; width: 90%;
   }
-  .lock-screen h1 { font-family: 'Sora', sans-serif; font-size: 1.5rem; margin-bottom: 8px; color: #fff; }
-  .lock-screen p { color: #94a3b8; font-size: 0.95rem; margin-bottom: 28px; }
-  .lock-screen input {
-    width: 100%; max-width: 320px;
+  .lock-box h1 { font-family: 'Sora', sans-serif; font-size: 1.5rem; margin-bottom: 8px; color: #fff; }
+  .lock-box p { color: #94a3b8; font-size: 0.95rem; margin-bottom: 28px; }
+  .lock-box input {
+    width: 100%;
     padding: 12px 16px;
-    border: 1px solid #2d4a6b;
-    border-radius: 8px;
-    background: #0f1d2e;
-    color: #e2e8f0;
-    font-size: 1rem;
-    outline: none;
+    border: 1px solid #2d4a6b; border-radius: 8px;
+    background: #0f1d2e; color: #e2e8f0; font-size: 1rem; outline: none;
     transition: border-color 0.2s;
   }
-  .lock-screen input:focus { border-color: #0e7c66; }
-  .lock-screen input::placeholder { color: #4a5f7a; }
-  .lock-screen button {
-    display: block;
-    margin: 16px auto 0;
+  .lock-box input:focus { border-color: #0e7c66; }
+  .lock-box input::placeholder { color: #4a5f7a; }
+  .lock-box button {
+    display: block; margin: 16px auto 0;
     padding: 12px 36px;
-    background: #0e7c66;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
+    background: #0e7c66; color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
     transition: background 0.2s;
   }
-  .lock-screen button:hover { background: #0b6452; }
-  .lock-screen .error {
-    color: #f87171;
-    font-size: 0.85rem;
-    margin-top: 12px;
-    min-height: 20px;
+  .lock-box button:hover { background: #0b6452; }
+  .lock-box .error { color: #f87171; font-size: 0.85rem; margin-top: 12px; min-height: 20px; }
+
+  /* Layout */
+  .app { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 260px; min-width: 260px;
+    background: #152336;
+    border-right: 1px solid #1e3348;
+    padding: 32px 0 24px;
+    position: sticky; top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+  }
+  .sidebar-header {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid #1e3348;
+    margin-bottom: 8px;
+  }
+  .sidebar-header h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .sidebar-header span {
+    font-size: 0.75rem;
+    color: #4a5f7a;
+  }
+  .sidebar-nav { flex: 1; padding: 8px 0; }
+  .sidebar-nav a {
+    display: block;
+    padding: 8px 24px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .sidebar-nav a:hover {
+    color: #e2e8f0;
+    background: #1a2d42;
+    border-left-color: #2d4a6b;
+  }
+  .sidebar-nav a.active {
+    color: #0e7c66;
+    background: #0f1d2e;
+    border-left-color: #0e7c66;
+    font-weight: 600;
+  }
+  .sidebar-section {
+    padding: 12px 24px 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #4a5f7a;
+    font-weight: 700;
   }
 
-  /* Content */
-  .content { display: none; }
-  .content.visible { display: block; }
-  .content h1 {
+  /* Main */
+  .main {
+    flex: 1;
+    padding: 48px 56px 80px;
+    max-width: 860px;
+  }
+  .main h1 {
     font-family: 'Sora', sans-serif;
     font-size: 1.75rem;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: #fff;
   }
-  .content .meta {
+  .main .intro {
     color: #94a3b8;
     font-size: 0.9rem;
-    margin-bottom: 32px;
-    border-bottom: 1px solid #2d4a6b;
-    padding-bottom: 20px;
-  }
-  .content h2 {
-    font-family: 'Sora', sans-serif;
-    font-size: 1.15rem;
-    color: #0e7c66;
-    margin: 28px 0 12px;
-    padding-bottom: 6px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
     border-bottom: 1px solid #1e3348;
   }
-  .content h2:first-of-type { margin-top: 0; }
-  .content ul {
-    list-style: none;
-    padding: 0;
-  }
-  .content li {
-    position: relative;
-    padding: 10px 0 10px 24px;
+  .challenge {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
     border-bottom: 1px solid #1a2d42;
-    line-height: 1.5;
-    font-size: 0.95rem;
+    scroll-margin-top: 32px;
   }
-  .content li::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
+  .challenge:last-child { border-bottom: none; }
+  .challenge .role-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: #0e7c66;
-    font-weight: bold;
-  }
-  .content li strong { color: #fff; display: block; margin-bottom: 2px; }
-  .content li .desc { color: #94a3b8; }
-  .content .section-intro {
-    color: #94a3b8;
-    font-size: 0.9rem;
+    background: rgba(14,124,102,0.12);
+    padding: 3px 10px;
+    border-radius: 4px;
     margin-bottom: 8px;
   }
+  .challenge h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .challenge .context {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .challenge .detail-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .challenge .detail-text {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .challenge .detail-text:last-child { margin-bottom: 0; }
+
+  /* Mobile */
+  .menu-toggle {
+    display: none;
+    position: fixed; top: 12px; left: 12px; z-index: 100;
+    background: #1a2d42; color: #e2e8f0;
+    border: 1px solid #2d4a6b; border-radius: 8px;
+    padding: 8px 12px; font-size: 1.2rem; cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed; left: -280px; top: 0; z-index: 90;
+      transition: left 0.25s;
+    }
+    .sidebar.open { left: 0; }
+    .menu-toggle { display: block; }
+    .main { padding: 24px 20px 60px; }
+    .main h1 { font-size: 1.35rem; }
+  }
+
+  /* overlay when sidebar open on mobile */
+  .sidebar-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 85;
+    background: rgba(0,0,0,0.5);
+  }
+  .sidebar-overlay.show { display: block; }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- LOCK SCREEN -->
-  <div class="lock-screen" id="lockScreen">
+<!-- LOCK SCREEN -->
+<div class="lock-overlay" id="lockOverlay">
+  <div class="lock-box">
     <h1>🔒 Restricted Access</h1>
     <p>Enter password to view this document.</p>
     <input type="password" id="pwInput" placeholder="Password" autofocus>
@@ -126,70 +218,273 @@
     <button onclick="unlock()">Unlock</button>
     <div class="error" id="errorMsg"></div>
   </div>
+</div>
 
-  <!-- CONTENT (hidden until unlocked) -->
-  <div class="content" id="content">
+<!-- APP (hidden until unlock) -->
+<div class="app" id="app" style="display:none">
+
+  <!-- Mobile toggle -->
+  <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Challenges</h2>
+      <span>Houssam Moallem</span>
+    </div>
+    <div class="sidebar-nav">
+      <div class="sidebar-section">Mirodec — Lead Designer</div>
+      <a href="#ch1" onclick="setActive(this)">Lost Design Data — Schindler KSA</a>
+      <a href="#ch2" onclick="setActive(this)">Self-Learning HP Glass Printing</a>
+
+      <div class="sidebar-section">Dataflow — Design Team Leader</div>
+      <a href="#ch3" onclick="setActive(this)">Qatar Ministry of Education — Scaling from 5 to 25 Designers</a>
+
+      <div class="sidebar-section">Seven Seas Cards — Project Manager</div>
+      <a href="#ch4" onclick="setActive(this)">KYC Provider Change — Regulatory</a>
+      <a href="#ch5" onclick="setActive(this)">Currency Exchange API Failure</a>
+      <a href="#ch6" onclick="setActive(this)">Vendor Coordination Across Time Zones</a>
+      <a href="#ch7" onclick="setActive(this)">Regulatory Compliance Timeline</a>
+      <a href="#ch8" onclick="setActive(this)">Device Registration &amp; Security</a>
+      <a href="#ch9" onclick="setActive(this)">Notification System Complexity</a>
+      <a href="#ch10" onclick="setActive(this)">Multi-Currency Edge Cases</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
     <h1>Project Challenges</h1>
-    <div class="meta">Seven Seas Cards &middot; Internal Document &middot; Confidential</div>
+    <p class="intro">
+      I have faced many challenges during the several responsibilities I have held.
+      I have the ability to successfully handle various types of challenges, including
+      technical challenges that require learning new skills in a short period of time,
+      as well as challenges related to the team I lead and the client we work for.
+      Below are examples of the major challenges I faced and solved.
+    </p>
 
-    <h2>1. KYC Provider Change — Regulatory Compliance</h2>
-    <div class="section-intro">The original KYC (Know Your Customer) provider was replaced before launch due to updated regulatory requirements.</div>
-    <ul>
-      <li>
-        <strong>What happened</strong>
-        <span class="desc">The initially selected KYC provider was found to be non-compliant with new regulatory standards introduced shortly before go-live. A replacement provider had to be sourced, integrated, and tested under significant time pressure.</span>
-      </li>
-      <li>
-        <strong>Impact</strong>
-        <span class="desc">Required rework of the identity verification flow — API integration, document upload, liveness detection, and backend verification pipelines had to be re-tested end to end. Delayed the onboarding module by approximately 2 weeks.</span>
-      </li>
-      <li>
-        <strong>Resolution</strong>
-        <span class="desc">Fast-tracked vendor evaluation; parallel-tracked integration and compliance review. New provider was fully integrated and passed UAT before launch deadline.</span>
-      </li>
-    </ul>
+    <!-- CHALLENGE 1: Mirodec — Lost Design Data -->
+    <section class="challenge" id="ch1">
+      <span class="role-tag">Mirodec — Lead Designer</span>
+      <h2>Lost Design Data — Schindler, KSA</h2>
+      <p class="context">
+        The company lost data related to designs that should be printed for one of our
+        major clients, Schindler in the KSA.
+      </p>
+      <p class="detail-label">Action Taken</p>
+      <p class="detail-text">
+        I created new designs that were close to the samples the client agreed on.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        I requested a call with the client and convinced him to approve the new design.
+      </p>
+    </section>
 
-    <h2>2. Currency Exchange API — Rate Update Failure</h2>
-    <div class="section-intro">On the Friday before our weekend, the third-party API responsible for currency exchange rates stopped sending updated rates without warning.</div>
-    <ul>
-      <li>
-        <strong>What happened</strong>
-        <span class="desc">The exchange rate API began returning stale/cached rates. FX conversions in the app — card load, balance display, transaction history — showed incorrect amounts for multi-currency cardholders. Detected late Friday afternoon.</span>
-      </li>
-      <li>
-        <strong>Impact</strong>
-        <span class="desc">Risk of cardholders seeing incorrect balances and making financial decisions based on wrong data. Required immediate escalation to the provider and implementation of a fallback mechanism before the weekend.</span>
-      </li>
-      <li>
-        <strong>Resolution</strong>
-        <span class="desc">Implemented a fallback rate source (secondary provider) with automatic failover. Added monitoring alerts for rate staleness (no update in >1 hour triggers notification). Deployed hotfix Friday evening before weekend blackout.</span>
-      </li>
-    </ul>
+    <!-- CHALLENGE 2: Mirodec — Self-Learning -->
+    <section class="challenge" id="ch2">
+      <span class="role-tag">Mirodec — Lead Designer</span>
+      <h2>Self-Learning HP Glass Printing Machine &amp; Software</h2>
+      <p class="context">
+        When I was first hired at Mirodec, I had to learn on my own how to use the
+        HP glass printing machine and the related software because it was a new industry
+        that I hadn't worked in before, and the designer before me left without giving
+        a notice period.
+      </p>
+      <p class="detail-label">Action Taken</p>
+      <p class="detail-text">
+        Self-taught the HP glass printing machine operation and its software with zero
+        handover from the previous designer. Learned the end-to-end production workflow
+        independently while continuing to deliver on ongoing client projects.
+      </p>
+      <p class="detail-label">Outcome</p>
+      <p class="detail-text">
+        Became fully proficient in glass printing operations and software within a short
+        period, ensuring uninterrupted production for all active client orders.
+      </p>
+    </section>
 
-    <h2>3. Additional Challenges</h2>
-    <ul>
-      <li>
-        <strong>Vendor Coordination Across Time Zones</strong>
-        <span class="desc">Multiple third-party providers (card processor, KYC, FX, SMS gateway) operating in different time zones created coordination overhead. Issue resolution often delayed by 12–24 hours due to time zone gaps.</span>
-      </li>
-      <li>
-        <strong>Regulatory Compliance Timeline</strong>
-        <span class="desc">Evolving regulatory landscape required mid-project adjustments to compliance features — transaction monitoring thresholds, KYC tier requirements, and reporting formats changed during development.</span>
-      </li>
-      <li>
-        <strong>Device Registration & Security</strong>
-        <span class="desc">Implementing device binding/authorization added complexity to the onboarding flow. Balancing security requirements with user experience required multiple design iterations.</span>
-      </li>
-      <li>
-        <strong>Notification System Complexity</strong>
-        <span class="desc">Push + in-app notifications for 12+ event types (refund, reversal, POS, PIN change, currency exchange, card status, e-commerce, magnetic stripe, etc.) required extensive test case coverage and edge-case handling.</span>
-      </li>
-      <li>
-        <strong>Multi-Currency Edge Cases</strong>
-        <span class="desc">Handling transactions across currencies introduced rounding discrepancies, rate timing issues, and display inconsistencies that required careful business logic and QA validation.</span>
-      </li>
-    </ul>
-  </div>
+    <!-- CHALLENGE 3: Dataflow — Qatar Ministry of Education -->
+    <section class="challenge" id="ch3">
+      <span class="role-tag">Dataflow — Design Team Leader</span>
+      <h2>Qatar Ministry of Education — Scaling from 5 to 25 Designers</h2>
+      <p class="context">
+        The company received a huge project for the Qatar Ministry of Education.
+        The project required very fast delivery and a big team of designers — at least 25 —
+        while my team had only 5 designers. The company's initial plan was to rely on
+        outsourcing because we didn't have enough time to hire and train new designers.
+        However, the first delivery was a complete disaster because we didn't have control
+        over the quality of the outsourced work and the client was unhappy.
+      </p>
+      <p class="detail-label">Action Taken</p>
+      <p class="detail-text">
+        I prepared training materials and a plan to recruit new designers instead of
+        outsourcing. I volunteered to make the plan succeed and worked 16–20 hours per
+        day for 3 months to complete my daily tasks, interview candidates, and train
+        new designers.
+      </p>
+      <p class="detail-label">Outcome</p>
+      <p class="detail-text">
+        We successfully delivered the project. The team grew from 5 to 25 designers.
+        I was promoted to Project Manager as a result of this effort.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 4: Seven Seas — KYC Provider -->
+    <section class="challenge" id="ch4">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>KYC Provider Change — Regulatory Compliance</h2>
+      <p class="context">
+        The original KYC (Know Your Customer) provider was replaced before launch due
+        to updated regulatory requirements. The initially selected provider was found to
+        be non-compliant with new standards introduced shortly before go-live.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        Required rework of the identity verification flow — API integration, document
+        upload, liveness detection, and backend verification pipelines had to be re-tested
+        end to end. Delayed the onboarding module by approximately 2 weeks.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Fast-tracked vendor evaluation; parallel-tracked integration and compliance review.
+        New provider was fully integrated and passed UAT before launch deadline.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 5: Seven Seas — Currency Exchange API -->
+    <section class="challenge" id="ch5">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>Currency Exchange API — Rate Update Failure</h2>
+      <p class="context">
+        On the Friday before our weekend, the third-party API responsible for currency
+        exchange rates stopped sending updated rates without warning. The exchange rate
+        API began returning stale/cached rates. FX conversions in the app showed incorrect
+        amounts for multi-currency cardholders. Detected late Friday afternoon.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        Risk of cardholders seeing incorrect balances and making financial decisions
+        based on wrong data. Required immediate escalation to the provider and
+        implementation of a fallback mechanism before the weekend.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Implemented a fallback rate source (secondary provider) with automatic failover.
+        Added monitoring alerts for rate staleness. Deployed hotfix Friday evening before
+        weekend blackout.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 6: Vendor Coordination -->
+    <section class="challenge" id="ch6">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>Vendor Coordination Across Time Zones</h2>
+      <p class="context">
+        Multiple third-party providers — card processor, KYC, FX, SMS gateway — operating
+        in different time zones created significant coordination overhead.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        Issue resolution often delayed by 12–24 hours due to time zone gaps. Required
+        careful scheduling of integration windows and escalation paths.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Established clear SLAs with each vendor specifying response times. Created a
+        shared escalation matrix. Scheduled overlapping support windows for critical
+        integration phases.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 7: Regulatory Compliance -->
+    <section class="challenge" id="ch7">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>Regulatory Compliance Timeline</h2>
+      <p class="context">
+        Evolving regulatory landscape required mid-project adjustments to compliance
+        features — transaction monitoring thresholds, KYC tier requirements, and
+        reporting formats changed during development.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        Required rework of already-completed features and continuous alignment with
+        the compliance team. Risked scope creep and timeline delays.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Embedded compliance review into the sprint cadence. Maintained a living compliance
+        requirements tracker. Prioritized regulatory items alongside feature development
+        to avoid last-minute rework.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 8: Device Registration -->
+    <section class="challenge" id="ch8">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>Device Registration &amp; Security</h2>
+      <p class="context">
+        Implementing device binding and authorization added complexity to the onboarding
+        flow. Balancing security requirements with user experience required multiple
+        design iterations.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        Initial designs created friction in the onboarding flow — users dropped off at
+        the device authorization step. Security team requirements conflicted with UX goals.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Ran multiple design iterations with UX and security teams. Implemented progressive
+        security — basic binding during onboarding, enhanced checks for sensitive operations.
+        Drop-off rate reduced while maintaining security compliance.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 9: Notification System -->
+    <section class="challenge" id="ch9">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>Notification System Complexity</h2>
+      <p class="context">
+        Push and in-app notifications for 12+ event types — refund, reversal, POS,
+        PIN change, currency exchange, card status, e-commerce, magnetic stripe, and
+        all transaction types — required extensive test case coverage and edge-case handling.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        High risk of missed or duplicate notifications. Complex state management across
+        notification channels. Coordination between backend, mobile, and SMS gateway teams.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Built a comprehensive test case matrix covering all event type × channel
+        combinations. Implemented idempotency keys to prevent duplicate notifications.
+        Created a notification preferences engine giving users granular control.
+      </p>
+    </section>
+
+    <!-- CHALLENGE 10: Multi-Currency -->
+    <section class="challenge" id="ch10">
+      <span class="role-tag">Seven Seas Cards — Project Manager</span>
+      <h2>Multi-Currency Edge Cases</h2>
+      <p class="context">
+        Handling transactions across currencies introduced rounding discrepancies,
+        rate timing issues, and display inconsistencies.
+      </p>
+      <p class="detail-label">Impact</p>
+      <p class="detail-text">
+        Cardholders occasionally saw mismatched amounts between transaction history
+        and balance displays. Required careful business logic for FX conversion timing.
+      </p>
+      <p class="detail-label">Resolution</p>
+      <p class="detail-text">
+        Standardized FX rate sourcing to a single provider per transaction. Implemented
+        consistent rounding rules across all display surfaces. Added automated
+        reconciliation checks to flag discrepancies.
+      </p>
+    </section>
+
+  </main>
 </div>
 
 <script>
@@ -205,10 +500,9 @@ async function unlock() {
   const input = document.getElementById('pwInput').value;
   const error = document.getElementById('errorMsg');
   if (!input) { error.textContent = 'Enter a password.'; return; }
-  const h = await sha256(input);
-  if (h === HASH) {
-    document.getElementById('lockScreen').style.display = 'none';
-    document.getElementById('content').classList.add('visible');
+  if (await sha256(input) === HASH) {
+    document.getElementById('lockOverlay').classList.add('hidden');
+    document.getElementById('app').style.display = 'flex';
   } else {
     error.textContent = 'Incorrect password.';
     document.getElementById('pwInput').value = '';
@@ -219,6 +513,32 @@ async function unlock() {
 document.getElementById('pwInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') unlock();
 });
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+
+function setActive(el) {
+  document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  // Close sidebar on mobile after click
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+// Highlight active section on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+document.querySelectorAll('.challenge').forEach(el => observer.observe(el));
 </script>
 
 </body>
