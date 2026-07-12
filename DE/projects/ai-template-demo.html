@@ -213,6 +213,15 @@
     .psa-btn-cta { font-family: 'IBM Plex Sans', system-ui, sans-serif; background: #0e7c66; color: #fff; border: none; border-radius: 14px; padding: 9px 24px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background .15s; }
     .psa-btn-cta:hover { background: #0a6655; color: #fff; text-decoration: none; }
     @media(max-width:540px) { .psa-card { max-width: 100%; } .psa-body { padding: 20px 18px; } .psa-body p { font-size: 13px; } .psa-hdr { padding: 16px 18px 14px; } }
+    @media(max-width:768px) {
+      .ai-gen-row { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+      .ai-gen-row .ai-hint { max-width: 100%; }
+      .fields-bar { flex-wrap: wrap; gap: 8px; }
+      .fields-bar input { min-width: 140px; }
+      .editor-wrap { grid-template-columns: 1fr; }
+      .editor-panel { border-left: none; border-top: 1px solid #e5e7eb; max-height: 200px; }
+      .action-bar { justify-content: center; flex-wrap: wrap; }
+    }
   </style>
 <script defer src="https://stats.houssammoallem.com/script.js" data-website-id="901d5209-410e-4293-931d-45a166eb49b7"></script>
 </head>
@@ -267,7 +276,7 @@
     </div>
 
     <!-- ✦ NEW: Vorlage mit KI generieren button -->
-    <div class="d-flex align-items-center gap-3 mb-4">
+    <div class="d-flex align-items-center gap-3 mb-4 ai-gen-row">
       <button class="btn-ai" onclick="openUploadModal()">
         <span class="spark">✦</span> Vorlage mit KI generieren
       </button>
