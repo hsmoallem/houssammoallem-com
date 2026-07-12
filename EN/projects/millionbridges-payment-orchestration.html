@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Orchestration &amp; KYC for MillionBridges | Houssam Moallem</title>
+<meta name="description" content="Product ownership of a multi-acquirer payment orchestration layer and KYC integration for MillionBridges, a regulated cross-border remittance platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="../index.html#case-studies">Case studies</a>
+      <a href="../about.html">About me</a>
+      <a class="cta" href="mailto:moallem.houssam@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS-03 &middot; MillionBridges &middot; Cross-border Remittance</p>
+    <h1>Multi-Acquirer Payment Orchestration &amp; KYC</h1>
+    <p class="tagline">Turning a remittance platform into an orchestration layer: routing card payments across acquirers by currency, verifying identity through a provider-independent KYC layer, and giving the receiver a choice of how to cash out.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">My role</div><div class="v">Product Manager / Product Owner</div></div>
+      <div class="meta-cell"><div class="k">Client</div><div class="v">MillionBridges (regulated remittance)</div></div>
+      <div class="meta-cell"><div class="k">Domain</div><div class="v">Fintech, payments, cross-border money transfer</div></div>
+      <div class="meta-cell"><div class="k">Partners</div><div class="v">Card acquirers, KYC &amp; ledger providers</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Context</h2>
+  <p>
+    MillionBridges is a regulated cross-border remittance service that lets people send
+    money into Lebanon and, through a charitable model, channel the platform's margin to
+    partner charities. It operates under real regulatory oversight, registered with the
+    Bank of Spain, authorized by Banque du Liban, and operating within the European
+    Banking Authority framework, which raises the bar on KYC, traceability, and payment
+    reliability.
+  </p>
+  <p>
+    The platform integrates with a new account-management and ledger system,
+    which does not itself provide identity verification or card acquiring. That left two
+    capabilities to design and own: a KYC layer and a card-payment layer, each provided by
+    external specialists, each needing to plug cleanly into MillionBridges as the
+    orchestration engine sitting between them.
+  </p>
+  <p>
+    The money-out side mattered just as much as the money-in side. Funds arrive with a
+    beneficiary in Lebanon who, after passing local identity checks, chooses how to receive
+    them: as cash (USD bills) or as a top-up to their existing e-wallet, handled through a regulated payout network. A distinctive "BridgeAccount" model also lets senders hold
+    funds safely in Europe and withdraw in parts, rather than every transfer being all-or-nothing.
+  </p>
+
+  <h2>The challenge</h2>
+  <ul>
+    <li>Accept card payments in many currencies when no single acquirer covers them all, without exposing that complexity to the sender.</li>
+    <li>Keep payments flowing even when a payment provider has an outage, rather than failing the transaction outright.</li>
+    <li>Integrate regulated identity verification (KYC) in a way that isn't locked to a single vendor and satisfies audit requirements.</li>
+    <li>Present transparent, accurate pricing to the sender even though fees and exchange rates differ depending on which provider handles the payment.</li>
+    <li>Give the receiver a real choice at cash-out, cash or wallet, while enforcing local identity checks and payout limits.</li>
+    <li>Work within a hard regulatory constraint: every third party in the chain had to be acceptable to the Spanish regulator, so delivery had to be sequenced around external approvals the project didn't control.</li>
+  </ul>
+
+  <h2>My role</h2>
+  <p>
+    As Product Manager and Product Owner on this work, the product definition for these features was owned here, working with the client's business owner, the payment and identity providers, and the development team. Responsibilities ran across discovery, authoring the functional specification documents (FSDs) with exhaustive acceptance criteria, prioritizing and sequencing the backlog across sprints, and running acceptance testing. As the single point of contact, the role was to translate regulatory constraints, provider API behavior, and commercial rules into requirements the team could build against, while commercial and vendor decisions stayed with the business owner.
+  </p>
+  <div class="callout">
+    <div class="k">How the work was done</div>
+    <p>
+      As on the other work here, AI tools were part of the workflow, used to accelerate specification writing and to build interactive front-end prototypes that validated flows with stakeholders before development began. That shortened feedback loops on genuinely complex payment logic and caught gaps while they were still cheap to fix.
+    </p>
+  </div>
+
+  <h2>Approach</h2>
+  <ul>
+    <li><strong>Orchestration, not a single integration.</strong> The specification framed MillionBridges as an orchestration layer sitting between two card acquirers, a specialist KYC provider, a wallet provider, and the account and ledger system, using a modular integration model so additional providers could be onboarded later without re-architecting.</li>
+    <li><strong>Currency-based acquirer routing.</strong> The design defined automatic routing that detects the transaction currency and sends each payment to the acquirer assigned to it, applying that acquirer's fees and exchange rates dynamically, all transparent to the sender. (The specific routing rules are held back here as they're commercially sensitive.)</li>
+    <li><strong>Failover with health checks.</strong> The spec introduced a pre-transaction health check so that if the primary acquirer is unavailable, eligible payments reroute automatically to a backup, and where no backup exists, the sender gets a clear, honest "please try again later" rather than a silent failure. Routing reverts automatically once the provider recovers.</li>
+    <li><strong>Provider-independent KYC.</strong> The identity-verification layer was specified so the data model stayed independent of any single KYC vendor: a multi-step verification flow with video capture, asynchronous status updates via webhooks, storage of verification media for rejected-case review, admin-configurable country blocking, and full audit fields.</li>
+    <li><strong>Transparent pricing.</strong> The spec defined how the app shows a clear breakdown of what the sender pays, what the beneficiary receives, and, in this platform's charitable model, what reaches the partner charity, computed correctly regardless of which acquirer processed the payment.</li>
+    <li><strong>Card handling and recurring payments.</strong> The spec covered secure card tokenization scoped per acquirer, 3-D Secure applied where regulation requires it, and recurring-payment mandates, so returning senders get a faster, compliant experience.</li>
+    <li><strong>Beneficiary cash-out: cash or wallet.</strong> The payout side was specified so the receiver, after local KYC, chooses between collecting cash (USD bills) or topping up their e-wallet, integrated with a regulated payout network, with balance controls that authorize each cash-out or top-up and support partial withdrawals.</li>
+    <li><strong>Transparent, itemized pricing.</strong> The design defined a full cost breakdown the sender can open on any transaction: the exchange rate applied, the card-scheme cost, the bank's cut, the payout provider's cut, what the platform keeps, and, in the charitable model, the amount delivered to charity, with an admin able to configure these parameters.</li>
+    <li><strong>Traceability of donations.</strong> A follow-up flow was specified to send the sender proof their contribution reached the partner charity, closing the loop on the platform's transparency promise.</li>
+  </ul>
+
+  <h2>Outcomes</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>11 currencies</b><span>Card payments accepted across 11 sender currencies behind one experience</span></div>
+    <div class="outcome"><b>Automatic failover</b><span>Health-checked routing keeps eligible payments flowing during provider outages</span></div>
+    <div class="outcome"><b>Vendor-independent KYC</b><span>Identity layer designed so the KYC provider can change without a data-model rebuild</span></div>
+    <div class="outcome"><b>Audit-ready</b><span>Verification media, status history, and traceability built in for regulatory review</span></div>
+    <div class="outcome"><b>Receiver choice</b><span>Beneficiaries cash out as USD bills or wallet top-up after local KYC</span></div>
+  </div>
+  <h2>Decisions &amp; learnings</h2>
+  <ul>
+    <li><strong>Designing for a vendor change no one could predict.</strong> Provider selection sat with the client, as it should, it's a commercial and regulatory decision, not a product one. The product job was to make the architecture resilient to it. Specifying the KYC layer to be provider-independent turned out to be the decision that mattered most: when the KYC provider was replaced during the project, the team could switch without rebuilding the integration or the data model.</li>
+    <li><strong>Parallelizing against the approval gate.</strong> Because each provider had to clear regulatory approval before going live, the integration groundwork ran in parallel with the approval process rather than waiting for it, so a provider could go live quickly once approved, while making sure nothing went into production ahead of sign-off. It's an example of managing a roadmap around constraints you don't control instead of letting them stall the project.</li>
+  </ul>
+  <p>
+    Alongside this payments and KYC work, the platform also went through a full rebrand,
+    app redesign, and a new mobile biometric security framework, covered in the next case
+    study.
+  </p>
+
+  <div class="cs-nav">
+    <a href="../index.html#case-studies">&larr; All case studies</a>
+    <a href="millionbridges-rebrand-biometric.html">Next: Rebrand &amp; Biometric Security &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem</span>
+    <span><a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

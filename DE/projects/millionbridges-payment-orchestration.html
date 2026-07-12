@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment-Orchestrierung &amp; KYC für MillionBridges | Houssam Moallem</title>
+<meta name="description" content="Product Ownership einer Multi-Acquirer-Payment-Orchestrierung und KYC-Integration für MillionBridges, eine regulierte grenzüberschreitende Remittance-Plattform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="../index.html#case-studies">Case Studies</a>
+      <a href="../about.html">Über mich</a>
+      <a class="cta" href="mailto:moallem.houssam@gmail.com">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS-03 &middot; MillionBridges &middot; Grenzüberschreitende Remittance</p>
+    <h1>Multi-Acquirer-Payment-Orchestrierung &amp; KYC</h1>
+    <p class="tagline">Eine Remittance-Plattform als Orchestrierungsschicht: Kartenzahlungen währungsbasiert über mehrere Acquirer routen, die Identität über eine anbieterunabhängige KYC-Schicht prüfen und dem Empfänger die Wahl geben, wie er sich auszahlen lässt.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">Meine Rolle</div><div class="v">Product Manager / Product Owner</div></div>
+      <div class="meta-cell"><div class="k">Kunde</div><div class="v">MillionBridges (regulierte Remittance)</div></div>
+      <div class="meta-cell"><div class="k">Bereich</div><div class="v">Fintech, Payments, grenzüberschreitender Geldtransfer</div></div>
+      <div class="meta-cell"><div class="k">Partner</div><div class="v">Card-Acquirer, KYC- &amp; Ledger-Anbieter</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Kontext</h2>
+  <p>
+    MillionBridges ist ein regulierter grenzüberschreitender Remittance-Dienst, über den
+    Menschen Geld in den Libanon senden und über ein wohltätiges Modell die Marge der
+    Plattform an Partnerorganisationen weiterleiten. Der Dienst unterliegt echter
+    regulatorischer Aufsicht, registriert bei der Bank von Spanien, autorisiert durch die
+    Banque du Liban und tätig im Rahmen der Europäischen Bankenaufsichtsbehörde (EBA), was
+    die Anforderungen an KYC, Nachvollziehbarkeit und Zahlungszuverlässigkeit deutlich erhöht.
+  </p>
+  <p>
+    Die Plattform integriert ein neues Konten- und Ledger-System, das selbst weder
+    Identitätsprüfung noch Card-Acquiring bereitstellt. Damit blieben zwei Fähigkeiten zu
+    konzipieren und zu verantworten: eine KYC-Schicht und eine Kartenzahlungsschicht, jeweils
+    von externen Spezialisten bereitgestellt und jeweils sauber in MillionBridges als
+    Orchestrierungs-Engine einzubinden.
+  </p>
+  <p>
+    Die Auszahlungsseite war ebenso wichtig wie die Einzahlungsseite. Die Gelder erreichen
+    einen Empfänger im Libanon, der nach bestandener lokaler Identitätsprüfung wählt, wie er
+    sie erhält: als Bargeld (USD-Scheine) oder als Aufladung seiner bestehenden E-Wallet,
+    abgewickelt über ein reguliertes Auszahlungsnetzwerk. Ein besonderes „BridgeAccount"-Modell
+    erlaubt Sendern außerdem, Guthaben sicher in Europa zu halten und in Teilbeträgen
+    abzurufen, statt dass jede Überweisung alles-oder-nichts ist.
+  </p>
+
+  <h2>Die Herausforderung</h2>
+  <ul>
+    <li>Kartenzahlungen in vielen Währungen akzeptieren, obwohl kein einzelner Acquirer alle abdeckt, ohne diese Komplexität an den Sender weiterzugeben.</li>
+    <li>Zahlungen auch bei einem Ausfall eines Anbieters weiterlaufen lassen, statt die Transaktion vollständig scheitern zu lassen.</li>
+    <li>Regulierte Identitätsprüfung (KYC) so integrieren, dass sie nicht an einen einzelnen Anbieter gebunden ist und Audit-Anforderungen erfüllt.</li>
+    <li>Dem Sender transparente, korrekte Preise anzeigen, obwohl Gebühren und Wechselkurse je nach ausführendem Anbieter unterschiedlich sind.</li>
+    <li>Dem Empfänger bei der Auszahlung eine echte Wahl geben, Bargeld oder Wallet, bei gleichzeitiger Durchsetzung lokaler Identitätsprüfungen und Auszahlungslimits.</li>
+    <li>Innerhalb einer harten regulatorischen Rahmenbedingung arbeiten: Jeder Dritte in der Kette musste für die spanische Aufsicht akzeptabel sein, sodass die Lieferung um externe Genehmigungen herum sequenziert werden musste, die das Projekt nicht kontrollierte.</li>
+  </ul>
+
+  <h2>Meine Rolle</h2>
+  <p>
+    Als Product Manager und Product Owner lag die Produktdefinition für diese Features hier
+    in der Verantwortung, in Zusammenarbeit mit dem Business Owner des Kunden, den Payment-
+    und Identitätsanbietern sowie dem Entwicklungsteam. Die Aufgaben reichten von der
+    Discovery über das Verfassen der funktionalen Spezifikationen (FSDs) mit ausführlichen
+    Akzeptanzkriterien und die Priorisierung und Sequenzierung des Backlogs über Sprints
+    hinweg bis zur Durchführung der Abnahmetests. Als zentrale Ansprechperson bestand die
+    Rolle darin, regulatorische Vorgaben, das Verhalten der Anbieter-APIs und kommerzielle
+    Regeln in Anforderungen zu übersetzen, die das Team umsetzen konnte, während kommerzielle
+    und Anbieterentscheidungen beim Business Owner blieben.
+  </p>
+  <div class="callout">
+    <div class="k">Wie die Arbeit ablief</div>
+    <p>
+      Wie bei den anderen Projekten waren KI-Tools Teil des Workflows, eingesetzt, um das
+      Schreiben von Spezifikationen zu beschleunigen und interaktive Frontend-Prototypen zu
+      bauen, mit denen Abläufe vor Entwicklungsbeginn mit den Stakeholdern validiert wurden.
+      Das verkürzte die Feedback-Schleifen bei wirklich komplexer Zahlungslogik und deckte
+      Lücken auf, solange sie noch günstig zu beheben waren.
+    </p>
+  </div>
+
+  <h2>Vorgehen</h2>
+  <ul>
+    <li><strong>Orchestrierung statt Einzelintegration.</strong> Die Spezifikation legte MillionBridges als Orchestrierungsschicht zwischen zwei Card-Acquirern, einem spezialisierten KYC-Anbieter, einem Wallet-Anbieter und dem Konten- und Ledger-System an, mit einem modularen Integrationsmodell, das die spätere Anbindung weiterer Anbieter ohne Neuarchitektur erlaubt.</li>
+    <li><strong>Währungsbasiertes Acquirer-Routing.</strong> Das Design definierte ein automatisches Routing, das die Transaktionswährung erkennt und jede Zahlung an den zugeordneten Acquirer sendet, dessen Gebühren und Wechselkurse dynamisch angewendet werden, für den Sender vollständig transparent. (Die konkreten Routing-Regeln bleiben hier bewusst unveröffentlicht, da sie kommerziell sensibel sind.)</li>
+    <li><strong>Failover mit Health-Checks.</strong> Die Spezifikation führte einen Health-Check vor der Transaktion ein: Ist der primäre Acquirer nicht verfügbar, werden geeignete Zahlungen automatisch an einen Backup-Acquirer umgeleitet; wo es keinen Backup gibt, erhält der Sender eine klare, ehrliche Meldung „Bitte später erneut versuchen" statt eines stillen Fehlers. Das Routing kehrt automatisch zurück, sobald der Anbieter wieder verfügbar ist.</li>
+    <li><strong>Anbieterunabhängiges KYC.</strong> Die Identitätsprüfungsschicht wurde so spezifiziert, dass das Datenmodell unabhängig von einem einzelnen KYC-Anbieter bleibt: ein mehrstufiger Verifizierungsablauf mit Videoerfassung, asynchronen Statusaktualisierungen über Webhooks, Speicherung der Verifizierungsmedien zur Prüfung abgelehnter Fälle, admin-konfigurierbarer Ländersperre und vollständigen Audit-Feldern.</li>
+    <li><strong>Transparente Preisgestaltung.</strong> Die Spezifikation definierte, wie die App eine klare Aufschlüsselung anzeigt: was der Sender zahlt, was der Empfänger erhält und, im wohltätigen Modell dieser Plattform, was die Partnerorganisation erreicht, korrekt berechnet unabhängig vom ausführenden Acquirer.</li>
+    <li><strong>Kartenhandling und wiederkehrende Zahlungen.</strong> Die Spezifikation umfasste eine sichere, pro Acquirer getrennte Kartentokenisierung, 3-D Secure dort, wo die Regulierung es verlangt, sowie Mandate für wiederkehrende Zahlungen, damit wiederkehrende Sender ein schnelleres, konformes Erlebnis erhalten.</li>
+    <li><strong>Empfänger-Auszahlung: Bargeld oder Wallet.</strong> Die Auszahlungsseite wurde so spezifiziert, dass der Empfänger nach lokalem KYC zwischen der Abholung von Bargeld (USD-Scheine) und der Aufladung seiner E-Wallet wählt, integriert mit einem regulierten Auszahlungsnetzwerk, mit Guthabenkontrollen, die jede Auszahlung oder Aufladung autorisieren und Teilabhebungen unterstützen.</li>
+    <li><strong>Transparente, aufgeschlüsselte Preise.</strong> Das Design definierte eine vollständige Kostenaufschlüsselung, die der Sender zu jeder Transaktion öffnen kann: den angewandten Wechselkurs, die Kosten des Kartenschemas, den Anteil der Bank, den Anteil des Auszahlungsanbieters, was die Plattform behält und, im wohltätigen Modell, den an die Wohltätigkeitsorganisation gelieferten Betrag, wobei ein Admin diese Parameter konfigurieren kann.</li>
+    <li><strong>Nachvollziehbarkeit von Spenden.</strong> Ein Folgeprozess wurde spezifiziert, der dem Sender den Nachweis sendet, dass sein Beitrag die Partnerorganisation erreicht hat, und so den Kreis des Transparenzversprechens der Plattform schließt.</li>
+  </ul>
+
+  <h2>Ergebnisse</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>11 Währungen</b><span>Kartenzahlungen in 11 Sender-Währungen hinter einem Erlebnis</span></div>
+    <div class="outcome"><b>Automatisches Failover</b><span>Health-Check-gestütztes Routing hält geeignete Zahlungen bei Anbieterausfällen am Laufen</span></div>
+    <div class="outcome"><b>Anbieterunabhängiges KYC</b><span>Identitätsschicht so gestaltet, dass der KYC-Anbieter ohne Umbau des Datenmodells wechseln kann</span></div>
+    <div class="outcome"><b>Audit-fähig</b><span>Verifizierungsmedien, Statusverlauf und Nachvollziehbarkeit für regulatorische Prüfungen integriert</span></div>
+    <div class="outcome"><b>Wahl für den Empfänger</b><span>Empfänger zahlen sich nach lokalem KYC als USD-Scheine oder Wallet-Aufladung aus</span></div>
+  </div>
+
+  <h2>Entscheidungen &amp; Erkenntnisse</h2>
+  <ul>
+    <li><strong>Auf einen unvorhersehbaren Anbieterwechsel hin gestalten.</strong> Die Anbieterauswahl lag beim Kunden, wie es sein sollte, es ist eine kommerzielle und regulatorische Entscheidung, keine Produktentscheidung. Die Produktaufgabe bestand darin, die Architektur dagegen widerstandsfähig zu machen. Die KYC-Schicht anbieterunabhängig zu spezifizieren, erwies sich als die wichtigste Entscheidung: Als der KYC-Anbieter während des Projekts ausgetauscht wurde, konnte das Team wechseln, ohne die Integration oder das Datenmodell neu aufzubauen.</li>
+    <li><strong>Parallelisierung entlang des Genehmigungs-Gates.</strong> Da jeder Anbieter vor dem Go-live eine regulatorische Genehmigung durchlaufen musste, lief die Integrationsvorbereitung parallel zum Genehmigungsprozess, statt darauf zu warten, sodass ein Anbieter nach der Genehmigung schnell live gehen konnte, wobei sichergestellt wurde, dass nichts vor der Freigabe in Produktion ging. Ein Beispiel dafür, eine Roadmap um nicht kontrollierbare Rahmenbedingungen herum zu steuern, statt sich von ihnen aufhalten zu lassen.</li>
+  </ul>
+
+  <p>
+    Neben dieser Payment- und KYC-Arbeit durchlief die Plattform auch einen vollständigen
+    Rebrand, ein App-Redesign und ein neues mobiles biometrisches Sicherheits-Framework,
+    behandelt in der nächsten Case Study.
+  </p>
+
+  <div class="cs-nav">
+    <a href="../index.html#case-studies">&larr; Alle Case Studies</a>
+    <a href="millionbridges-rebrand-biometric.html">Weiter: Rebrand &amp; biometrische Sicherheit &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem</span>
+    <span><a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

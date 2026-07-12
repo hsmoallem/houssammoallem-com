@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rebrand, App-Redesign &amp; biometrische Sicherheit für MillionBridges | Houssam Moallem</title>
+<meta name="description" content="Product Ownership eines Corporate Rebrands, App-Redesigns und eines mobilen biometrischen Sicherheits-Frameworks für MillionBridges, eine regulierte Remittance-App.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="../index.html#case-studies">Case Studies</a>
+      <a href="../about.html">Über mich</a>
+      <a class="cta" href="mailto:moallem.houssam@gmail.com">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS-04 &middot; MillionBridges &middot; Marke &amp; mobile Sicherheit</p>
+    <h1>Rebrand, App-Redesign &amp; biometrische Sicherheit</h1>
+    <p class="tagline">Eine neue Corporate Identity und ein neues App-Erlebnis für eine regulierte Remittance-Plattform, verankert in einem strengen mobilen biometrischen Sicherheits-Framework.</p>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">Meine Rolle</div><div class="v">Product Manager / Product Owner</div></div>
+      <div class="meta-cell"><div class="k">Kunde</div><div class="v">MillionBridges (regulierte Remittance)</div></div>
+      <div class="meta-cell"><div class="k">Bereich</div><div class="v">Fintech, Mobile UX, Authentifizierung</div></div>
+      <div class="meta-cell"><div class="k">Plattformen</div><div class="v">Web &amp; Mobile (iOS / Android)</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Kontext</h2>
+  <p>
+    Während MillionBridges zu einem regulierten, marktübergreifenden Remittance-Dienst
+    heranwuchs, mussten Marke und App nachziehen. Die Plattform führte eine neue Corporate
+    Identity und ein überarbeitetes Erlebnis über Web und Mobile ein, und weil Menschen ihr
+    gleich ihr Geld und ihre Ausweisdokumente anvertrauen sollten, brauchte sie eine
+    Authentifizierung, die sowohl wirklich sicher als auch mühelos genug für den täglichen
+    Gebrauch war.
+  </p>
+
+  <h2>Die Herausforderung</h2>
+  <ul>
+    <li>Eine neue Corporate Identity und UI/UX konsistent über Web-Plattform und Mobile-App ausrollen, auf Basis einer einzigen abgestimmten Design-Grundlage.</li>
+    <li>Reine Passwort-Anmeldung durch biometrische Authentifizierung ersetzen, die auf dem gesamten Spektrum realer Geräte nutzbar bleibt, auch auf solchen ohne Biometrie-Hardware oder ohne hinterlegte Biometrie.</li>
+    <li>Sicherstellen, dass das Sicherheitsmodell die unglamourösen, aber kritischen Edge Cases abdeckt: fehlgeschlagene Erkennung, geänderte Fingerabdrücke oder Gesichter, Sperren, Inaktivitäts-Timeouts und Zahlungsbestätigung, nicht nur den Happy Path.</li>
+    <li>Regulatorische Vertrauenssignale (etwa die überprüfbare Registrierung bei der Bank von Spanien) direkt im Produkt sichtbar machen.</li>
+  </ul>
+
+  <h2>Meine Rolle</h2>
+  <p>
+    Als Product Manager und Product Owner lag die Produktdefinition hier in der Verantwortung,
+    in Zusammenarbeit mit dem Designteam, dem Entwicklungsteam und dem Kunden. Die Rolle
+    umfasste die Ausrichtung von App- und Web-Redesign an einer einzigen Designspezifikation
+    sowie das Verfassen des biometrischen Sicherheits-Frameworks als detaillierte FSD mit
+    ausführlichen, testbaren Akzeptanzkriterien. Jeder Zustand und jeder Edge Case wurde
+    spezifiziert und anschließend durch Lieferung und Abnahmetests getrieben, die das Team bis
+    zum Release trug.
+  </p>
+  <div class="callout">
+    <div class="k">Wie die Arbeit ablief</div>
+    <p>
+      Wie bei den anderen Projekten waren KI-Tools Teil des Workflows, um das Schreiben von
+      Spezifikationen zu beschleunigen und Abläufe vor dem Build für die Stakeholder-Validierung
+      zu prototypisieren. Bei einem Sicherheits-Framework war das entscheidend: Es machte es
+      möglich, den vollständigen Entscheidungsbaum der Zustände früh durchzutesten, sodass die
+      Edge Cases von Anfang an eingeplant statt in der Produktion entdeckt wurden.
+    </p>
+  </div>
+
+  <h2>Vorgehen</h2>
+  <ul>
+    <li><strong>Eine einzige Design-Grundlage.</strong> Die Spezifikation verlangte, dass jeder Screen und jede Komponente auf Web und App strikt der abgestimmten Design-Datei folgt, damit die neue Identity konsistent ankommt statt zwischen den Plattformen zu driften.</li>
+    <li><strong>Geräteabhängiges Biometrie-Setup.</strong> Das Design definierte eigene Abläufe für die drei realen Fälle: Geräte ohne Biometrie-Hardware, Geräte mit Biometrie-Unterstützung aber ohne hinterlegte Biometrie und Geräte mit einsatzbereiter Biometrie, jeweils mit Führung zum passenden Setup und stets mit Passcode-Fallback.</li>
+    <li><strong>Sicherheit in den Edge Cases.</strong> Die Spezifikation deckte das Verhalten bei fehlgeschlagener biometrischer Erkennung ab, bei Änderungen der OS-Biometrie (die den biometrischen Login bis zur Passwort-Neuauthentifizierung ungültig machen), bei Sperren nach mehreren Fehlversuchen, beim Passwort-Reset zur Wiederherstellung des Zugangs sowie beim automatischen Logout nach Inaktivität im Hintergrund, einschließlich der Regel, eine laufende Zahlung nach Sitzungsablauf nicht wiederherzustellen.</li>
+    <li><strong>Biometrische Zahlungsbestätigung.</strong> Die Spezifikation verlangte, dass eine Überweisung eine biometrische (oder Passcode-)Bestätigung auslöst, bevor irgendetwas übermittelt wird, sodass keine Zahlung ohne die ausdrückliche, verifizierte Zustimmung des Nutzers die App verlässt, mit klarem Fallback- und Abbruchverhalten.</li>
+    <li><strong>Vertrauenssignale im Produkt.</strong> Das Design ergänzte einen In-App-Verifizierungsbildschirm, über den Nutzer die regulatorische Registrierung der Plattform direkt überprüfen können, wodurch aus einer Compliance-Tatsache sichtbares Nutzervertrauen wird.</li>
+    <li><strong>KYC-Onboarding-UX.</strong> Das überarbeitete Onboarding wurde auf den Identitätsprüfungsablauf abgestimmt, einschließlich des Wechsels vom statischen Foto-Upload zur geführten Videoerfassung, und spiegelte die klaren Kontostatus wider (registriert, dann aktiv erst nach bestandener Verifizierung), sodass Nutzer stets wussten, wo sie standen, statt die Verifizierung als Anhängsel zu behandeln.</li>
+  </ul>
+
+  <h2>Ergebnisse</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>Konsistente Identity</b><span>Neue Marke und UI/UX nach einem Standard über Web und Mobile ausgerollt</span></div>
+    <div class="outcome"><b>Sicher als Standard</b><span>Biometrische Auth mit Passcode-Fallback über alle Gerätefähigkeitsstufen</span></div>
+    <div class="outcome"><b>Keine stillen Fehler</b><span>Fehlerhafte Erkennung, Biometrie-Änderungen, Sperren und Timeouts alle explizit spezifiziert</span></div>
+    <div class="outcome"><b>Verifizierte Freigabe</b><span>Jede Zahlung durch biometrische oder Passcode-Bestätigung vor der Übermittlung abgesichert</span></div>
+  </div>
+
+  <div class="cs-nav">
+    <a href="millionbridges-payment-orchestration.html">&larr; Zurück: Payment-Orchestrierung &amp; KYC</a>
+    <a href="../index.html#case-studies">Alle Case Studies &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem</span>
+    <span><a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
