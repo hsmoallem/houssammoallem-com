@@ -356,7 +356,7 @@ footer { padding: 30px 0 44px; }
 
 /* ---------- Burger menu ---------- */
 .nav-burger {
-  display: none;
+  display: none; flex-shrink: 0;
   width: 44px; height: 44px;
   flex-direction: column; justify-content: center; align-items: center; gap: 5px;
   background: none; border: 1.5px solid var(--line); border-radius: 10px;
@@ -402,6 +402,15 @@ footer { padding: 30px 0 44px; }
   .nav-links a.cta {
     margin: 10px 20px 0; text-align: center; border-radius: 12px; padding: 13px 16px;
   }
+}
+/* Extra small screens: tighten nav */
+@media (max-width: 400px) {
+  .nav-inner { padding: 10px 12px; gap: 6px; }
+  .nav-icon { width: 28px; height: 28px; font-size: 12px; }
+  .nav-icons { gap: 1px; margin-left: 0; }
+  .lang-switcher { margin-left: 4px; font-size: 11px; }
+  .brand { font-size: 15px; }
+  .brand .pmp { font-size: 9px; padding: 1px 5px; margin-left: 4px; }
 }
 
 /* ============================================================
