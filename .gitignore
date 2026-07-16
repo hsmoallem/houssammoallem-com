@@ -1,1 +1,4 @@
-.DS_Store\n*.bak\n.hermes-tmp.*
+.DS_Store
+*.bak
+.hermes-tmp.*
+*.docx
