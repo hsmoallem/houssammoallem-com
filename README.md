@@ -2,14 +2,8 @@
 
 Source code for [houssammoallem.com](https://houssammoallem.com)
 
-## Documentation
-
-| Document | Purpose |
-|----------|---------|
-| [docs/README.md](docs/README.md) | Project overview, features, page structure |
-| [docs/TECHNICAL.md](docs/TECHNICAL.md) | Architecture, DNS, nginx, SSL, security, commands |
-| [docs/SETUP.md](docs/SETUP.md) | Editing workflow, deployment, Git, troubleshooting |
-| [docs/PRD.md](docs/PRD.md) | Product vision, pages, design decisions, roadmap |
+> Internal operations docs (architecture, DNS, server, deploy) are kept **private**
+> and are not tracked in this public repository.
 
 ## Quick Deploy
 
