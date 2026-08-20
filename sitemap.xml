@@ -1,51 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://houssammoallem.com/</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/about.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/projects/sevenseas-caas-platform.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/projects/sevenseas-cardholder-app.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/projects/admod-mcn.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/projects/billing-revenue-automation.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/projects/credit-limit-management.html</loc>
-    <lastmod>2026-07-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://houssammoallem.com/projects/ai-template-generation.html</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- EN pages -->
+  <url><loc>https://houssammoallem.com/</loc><lastmod>2026-07-27</lastmod><changefreq>weekly</changefreq><priority>1.0</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/"/></url>
+  <url><loc>https://houssammoallem.com/about.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/about.html"/></url>
+  <url><loc>https://houssammoallem.com/resume.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/resume.html"/></url>
+  <!-- DE pages -->
+  <url><loc>https://houssammoallem.com/de/</loc><lastmod>2026-07-27</lastmod><changefreq>weekly</changefreq><priority>0.9</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/"/></url>
+  <url><loc>https://houssammoallem.com/de/about.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/about.html"/></url>
+  <url><loc>https://houssammoallem.com/de/resume.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/resume.html"/></url>
+  <!-- EN projects -->
+  <url><loc>https://houssammoallem.com/projects/sevenseas-caas-platform.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/sevenseas-caas-platform.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/sevenseas-cardholder-app.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/sevenseas-cardholder-app.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/admod-mcn.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/admod-mcn.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/billing-revenue-automation.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/billing-revenue-automation.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/credit-limit-management.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/credit-limit-management.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/ai-template-generation.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/ai-template-generation.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/ai-template-demo.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://houssammoallem.com/projects/millionbridges-payment-orchestration.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/millionbridges-payment-orchestration.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/millionbridges-rebrand-biometric.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/millionbridges-rebrand-biometric.html"/></url>
+  <url><loc>https://houssammoallem.com/projects/mcn-bidding-portal.html</loc><lastmod>2026-08-15</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><xhtml:link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/mcn-bidding-portal.html"/></url>
+  <!-- DE projects -->
+  <url><loc>https://houssammoallem.com/de/projects/sevenseas-caas-platform.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/sevenseas-caas-platform.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/sevenseas-cardholder-app.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/sevenseas-cardholder-app.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/admod-mcn.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/admod-mcn.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/billing-revenue-automation.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/billing-revenue-automation.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/credit-limit-management.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/credit-limit-management.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/ai-template-generation.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/ai-template-generation.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/ai-template-demo.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://houssammoallem.com/de/projects/millionbridges-payment-orchestration.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/millionbridges-payment-orchestration.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/millionbridges-rebrand-biometric.html</loc><lastmod>2026-07-27</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/millionbridges-rebrand-biometric.html"/></url>
+  <url><loc>https://houssammoallem.com/de/projects/mcn-bidding-portal.html</loc><lastmod>2026-08-15</lastmod><changefreq>monthly</changefreq><priority>0.7</priority><xhtml:link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/mcn-bidding-portal.html"/></url>
 </urlset>
