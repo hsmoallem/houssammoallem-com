@@ -11,6 +11,7 @@ Source code for [houssammoallem.com](https://houssammoallem.com)
 cd ~/houssammoallem-com && git pull && sudo rsync -a --delete \
   --exclude='.git' --exclude='docs' --exclude='nginx' \
   --exclude='README.md' --exclude='.gitignore' \
+  --exclude='CLAUDE.md' --exclude='.claude' \
   --exclude='*.docx' --exclude='*.bak' \
   ./ /var/www/houssammoallem/
 ```

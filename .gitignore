@@ -3,3 +3,6 @@
 .hermes-tmp.*
 *.docx
 docs/
+CLAUDE.md
+.claude/
+nginx/
