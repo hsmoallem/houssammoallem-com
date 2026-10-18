@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.png?v=4">
+<link rel="canonical" href="https://houssammoallem.com/projects/ai-clause-review.html">
+<link rel="alternate" hreflang="en" href="https://houssammoallem.com/projects/ai-clause-review.html">
+<link rel="alternate" hreflang="de" href="https://houssammoallem.com/de/projects/ai-clause-review.html">
+<link rel="alternate" hreflang="x-default" href="https://houssammoallem.com/projects/ai-clause-review.html">
+<meta property="og:title" content="AI Clause Review for Contracts | Houssam Moallem">
+<meta property="og:description" content="AI clause review for contracts: the AI compares a contract with the approved clause library and shows every deviation side by side with the approved wording.">
+<meta property="og:url" content="https://houssammoallem.com/projects/ai-clause-review.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://houssammoallem.com/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://houssammoallem.com/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Clause Review for Contracts | Houssam Moallem">
+<meta name="twitter:description" content="Pick a contract type, press Review, and see every deviation from the approved wording side by side.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Clause Review | Houssam Moallem</title>
+<meta name="description" content="AI clause review: compares a contract with the approved clause library for its type and office, and flags deviations from the approved wording for a lawyer to check.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/styles.css?v=6">
+<script defer src="https://stats.houssammoallem.com/script.js" data-website-id="b81a3557-030a-46bf-9850-18e33392bd3d"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/index.html">Houssam Moallem<span class="pmp">PMP&reg; &middot; MBA</span></a>
+    <div class="nav-links">
+      <a href="/index.html#case-studies">Case studies</a>
+      <a href="/index.html#clients">Clients</a>
+      <a href="/about.html">About me</a>
+      <a href="/resume.html">Resume</a>
+      <a class="cta" href="/index.html#contact">Let's talk</a>
+    </div>
+    <span class="nav-icons">
+<a class="nav-icon" href="mailto:moallem.houssam@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
+
+
+      
+      
+
+      
+      <a class="nav-icon" href="https://wa.me/+4915210162325" target="_blank" rel="noopener" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a class="nav-icon" href="https://github.com/hsmoallem" target="_blank" rel="noopener" title="GitHub"><i class="bi bi-github"></i></a>
+      <a class="nav-icon" href="https://www.linkedin.com/in/moallem/" target="_blank" rel="noopener" title="LinkedIn"><i class="bi bi-linkedin"></i></a>    
+      <span class="lang-switcher"><a href="./" class="active" data-umami-event="lang-switch-en">EN</a><span class="sep"> | </span><a href="/de/projects/ai-clause-review.html">DE</a></span>
+    </span>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="wrap">
+    <p class="eyebrow">CS-02 &middot; LexCentrix &middot; AI &amp; Legal Tech</p>
+    <h1>AI Clause Review for Contracts</h1>
+    <p class="tagline">Pick a contract type, press Review &mdash; the AI compares the contract with the approved clause library and shows every deviation next to the approved wording, so a lawyer checks facts instead of reading every line.</p>
+
+    <div style="margin-top:24px;">
+      <a class="btn btn-primary" href="ai-clause-review-demo.html" target="_blank" style="font-size:14px;">&#10022; Try the live demo</a>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-cell"><div class="k">My role</div><div class="v">Product review &middot; QA testing &middot; Documentation</div></div>
+      <div class="meta-cell"><div class="k">Product</div><div class="v">LexCentrix legal platform (Quanta)</div></div>
+      <div class="meta-cell"><div class="k">Domain</div><div class="v">Legal tech, contract management</div></div>
+      <div class="meta-cell"><div class="k">Technology</div><div class="v">AI clause comparison, clause library, contract workspace</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="cs-body">
+  <h2>Context</h2>
+  <p>
+    LexCentrix is a legal platform with three portals: a request portal for the business, a workspace for the legal team,
+    and an admin portal where the rules live. Each contract in the workspace opens in one dialog with tabs for details,
+    parties, versions, history, an AI summary and the AI clause review. Before this feature, a lawyer checked every
+    incoming contract against the company's approved wording by reading it line by line.
+  </p>
+
+  <h2>The challenge</h2>
+  <ul>
+    <li>Approved wording differs by contract type (NDA, employment contract, lease agreement) and by country and office, so one checklist does not fit all.</li>
+    <li>Some clauses are mandatory, some are optional, and some are restricted: wording the company does not want to accept at all.</li>
+    <li>Comparing a contract with the approved text by eye is slow and easy to get wrong, especially when a clause is reworded but still looks similar.</li>
+    <li>A legal team will not trust an AI verdict it cannot check against the document.</li>
+  </ul>
+
+  <h2>My role</h2>
+  <p>
+    I reviewed the feature end to end as a product person and tester: how a lawyer reaches it, what the review shows,
+    where it fails, and how it behaves for each contract type and organisation. I documented it in the platform user
+    manual, wrote the test cases and bug reports, and built the interactive prototype linked above to walk stakeholders
+    through the flow without touching the live system.
+  </p>
+  <div class="callout">
+    <div class="k">Evidence, not verdicts</div>
+    <p>
+      The review never just says &ldquo;this clause is wrong&rdquo;. It puts the approved wording and the contract wording
+      side by side, says in one sentence how they differ, and warns when the quoted text could not be found in the
+      document. The AI points; the lawyer decides.
+    </p>
+  </div>
+
+  <h2>Approach</h2>
+  <ul>
+    <li><strong>A clause library that the legal team owns.</strong> In the admin portal, every clause has a kind (standard or restricted), a contract type, an organisation (country and department), a mandatory or optional flag and a version. Reviews compare against the library for the contract's type and office.</li>
+    <li><strong>One tab, three actions.</strong> The AI Clause Review tab holds a contract type selector, a <em>Detect with AI</em> button for contracts nobody has labelled, and a <em>Review</em> button that becomes <em>Re-review</em> once a result exists.</li>
+    <li><strong>Always labelled as AI.</strong> A banner on the tab reads &ldquo;AI-generated, verify against source; not legal advice.&rdquo;</li>
+    <li><strong>Results grouped by what the lawyer must do.</strong> Findings sit under &ldquo;Standard clause comparison&rdquo; and then &ldquo;Deviations from the approved wording&rdquo;, each with a count, so the first thing a reader sees is how much needs attention.</li>
+    <li><strong>Side-by-side comparison.</strong> Each finding shows the approved wording and the contract wording in two columns, with the clause name, version and a one-line explanation of the difference.</li>
+    <li><strong>Traceable runs.</strong> The result header records what was compared against: contract type, organisation, number of clauses, clause version and the time of the review.</li>
+  </ul>
+
+  <h2>Try it</h2>
+  <p>The prototype uses sample contract text. Open it in a new tab, press Detect with AI or Review, open the groups, and mark findings as checked.</p>
+  <p style="font-size:14px;"><a href="ai-clause-review-demo.html" target="_blank">Open the prototype in its own tab &rarr;</a></p>
+
+  <h2>Outcomes</h2>
+  <div class="outcome-grid">
+    <div class="outcome"><b>Line-by-line reading &rarr; reviewing flagged clauses</b><span>A lawyer starts from the list of deviations, not from page one</span></div>
+    <div class="outcome"><b>Every finding checkable</b><span>Approved and contract wording side by side, plus a warning when the quote cannot be found in the document</span></div>
+    <div class="outcome"><b>Rules owned by legal, not by developers</b><span>Clause kind, type, organisation, mandatory flag and version are set in the admin portal</span></div>
+    <div class="outcome"><b>One review per contract type and office</b><span>The same feature serves NDAs, employment contracts and lease agreements across countries</span></div>
+  </div>
+
+  <h2>Key decisions &amp; learnings</h2>
+  <ul>
+    <li><strong>Show the evidence next to the claim.</strong> A finding without the approved text beside it forces the lawyer to go and look it up. Two columns removed that step.</li>
+    <li><strong>Warn when the AI quotes something it cannot find.</strong> The tab tells the reader to check the document before relying on a quote. That one line is what makes the rest of the output safe to use.</li>
+    <li><strong>Make the library the single source of truth.</strong> Putting kind, mandatory flag, organisation and version on each clause keeps the AI to rules the company has actually approved.</li>
+    <li><strong>Label it as AI, every time.</strong> The banner stays on the tab in every state, empty, running or finished.</li>
+  </ul>
+
+  <div class="cs-nav">
+    <a href="ai-template-generation.html">&larr; Previous: AI Template Generator</a>
+    <a href="sevenseas-caas-platform.html">Next: CAAS Platform &rarr;</a>
+  </div>
+</main>
+
+<section class="contact-band" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Let's talk</p>
+    <h2 class="section-title">Hiring a Product Manager or Product Owner?</h2>
+    <p>
+      I'm based in Germany, with full work authorization, and open to
+      relocating anywhere in Germany. English is my working language, and I'm actively
+      progressing toward German B2. I'd be glad to walk you through any of these case
+      studies in detail.
+    </p>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:moallem.houssam@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="https://wa.me/+4915210162325" data-umami-event="whatsapp-click" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/moallem/" data-umami-event="linkedin-click" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/hsmoallem" data-umami-event="github-click" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-inner">
+    <span>&copy; 2026 Houssam Moallem &middot; Designed &amp; hand-coded by Houssam Moallem &middot; Self-hosted</span>
+    <span><a href="/about.html">About</a> &middot; <a href="/index.html#case-studies">Case studies</a> &middot; <a href="mailto:moallem.houssam@gmail.com">moallem.houssam@gmail.com</a></span>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var burger = document.querySelector('.nav-burger');
+  var nav = document.querySelector('.nav');
+  if (burger && nav) {
+    burger.addEventListener('click', function(){
+      nav.classList.toggle('open');
+    });
+  }
+})();
+</script>
+<script>
+/* Section time tracking via IntersectionObserver */
+(function(){if(typeof umami==="undefined")return;var sections={},timers={};document.querySelectorAll("section[id],header[class~='hero'],#case-studies,#clients,#contact,.cred-grid").forEach(function(el){var id=el.id||("s-"+Math.random().toString(36).substr(2,6));sections[id]=el});var o=new IntersectionObserver(function(e){e.forEach(function(e){var n=e.target.id;if(!n)return;if(e.isIntersecting){if(!timers[n])timers[n]=Date.now()}else{if(timers[n]){var d=Math.round((Date.now()-timers[n])/1000);delete timers[n];if(d>1&&typeof umami!=="undefined")umami.track("section-time-"+n,{duration:d})}}})},{threshold:.2});Object.values(sections).forEach(function(el){o.observe(el)});window.addEventListener("beforeunload",function(){var n=Date.now();for(var k in timers){var d=Math.round((n-timers[k])/1000);if(d>1&&typeof umami!=="undefined")umami.track("section-time-"+k,{duration:d})}timers={}})})();
+</script>
+</body>
+</html>
