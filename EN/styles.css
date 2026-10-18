@@ -501,3 +501,21 @@ footer { padding: 30px 0 44px; }
 }
 
 .nav-links .active { color: var(--green) !important; font-weight: 800; font-size: 15px; cursor: default; text-decoration: none; }
+
+/* ---------- Freelance band ---------- */
+.freelance-band {
+  background: var(--green-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.freelance-band .eyebrow { color: var(--green); }
+.freelance-band .section-sub { margin-bottom: 30px; }
+.freelance-links { margin-top: 4px; display: flex; gap: 14px; flex-wrap: wrap; }
+.freelance-links .btn-primary { background: var(--green); }
+.freelance-links .btn-primary:hover { background: #0a6353; }
+.freelance-links .btn-ghost { background: transparent; color: var(--ink); border-color: var(--green); }
+.freelance-links .btn-ghost:hover { background: var(--green); color: #fff; border-color: var(--green); }
+.freelance-note {
+  font-family: var(--font-mono); font-size: 12.5px;
+  color: var(--ink-soft); margin-top: 22px;
+}
